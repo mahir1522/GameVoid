@@ -6,7 +6,6 @@ namespace PROG3050_Team_Project.Models
     {
         public int MemberID { get; set; }
 
-        //we gonna create this name in that way 
         public string UserName { get; set; }
 
         public string Email {  get; set; }
