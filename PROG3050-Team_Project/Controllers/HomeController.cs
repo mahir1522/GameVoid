@@ -12,6 +12,10 @@ namespace PROG3050_Team_Project.Controllers
         {
             _logger = logger;
         }
+        public IActionResult SignUp()
+        {
+            return View();
+        }
 
         public IActionResult Index()
         {
