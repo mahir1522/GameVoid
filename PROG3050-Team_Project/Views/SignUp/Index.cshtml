@@ -1,11 +1,12 @@
-﻿@{
+﻿@model Member
+@{
     ViewData["Title"] = "Sign Up";
 }
 
 <div class="text-center">
     <h1 class="display-4">Sign Up</h1>
     
-    @using (Html.BeginForm("Signup", "Home", FormMethod.Post))
+    @using (Html.BeginForm("Index", "SignUp", FormMethod.Post))
     {
         <div class="d-flex flex-column align-items-center">
             <div class="form-group">
