@@ -1,30 +1,23 @@
-﻿@model Member
+﻿@model PROG3050_Team_Project.Models.Member
+
 @{
     ViewData["Title"] = "Sign Up";
 }
 
 <div class="text-center">
     <h1 class="display-4">Sign Up</h1>
-    
-    @using (Html.BeginForm("Index", "SignUp", FormMethod.Post))
-    {
-        <div class="d-flex flex-column align-items-center">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" style="width:400px" required />
-            </div>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" style="width:400px" required />
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" style="width:400px" required />
-            </div>
-
-            <button type="submit" class="btn btn-primary">Create Account</button>
+    <form asp-action="Index" asp-controller="SignUp" method="post">
+        <div class="form-group">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" class="form-control" required />
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
         </div>
-    }
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" type="password" class="form-control" required />
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
