@@ -22,7 +22,11 @@ namespace PROG3050_Team_Project.Controllers
         }
 
         [HttpPost]
+<<<<<<< HEAD
         public async Task<IActionResult> Index(Member member)
+=======
+        public IActionResult Index(Member member)
+>>>>>>> 39e92f73b2d78c22540b4ba0fc229cf3ed7f6c1b
         {
             if (ModelState.IsValid)
             {
