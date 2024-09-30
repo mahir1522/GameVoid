@@ -15,12 +15,12 @@ namespace PROG3050_Team_Project.Controllers
         }
 
         [HttpGet]
-        public IActionResult SignUp()
+        public IActionResult Index()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult SignUp(Member member)
+        public IActionResult Index(Member member)
         {
             // Validate the model
             if (ModelState.IsValid)
