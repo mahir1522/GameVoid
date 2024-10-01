@@ -22,39 +22,46 @@ namespace PROG3050_Team_Project.Controllers
         }
 
         [HttpPost]
-<<<<<<< HEAD
         public async Task<IActionResult> Index(Member member)
-=======
-        public IActionResult Index(Member member)
->>>>>>> 39e92f73b2d78c22540b4ba0fc229cf3ed7f6c1b
         {
+            ViewBag.ConsoleMessage = "Calling Index HttpPost";
+
+            // Check for existing user
+            var existingMember = await _context.Members
+                .FirstOrDefaultAsync(m => m.UserName == member.UserName);
+
+            if (existingMember != null)
+            {
+                ModelState.AddModelError("UserName", "Username is already taken.");
+                ViewBag.ConsoleMessage = "Username already taken";
+                return View(member); // Return the view with validation errors
+            }
+
+            // Validate the password strength
+            var passwordCriteria = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
+            if (!passwordCriteria.IsMatch(member.Password))
+            {
+                ModelState.AddModelError("Password", "Password is not strong enough.");
+                ViewBag.ConsoleMessage = "Password not strong enough";
+                return View(member); // Return the view with validation errors
+            }
+
+            // Add new member
             if (ModelState.IsValid)
             {
-                // Check for existing user
-                var existingMember = await _context.Members.FirstOrDefaultAsync(m => m.UserName == member.UserName);
-
-                if (existingMember != null)
-                {
-                    ModelState.AddModelError("UserName", "Username is already taken.");
-                    return View(member); // Return the view with validation errors
-                }
-
-                // Validate the password strength
-                var passwordCriteria = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
-                if (!passwordCriteria.IsMatch(member.Password))
-                {
-                    ModelState.AddModelError("Password", "Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.");
-                    return View(member); // Return the view with validation errors
-                }
-
-                // Add new member
                 _context.Members.Add(member);
-                await _context.SaveChangesAsync();
-
+                await _context.SaveChangesAsync(); // Await the SaveChangesAsync method
+                ViewBag.ConsoleMessage = "Added member successfully";
                 return RedirectToAction("Index", "Home"); // Redirect to home or another action
             }
+            else
+            {
+                ViewBag.ConsoleMessage = "Member not valid";
+            }
+
 
             return View(member); // Return the view with any validation errors
         }
+
     }
 }

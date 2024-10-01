@@ -59,12 +59,12 @@ namespace PROG3050_Team_Project.Migrations
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    WantsPromotions = table.Column<bool>(type: "bit", nullable: false),
-                    FavoritePlatforms = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FavoriteGameCategories = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    WantsPromotions = table.Column<bool>(type: "bit", nullable: true),
+                    FavoritePlatforms = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FavoriteGameCategories = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MemberID1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
