@@ -18,14 +18,12 @@ namespace PROG3050_Team_Project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(new Member()); // Return a new Member model for the form
+            return View(new Member());
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(Member member)
         {
-            ViewBag.ConsoleMessage = "Calling Index HttpPost";
-
             // Check for existing user
             var existingMember = await _context.Members
                 .FirstOrDefaultAsync(m => m.UserName == member.UserName);
@@ -34,7 +32,7 @@ namespace PROG3050_Team_Project.Controllers
             {
                 ModelState.AddModelError("UserName", "Username is already taken.");
                 ViewBag.ConsoleMessage = "Username already taken";
-                return View(member); // Return the view with validation errors
+                return View(member);
             }
 
             // Validate the password strength
