@@ -24,6 +24,14 @@ namespace PROG3050_Team_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(Member member)
         {
+            // Check if Password and ConfirmPassword match
+            if (member.Password != member.ConfirmPassword)
+            {
+                ModelState.AddModelError("ConfirmPassword", "Passwords do not match.");
+                ViewBag.ConsoleMessage = "Passwords do not match.";
+                return View(member);
+            }
+
             // Check for existing user
             var existingMember = await _context.Members
                 .FirstOrDefaultAsync(m => m.UserName == member.UserName);
@@ -31,7 +39,7 @@ namespace PROG3050_Team_Project.Controllers
             if (existingMember != null)
             {
                 ModelState.AddModelError("UserName", "Username is already taken.");
-                ViewBag.ConsoleMessage = "Username already taken";
+                ViewBag.ConsoleMessage = "Username already taken.";
                 return View(member);
             }
 
@@ -40,26 +48,24 @@ namespace PROG3050_Team_Project.Controllers
             if (!passwordCriteria.IsMatch(member.Password))
             {
                 ModelState.AddModelError("Password", "Password is not strong enough.");
-                ViewBag.ConsoleMessage = "Password not strong enough";
-                return View(member); // Return the view with validation errors
+                ViewBag.ConsoleMessage = "Password not strong enough.";
+                return View(member);
             }
 
-            // Add new member
+            // Add new member if the model state is valid
             if (ModelState.IsValid)
             {
                 _context.Members.Add(member);
-                await _context.SaveChangesAsync(); // Await the SaveChangesAsync method
-                ViewBag.ConsoleMessage = "Added member successfully";
-                return RedirectToAction("Index", "Home"); // Redirect to home or another action
+                await _context.SaveChangesAsync();
+                ViewBag.ConsoleMessage = "Added member successfully.";
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewBag.ConsoleMessage = "Member not valid";
+                ViewBag.ConsoleMessage = "Member not valid.";
             }
 
-
-            return View(member); // Return the view with any validation errors
+            return View(member);
         }
-
     }
 }
