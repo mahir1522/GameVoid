@@ -1,101 +1,3 @@
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
-//using Newtonsoft.Json;
-//using Newtonsoft.Json.Linq;
-//using PROG3050_Team_Project.Models;
-//using System.CodeDom;
-//using System.Text.RegularExpressions;
-//using System.Threading.Tasks;
-
-//namespace PROG3050_Team_Project.Controllers
-//{
-//    public class SignUpController : Controller
-//    {
-//        private readonly GameVoidContext _context;
-
-//        public SignUpController(GameVoidContext context)
-//        {
-//            _context = context;
-//        }
-
-//        [HttpGet]
-//        public IActionResult Index()
-//        {
-//            return View(new Member());
-//        }
-
-//        [HttpPost]
-//        public async Task<IActionResult> Index(Member member, string gRecaptchaRes)
-//        {
-
-//            // Check if Password and ConfirmPassword match
-//            if (member.Password != member.ConfirmPassword)
-//            {
-//                ModelState.AddModelError("ConfirmPassword", "Passwords do not match.");
-//                ViewBag.ConsoleMessage = "Passwords do not match.";
-//                return View(member);
-//            }
-
-//            // Check for existing user
-//            var existingMember = await _context.Members
-//                .FirstOrDefaultAsync(m => m.UserName == member.UserName);
-
-//            if (existingMember != null)
-//            {
-//                ModelState.AddModelError("UserName", "Username is already taken.");
-//                ViewBag.ConsoleMessage = "Username already taken.";
-//                return View(member);
-//            }
-
-//            // Validate the password strength
-//            var passwordCriteria = new Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
-//            if (!passwordCriteria.IsMatch(member.Password))
-//            {
-//                ModelState.AddModelError("Password", "Password is not strong enough.");
-//                ViewBag.ConsoleMessage = "Password not strong enough.";
-//                return View(member);
-//            }
-
-
-
-//            if (!await ValidateRecaptcha(gRecaptchaRes))
-//            {
-//                ModelState.AddModelError("CaptchaError", "Please verify that you're not a robot.");
-//                return View(member);
-//            }
-
-
-//            // Add new member if the model state is valid
-//            if (ModelState.IsValid)
-//            {
-//                _context.Members.Add(member);
-//                await _context.SaveChangesAsync();
-//                ViewBag.ConsoleMessage = "Added member successfully.";
-//                return RedirectToAction("Index", "User");
-//            }
-//            else
-//            {
-//                ViewBag.ConsoleMessage = "Member not valid.";
-//            }
-
-//            return View(member);
-//        }
-
-
-//        private async Task<bool> ValidateRecaptcha(string gRecaptchRes)
-//        {
-//            var client = new HttpClient();
-//            var key = "6Ld32FcqAAAAAOWxV7HPcLN8Ll7E2i7A_YK03VT-";
-//            var res = await client.GetStringAsync($"https://www.google.com/recaptcha/api/siteverify?secret={key}&response={gRecaptchRes}");
-//            var result = JObject.Parse(res);
-//            return result["success"].Value<bool>();
-
-//        }
-//    }
-//}
-
-
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
@@ -123,9 +25,6 @@ namespace PROG3050_Team_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(Member member, string gRecaptchaRes)
         {
-
-
-
             if(!ModelState.IsValid)
             {
                 foreach(var error in ModelState.Values.SelectMany(x => x.Errors))
@@ -193,23 +92,11 @@ namespace PROG3050_Team_Project.Controllers
         // reCAPTCHA validation method
         private async Task<bool> ValidateRecaptcha(string gRecaptchaRes)
         {
-
-
-
-            Console.WriteLine($"reCAPTCHA Response: {gRecaptchaRes}"); // Log the response
-
             var client = new HttpClient();
             var secretKey = "6Ld32FcqAAAAAOWxV7HPcLN8Ll7E2i7A_YK03VT-"; 
             var res = await client.GetStringAsync($"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={gRecaptchaRes}");
 
-
-
-
-
             var result = JObject.Parse(res);
-
-
-            Console.WriteLine($"reCAPTCHA Validation Result: {result}"); // Log the validation result
 
             return result["success"].Value<bool>();
         }
