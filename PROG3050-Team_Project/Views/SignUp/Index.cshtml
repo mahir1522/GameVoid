@@ -36,8 +36,11 @@
         </div>
         <br />
 
-        <div class="g-recaptch" data-sitekey="6LcfvlYqAAAAAL4WLgdnRkTkQEY_UaFIaxpNZsNS"></div>
+        <div class="g-recaptcha" data-sitekey="6Ld32FcqAAAAANrQRUMWVjmxaJ-QCmXpBiY96LQR"></div>
         @Html.ValidationMessage("CaptchaError", new { @class = "text-danger" })
+
+
+        <input type="hidden" id="gRecaptchaRes" name="gRecaptchaRes" />
 
         <br />
         <button type="submit" class="btn btn-primary">Create Account</button>
@@ -46,8 +49,16 @@
         console.log('@ViewBag.ConsoleMessage');
     </script>
 
+    <script>
+        document.querySelector('form').addEventListener('submit', function () {
+            var response = grecaptcha.getResponse();
+            console.log(response); // Log the reCAPTCHA response
+            document.getElementById('gRecaptchaRes').value = response;
+        });
+    </script>
 
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcfvlYqAAAAAL4WLgdnRkTkQEY_UaFIaxpNZsNS"></script>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 
 </div>

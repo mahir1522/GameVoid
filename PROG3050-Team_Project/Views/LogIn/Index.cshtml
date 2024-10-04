@@ -12,14 +12,12 @@
 
     <form asp-action="Index" asp-controller="LogIn" method="post">
         <div class="form-group">
-            @* <label asp-for="UserName"></label> *@
             <input asp-for="UserName" class="form-control" style="width: 400px;" placeholder="Username" required />
             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
         </div>
         <br />
         <br />
         <div class="form-group">
-            @* <label asp-for="Password"></label> *@
             <input asp-for="Password" type="password" class="form-control" style="width: 400px;" placeholder="Password" required />
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
         </div>

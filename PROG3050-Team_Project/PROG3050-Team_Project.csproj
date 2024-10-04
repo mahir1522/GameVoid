@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Api.Gax" Version="4.9.0" />
+    <PackageReference Include="Google.Cloud.RecaptchaEnterprise.V1" Version="2.15.0" />
+    <PackageReference Include="Google.Cloud.Storage.V1" Version="4.10.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PROG3050_Team_Project.Models;
+using System.Text.RegularExpressions;
 
 namespace PROG3050_Team_Project.Controllers
 {
@@ -22,7 +23,6 @@ namespace PROG3050_Team_Project.Controllers
             // Check if logged as admin
             if (Admin.ValidateAdmin(username, password))
             {
-                ViewBag.ConsoleMessage = "Admin login successful";
                 return RedirectToAction("Index", "Admin");
             }
 
@@ -32,19 +32,19 @@ namespace PROG3050_Team_Project.Controllers
 
             if (existingMember != null)
             {
-                ViewBag.ConsoleMessage = "User exists";
+                // ViewBag.ConsoleMessage = "User exists";
                 if (password == existingMember.Password)
                 {
-                    ViewBag.ConsoleMessage = "Login successful";
+                    return RedirectToAction("Index", "User");
                 }
                 else
                 {
-                    ViewBag.ConsoleMessage = "Incorrect Password";
+                    ModelState.AddModelError("Password", "Incorrect Password");
                 }
             }
             else
             {
-                ViewBag.ConsoleMessage = "User does not exist";
+                ModelState.AddModelError("Username", "User does not exist");
             }
 
             return View();
