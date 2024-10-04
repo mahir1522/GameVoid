@@ -1,0 +1,44 @@
+﻿@model PROG3050_Team_Project.Models.Member
+
+@{
+    ViewData["Title"] = "Log In";
+}
+
+<div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <h1 class="display-4">Sign In</h1>
+
+    <br />
+    <br />
+
+    <form asp-action="Index" asp-controller="LogIn" method="post">
+        <div class="form-group">
+            <input asp-for="UserName" class="form-control" style="width: 400px;" placeholder="Username" required />
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+        </div>
+        <br />
+        <br />
+        <div class="form-group">
+            <input asp-for="Password" type="password" class="form-control" style="width: 400px;" placeholder="Password" required />
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+        <br />
+        <br />
+        <button type="submit" class="btn btn-primary">Sign In</button><br />
+
+        <a href="">Forget Password?</a>
+
+    </form>
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <a asp-action="Index" asp-controller="SignUp" class="btn btn-dark">Create An Account</a> 
+        <a href="">Not a Member?</a>
+
+    <script>
+        console.log('@ViewBag.ConsoleMessage');
+    </script>
+</div>
+

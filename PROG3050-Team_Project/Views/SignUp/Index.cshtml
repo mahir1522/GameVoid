@@ -4,29 +4,62 @@
     ViewData["Title"] = "Sign Up";
 }
 
+
+
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-    <h1 class="display-4">Sign Up</h1>
+    <h1 class="display-4">Create Account</h1>
+    <p>Become a member today!</p>
+    <br />
+    <br />
 
     <form asp-action="Index" asp-controller="SignUp" method="post">
         <div class="form-group">
-            <label asp-for="UserName"></label>
-            <input asp-for="UserName" class="form-control" style="width: 400px;" required />
+            <input asp-for="UserName" class="form-control" style="width: 400px;" placeholder="Username" required />
             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
         </div>
+        <br />
         <div class="form-group">
-            <label asp-for="Email"></label>
-            <input asp-for="Email" class="form-control" style="width: 400px;" required />
+            <input asp-for="Email" class="form-control" style="width: 400px;" placeholder="Email" required />
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
         </div>
+        <br />
         <div class="form-group">
-            <label asp-for="Password"></label>
-            <input asp-for="Password" type="password" class="form-control" style="width: 400px;" required />
+            <input asp-for="Password" type="password" class="form-control" style="width: 400px;" placeholder="Password" required />
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
         </div>
+        <br />
+
+        <div class="form-group">
+            <input asp-for="ConfirmPassword" type="password" class="form-control" style="width: 400px;" placeholder="Repeat Password" required />
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+
+        </div>
+        <br />
+
+        <div class="g-recaptcha" data-sitekey="6Ld32FcqAAAAANrQRUMWVjmxaJ-QCmXpBiY96LQR"></div>
+        @Html.ValidationMessage("CaptchaError", new { @class = "text-danger" })
+
+
+        <input type="hidden" id="gRecaptchaRes" name="gRecaptchaRes" />
+
+        <br />
         <button type="submit" class="btn btn-primary">Create Account</button>
     </form>
      <script>
         console.log('@ViewBag.ConsoleMessage');
     </script>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function () {
+            var response = grecaptcha.getResponse();
+            console.log(response); // Log the reCAPTCHA response
+            document.getElementById('gRecaptchaRes').value = response;
+        });
+    </script>
+
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
 </div>
 

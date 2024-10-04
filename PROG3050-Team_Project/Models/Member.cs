@@ -18,6 +18,10 @@ namespace PROG3050_Team_Project.Models
         [Required(ErrorMessage = "Password is required.")]
         public string? Password { get; set; }  // Nullable string 
 
+
+        [NotMapped] // This will not be mapped to out database
+        public string? ConfirmPassword { get; set; }
+
         public string? FullName { get; set; } = String.Empty;
 
         public string? Gender { get; set; } = String.Empty;
