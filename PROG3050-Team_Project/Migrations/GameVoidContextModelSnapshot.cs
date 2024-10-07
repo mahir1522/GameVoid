@@ -262,7 +262,7 @@ namespace PROG3050_Team_Project.Migrations
                             FavoritePlatforms = "[]",
                             FullName = "John Doe",
                             Gender = "Male",
-                            IsEmailVerified = false,
+                            IsEmailVerified = true,
                             Password = "hello@1234",
                             UserName = "GamerOne",
                             WantsPromotions = true
@@ -276,7 +276,7 @@ namespace PROG3050_Team_Project.Migrations
                             FavoritePlatforms = "[]",
                             FullName = "Jane Smith",
                             Gender = "Female",
-                            IsEmailVerified = false,
+                            IsEmailVerified = true,
                             Password = "hello@1234",
                             UserName = "GamerTwo",
                             WantsPromotions = false

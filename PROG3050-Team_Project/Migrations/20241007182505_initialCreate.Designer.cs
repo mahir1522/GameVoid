@@ -12,8 +12,8 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    [Migration("20241007180900_initials")]
-    partial class initials
+    [Migration("20241007182505_initialCreate")]
+    partial class initialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -265,7 +265,7 @@ namespace PROG3050_Team_Project.Migrations
                             FavoritePlatforms = "[]",
                             FullName = "John Doe",
                             Gender = "Male",
-                            IsEmailVerified = false,
+                            IsEmailVerified = true,
                             Password = "hello@1234",
                             UserName = "GamerOne",
                             WantsPromotions = true
@@ -279,7 +279,7 @@ namespace PROG3050_Team_Project.Migrations
                             FavoritePlatforms = "[]",
                             FullName = "Jane Smith",
                             Gender = "Female",
-                            IsEmailVerified = false,
+                            IsEmailVerified = true,
                             Password = "hello@1234",
                             UserName = "GamerTwo",
                             WantsPromotions = false
