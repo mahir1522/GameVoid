@@ -49,5 +49,6 @@ namespace PROG3050_Team_Project.Models
         public ICollection<WishList>? WishLists { get; set; }  // Nullable collections
         public ICollection<Order>? Orders { get; set; }  // Nullable collections
         public ICollection<Event>? RegisteredEvents { get; set; }  // Nullable collections
+        public bool IsEmailVerified { get; set; } = false;
     }
 }

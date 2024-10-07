@@ -54,7 +54,8 @@ namespace PROG3050_Team_Project.Models
                     FullName = "John Doe",
                     Gender = "Male",
                     BirthDate = new DateTime(1990, 1, 1),
-                    WantsPromotions = true
+                    WantsPromotions = true,
+                    IsEmailVerified = true
                 },
                 new Member
                 {
@@ -65,7 +66,8 @@ namespace PROG3050_Team_Project.Models
                     FullName = "Jane Smith",
                     Gender = "Female",
                     BirthDate = new DateTime(1988, 7, 15),
-                    WantsPromotions = false
+                    WantsPromotions = false,
+                    IsEmailVerified = true
                 }
             );
 

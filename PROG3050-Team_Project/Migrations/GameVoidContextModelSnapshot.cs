@@ -204,13 +204,13 @@ namespace PROG3050_Team_Project.Migrations
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Member", b =>
                 {
-                    b.Property<int>("MemberID")
+                    b.Property<int?>("MemberID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MemberID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("MemberID"));
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -218,20 +218,19 @@ namespace PROG3050_Team_Project.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FavoriteGameCategories")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FavoritePlatforms")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsEmailVerified")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("MemberID1")
                         .HasColumnType("int");
@@ -244,7 +243,7 @@ namespace PROG3050_Team_Project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("WantsPromotions")
+                    b.Property<bool?>("WantsPromotions")
                         .HasColumnType("bit");
 
                     b.HasKey("MemberID");
@@ -263,6 +262,7 @@ namespace PROG3050_Team_Project.Migrations
                             FavoritePlatforms = "[]",
                             FullName = "John Doe",
                             Gender = "Male",
+                            IsEmailVerified = true,
                             Password = "hello@1234",
                             UserName = "GamerOne",
                             WantsPromotions = true
@@ -276,6 +276,7 @@ namespace PROG3050_Team_Project.Migrations
                             FavoritePlatforms = "[]",
                             FullName = "Jane Smith",
                             Gender = "Female",
+                            IsEmailVerified = true,
                             Password = "hello@1234",
                             UserName = "GamerTwo",
                             WantsPromotions = false

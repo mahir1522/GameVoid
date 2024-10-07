@@ -7,6 +7,27 @@
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <h1 class="display-4">Sign In</h1>
 
+    @if (ViewBag.VerificationMessage != null)
+    {
+        <div class="alert alert-info">
+            @ViewBag.VerificationMessage
+        </div>
+    }
+
+    @if (ViewBag.AccountConfirmed != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.AccountConfirmed
+        </div>
+    }
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
     <br />
     <br />
 
@@ -26,19 +47,17 @@
         <button type="submit" class="btn btn-primary">Sign In</button><br />
 
         <a href="">Forget Password?</a>
-
     </form>
 
-        <br />
-        <br />
-        <br />
-        <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
-        <a asp-action="Index" asp-controller="SignUp" class="btn btn-dark">Create An Account</a> 
-        <a href="">Not a Member?</a>
+    <a asp-action="Index" asp-controller="SignUp" class="btn btn-dark">Create An Account</a>
+    <a href="">Not a Member?</a>
 
     <script>
         console.log('@ViewBag.ConsoleMessage');
     </script>
 </div>
-
