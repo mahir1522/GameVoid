@@ -1,7 +1,12 @@
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using PROG3050_Team_Project.Models;
+using PROG3050_Team_Project.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddTransient<IEmailSender, EmailSend>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

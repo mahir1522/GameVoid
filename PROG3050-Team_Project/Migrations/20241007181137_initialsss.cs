@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROG3050_Team_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initialsss : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,6 +65,7 @@ namespace PROG3050_Team_Project.Migrations
                     WantsPromotions = table.Column<bool>(type: "bit", nullable: true),
                     FavoritePlatforms = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FavoriteGameCategories = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsEmailVerified = table.Column<bool>(type: "bit", nullable: false),
                     MemberID1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -203,11 +204,11 @@ namespace PROG3050_Team_Project.Migrations
 
             migrationBuilder.InsertData(
                 table: "Members",
-                columns: new[] { "MemberID", "BirthDate", "Email", "FavoriteGameCategories", "FavoritePlatforms", "FullName", "Gender", "MemberID1", "Password", "UserName", "WantsPromotions" },
+                columns: new[] { "MemberID", "BirthDate", "Email", "FavoriteGameCategories", "FavoritePlatforms", "FullName", "Gender", "IsEmailVerified", "MemberID1", "Password", "UserName", "WantsPromotions" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamerone@example.com", "[]", "[]", "John Doe", "Male", null, "hello@1234", "GamerOne", true },
-                    { 2, new DateTime(1988, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamertwo@example.com", "[]", "[]", "Jane Smith", "Female", null, "hello@1234", "GamerTwo", false }
+                    { 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamerone@example.com", "[]", "[]", "John Doe", "Male", false, null, "hello@1234", "GamerOne", true },
+                    { 2, new DateTime(1988, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamertwo@example.com", "[]", "[]", "Jane Smith", "Female", false, null, "hello@1234", "GamerTwo", false }
                 });
 
             migrationBuilder.CreateIndex(

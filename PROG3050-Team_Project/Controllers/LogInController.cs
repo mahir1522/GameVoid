@@ -15,40 +15,55 @@ namespace PROG3050_Team_Project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (TempData["VerificationMessage"] != null)
+            {
+                ViewBag.VerificationMessage = TempData["VerificationMessage"].ToString();
+            }
+
+            // Check if there's a message about account confirmation
+            if (TempData["AccountConfirmed"] != null)
+            {
+                ViewBag.AccountConfirmed = TempData["AccountConfirmed"].ToString();
+            }
+
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Index(string username, string password)
         {
-            // Check if logged as admin
+            // Check if logged in as admin
             if (Admin.ValidateAdmin(username, password))
             {
                 return RedirectToAction("Index", "Admin");
             }
 
-            // Check if member exists in database
-            var existingMember = await _context.Members
-          .FirstOrDefaultAsync(m => m.UserName == username);
+            // Check if member exists in the database
+            var existingMember = await _context.Members.FirstOrDefaultAsync(m => m.UserName == username);
 
             if (existingMember != null)
             {
-                // ViewBag.ConsoleMessage = "User exists";
+                if (!existingMember.IsEmailVerified)
+                {
+                    ModelState.AddModelError("Email", "Your email is not verified. Please check your email for verification.");
+                    ViewBag.ErrorMessage = "Your email is not verified. Please check your email for verification.";
+                    return View();
+                }
+
                 if (password == existingMember.Password)
                 {
                     return RedirectToAction("Index", "User");
                 }
                 else
                 {
-                    ModelState.AddModelError("Password", "Incorrect Password");
+                    ViewBag.ErrorMessage = "Incorrect Password";
                 }
             }
             else
             {
-                ModelState.AddModelError("Username", "User does not exist");
+                ViewBag.ErrorMessage = "User does not exist";
             }
 
             return View();
         }
-       
     }
 }
