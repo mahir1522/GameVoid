@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<PROG3050_Team_Project.Models.Game>
 
-
 @{
     ViewData["Title"] = "Admin Panel";
 }
@@ -16,6 +15,8 @@
         }
         else
         {
+            <a href="@Url.Action("Add", "Admin")" class="btn btn-primary">Add Game</a>
+
             <table class="table">
                 <thead>
                     <tr>

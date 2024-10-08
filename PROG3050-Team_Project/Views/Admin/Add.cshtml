@@ -1,0 +1,46 @@
+﻿@model PROG3050_Team_Project.Models.Game
+@{
+    ViewData["Title"] = "Add Game";
+}
+
+<div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <h1 class="display-4">Add Game</h1>
+
+    <form asp-action="Add" asp-controller="Admin" method="post">
+        <div class="form-group">
+            <input asp-for="Title" class="form-control" style="width: 400px;" placeholder="Title" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input asp-for="Description" class="form-control" style="width: 400px;" placeholder="Description" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input asp-for="Platform" class="form-control" style="width: 400px;" placeholder="Platform" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input asp-for="Category" class="form-control" style="width: 400px;" placeholder="Category" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input asp-for="ReleaseDate" class="form-control" style="width: 400px;" placeholder="ReleaseDate" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input asp-for="Price" class="form-control" style="width: 400px;" placeholder="Price" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input asp-for="Rating" class="form-control" style="width: 400px;" placeholder="Rating" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <label>Is Downloadable</label>
+            <input asp-for="IsDownloadable" class="text-center" placeholder="IsDownloadable" required />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Add Game</button><br />
+    </form>
+</div>
+

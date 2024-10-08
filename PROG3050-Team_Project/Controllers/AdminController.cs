@@ -17,5 +17,20 @@ namespace PROG3050_Team_Project.Controllers
             var games = _context.Games.ToList();
             return View(games);
         }
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Delete()
+        {
+            return View();
+        }
     }
 }
