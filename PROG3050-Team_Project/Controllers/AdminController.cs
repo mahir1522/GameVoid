@@ -27,7 +27,7 @@ namespace PROG3050_Team_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Game game)
         {
-
+            // Checking if game passes all inputs
             if (!ModelState.IsValid)
             {
                 ViewBag.ConsoleMessage = "Model is invalid. Please check the inputs.";
@@ -38,7 +38,7 @@ namespace PROG3050_Team_Project.Controllers
                 return View(game);
             }
 
-
+            // Adding game to table if game is valid
             if (ModelState.IsValid)
             {
                 _context.Games.Add(game);
@@ -58,10 +58,19 @@ namespace PROG3050_Team_Project.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult Delete()
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            // Getting game based on id and deleting it from database
+            var game = await _context.Games.FindAsync(id);
+            if (game == null)
+            {
+                return NotFound();
+            }
+            _context.Games.Remove(game);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Admin");
         }
     }
 }
