@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PROG3050_Team_Project.Models;
+using System.Text.RegularExpressions;
 
 namespace PROG3050_Team_Project.Controllers
 {
@@ -20,6 +22,36 @@ namespace PROG3050_Team_Project.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Add(Game game)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ConsoleMessage = "Model is invalid. Please check the inputs.";
+                foreach (var error in ModelState.Values.SelectMany(x => x.Errors))
+                {
+                    ViewBag.ConsoleMessage = $"Model Error: {error.ErrorMessage}";
+                }
+                return View(game);
+            }
+
+
+            if (ModelState.IsValid)
+            {
+                _context.Games.Add(game);
+                await _context.SaveChangesAsync();
+                ViewBag.ConsoleMessage = "Game successfully added to database.";
+
+                return RedirectToAction("Index", "User");
+            }
+            else
+            {
+                ViewBag.ConsoleMessage = "Game not valid.";
+            }
+
             return View();
         }
         [HttpGet]

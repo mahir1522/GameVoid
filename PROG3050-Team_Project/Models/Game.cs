@@ -17,7 +17,7 @@
 
         public bool IsDownloadable { get; set; }
 
-        public ICollection<WishList> WishLists { get; set; }
+        public ICollection<WishList>? WishLists { get; set; } = null;
 
 
     }
