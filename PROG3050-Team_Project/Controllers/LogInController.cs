@@ -51,7 +51,7 @@ namespace PROG3050_Team_Project.Controllers
 
                 if (password == existingMember.Password)
                 {
-                    return RedirectToAction("Index", "User");
+                    return RedirectToAction("Index", "User", new {memberId = existingMember.MemberID});
                 }
                 else
                 {

@@ -1,11 +1,76 @@
-﻿@model PROG3050_Team_Project.Models.Member
-
+﻿@model MemberGamesViewModel
 @{
-    ViewData["Title"] = "User Panel";
+    ViewData["Title"] = "UserPage";
 }
 
-<div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-    <h1 class="display-4">User Panel</h1>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 bg-secondary p-4">
+            <div class="mb-5">
+                <h1 class="text-black">GAME VOID</h1>
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" href="#">Profile</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" href="#">Search</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" href="#">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Balance</a>
+                </li>
+            </ul>
+        </div>
 
+        <!-- Main Content -->
+        <div class="col-md-10 p-4">
+            <!-- Search Bar -->
+            <div class="mb-4 d-flex align-items-center">
+                <input type="text" class="form-control me-5" style="width: 46rem;" placeholder="Search..." aria-label="Search">
+                <img src=@Model.member.profileImage width="50" height="50" class="rounded-circle" alt="Profile Pic">
+            </div>
+
+
+
+            <!-- Banner -->
+            <div class="card mb-4 text-center">
+                <img src="~/img/default.jpg" class="card-img-top" alt="Cyberpunk 2007">
+                <div class="card-body">
+                    <a href="#" class="btn">Order Now</a>
+                </div>
+            </div>
+
+            <!-- Product Section -->
+            <div>
+                <h2 class="mb-3">Product</h2>
+                <div class="mb-4">
+                    <button class="btn">Top</button>
+                    <button class="btn">Popular</button>
+                    <button class="btn">Recommended</button>
+                    <button class="btn">Filter</button>
+                </div>
+
+                <!-- Game Cards Grid -->
+                <div class="row">
+                    @foreach (var game in Model.games)
+                    {
+                        <div class="col-md-3 mb-4">
+                            <div class="card bg-secondary text-light">
+                                <img src="@game.ImageUrl" class="card-img-top" alt="@game.Title">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">@game.Title</h5>
+                                    <p class="card-text">@game.Price.ToString("C")</p>
+                                    <a href="#" class="btn btn-purple">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-

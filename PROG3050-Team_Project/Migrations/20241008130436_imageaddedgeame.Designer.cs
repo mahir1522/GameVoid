@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PROG3050_Team_Project.Models;
 
@@ -11,9 +12,11 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    partial class GameVoidContextModelSnapshot : ModelSnapshot
+    [Migration("20241008130436_imageaddedgeame")]
+    partial class imageaddedgeame
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,7 +188,7 @@ namespace PROG3050_Team_Project.Migrations
                             GameID = 1,
                             Category = "RPG",
                             Description = "An open-world, action-adventure story set in Night City.",
-                            ImageUrl = "/img/default.jpg",
+                            ImageUrl = "https://unsplash.com/photos/a-blue-and-white-nintendo-wii-game-system-bj6fp3AGSbM",
                             IsDownloadable = true,
                             Platform = "PC",
                             Price = 59.99m,
@@ -198,7 +201,7 @@ namespace PROG3050_Team_Project.Migrations
                             GameID = 2,
                             Category = "RPG",
                             Description = "A story-driven, open-world RPG set in a visually stunning fantasy universe.",
-                            ImageUrl = "/img/default.jpg",
+                            ImageUrl = "https://unsplash.com/photos/a-blue-and-white-nintendo-wii-game-system-bj6fp3AGSbM",
                             IsDownloadable = true,
                             Platform = "Xbox",
                             Price = 39.99m,
@@ -252,10 +255,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.Property<bool?>("WantsPromotions")
                         .HasColumnType("bit");
 
-                    b.Property<string>("profileImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("MemberID");
 
                     b.HasIndex("MemberID1");
@@ -275,8 +274,7 @@ namespace PROG3050_Team_Project.Migrations
                             IsEmailVerified = true,
                             Password = "hello@1234",
                             UserName = "GamerOne",
-                            WantsPromotions = true,
-                            profileImage = "/img/profile.png"
+                            WantsPromotions = true
                         },
                         new
                         {
@@ -290,8 +288,7 @@ namespace PROG3050_Team_Project.Migrations
                             IsEmailVerified = true,
                             Password = "hello@1234",
                             UserName = "GamerTwo",
-                            WantsPromotions = false,
-                            profileImage = "/img/profile.png"
+                            WantsPromotions = false
                         });
                 });
 
