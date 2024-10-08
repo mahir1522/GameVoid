@@ -43,9 +43,8 @@ namespace PROG3050_Team_Project.Controllers
             {
                 _context.Games.Add(game);
                 await _context.SaveChangesAsync();
-                ViewBag.ConsoleMessage = "Game successfully added to database.";
 
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Index", "Admin");
             }
             else
             {
