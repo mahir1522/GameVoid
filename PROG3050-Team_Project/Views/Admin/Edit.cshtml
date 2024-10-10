@@ -1,8 +1,58 @@
 ﻿@model PROG3050_Team_Project.Models.Game
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Game";
 }
 
-<h1>Edit</h1>
+<div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <h1 class="display-4">Edit Game</h1>
+
+    @if (ViewBag.ConsoleMessage != null)
+    {
+        <div class="alert alert-warning">
+            @ViewBag.ConsoleMessage
+        </div>
+    }
+
+    @if (Model != null)
+    {
+        <form asp-action="Edit" asp-controller="Admin" method="post">
+            <input type="hidden" asp-for="GameID" />
+            <div class="form-group">
+                <input asp-for="Title" class="form-control" style="width: 400px;" placeholder="Title" required />
+            </div>
+            <br />
+            <div class="form-group">
+                <input asp-for="Description" class="form-control" style="width: 400px;" placeholder="Description" required />
+            </div>
+            <br />
+            <div class="form-group">
+                <input asp-for="Platform" class="form-control" style="width: 400px;" placeholder="Platform" required />
+            </div>
+            <br />
+            <div class="form-group">
+                <input asp-for="Category" class="form-control" style="width: 400px;" placeholder="Category" required />
+            </div>
+            <br />
+            <div class="form-group">
+                <input asp-for="ReleaseDate" class="form-control" style="width: 400px;" placeholder="ReleaseDate" required />
+            </div>
+            <br />
+            <div class="form-group">
+                <input asp-for="Price" class="form-control" style="width: 400px;" placeholder="Price" required />
+            </div>
+            <br />
+            <div class="form-group">
+                <input asp-for="Rating" class="form-control" style="width: 400px;" placeholder="Rating" required />
+            </div>
+            <br />
+            <div class="form-group">
+                <label>Is Downloadable</label>
+                <input asp-for="IsDownloadable" class="text-center" placeholder="IsDownloadable" />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Edit Game</button><br />
+        </form>
+    }
+</div>
 

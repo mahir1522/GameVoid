@@ -45,7 +45,7 @@
                             <td>@game.Rating</td>
                             <td>@game.IsDownloadable</td>
                             <td>
-                                <button type="submit" name="action" value="Edit" formaction="@Url.Action("Edit", "Admin", new { id = game.GameID })" class="btn btn-warning">Edit</button>
+                                <a href="@Url.Action("Edit", "Admin", new { id = game.GameID })" class="btn btn-warning">Edit</a>
                                 <button type="submit" name="action" value="Delete" formaction="@Url.Action("Delete", "Admin", new { id = game.GameID })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
                             </td>
                         </tr>

@@ -54,8 +54,31 @@ namespace PROG3050_Team_Project.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
+            // Getting the selected games data by fetching id
+            var game = _context.Games.Find(id);
+            if (game == null)
+            {
+                return NotFound();
+            }
+            return View(game);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(Game game)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Attach(game);
+                _context.Entry(game).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Admin");
+            }
+            else
+            {
+                ViewBag.ConsoleMessage = "Game not valid.";
+            }
+
             return View();
         }
         [HttpPost]
