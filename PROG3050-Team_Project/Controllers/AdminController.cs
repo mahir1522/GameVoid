@@ -67,6 +67,7 @@ namespace PROG3050_Team_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Game game)
         {
+            // Tracks the existing game and modifies it based on the inputs
             if (ModelState.IsValid)
             {
                 _context.Attach(game);
@@ -76,7 +77,7 @@ namespace PROG3050_Team_Project.Controllers
             }
             else
             {
-                ViewBag.ConsoleMessage = "Game not valid.";
+                ViewBag.ConsoleMessage = "Inavlid input.";
             }
 
             return View();
