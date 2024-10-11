@@ -1,0 +1,127 @@
+/* General Body Styling */
+body {
+    background-color: #242424; /* Main background color */
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the whole login page */
+.text-center {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #242424;
+}
+
+/* Title Styling */
+h1.display-4 {
+    color: #FFFFFF;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 1.44px;
+}
+
+/* Form Group Styling */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+}
+
+/* Input Fields */
+input[type="text"], input[type="password"] {
+    width: 400px;
+    background: rgba(94, 94, 94, 0.35); /* Semi-transparent input background */
+    border: none;
+    border-radius: 16px;
+    padding: 12px 24px;
+    color: rgba(255, 255, 255, 0.50); /* Text color */
+    font-size: 24px;
+    font-weight: 500;
+}
+
+/* Buttons */
+button.btn-primary {
+    background-color: #DA00FE;
+    border: none;
+    border-radius: 16px;
+    padding: 12px 56px;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 24px;
+}
+
+/* Create Account Button */
+a.btn.btn-dark {
+    background-color: #8A8A8A;
+    border: none;
+    border-radius: 16px;
+    padding: 12px 56px;
+    color: white;
+    font-size: 24px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 24px;
+}
+
+/* Forgot Password and Not a Member Links */
+a {
+    color: #A100ED;
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: none;
+    margin-top: 16px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Additional Styling for Various Text Elements */
+.text-danger {
+    color: #FF4C4C; /* Error text color */
+}
+
+
+
+
+/* Styling for the "GAME VOID" text */
+.brand-logo {
+    position: absolute; /* Make it float above other content */
+    top: 20px; /* Distance from the top */
+    left: 20px; /* Distance from the left */
+    font-family: 'Quicksand', sans-serif; /* Font as specified */
+    font-weight: 700; /* Bold text */
+    display: flex; /* Display both words side-by-side */
+    flex-direction: column; /* Stagger vertically */
+    line-height: 1; /* Remove default line height spacing */
+}
+
+/* Style for GAME text */
+.brand-logo .game {
+    color: #DA00FE; /* Purple color from Figma */
+    font-size: 24px; /* Font size */
+    margin-bottom: -8px; /* Negative margin to bring VOID closer */
+}
+
+/* Style for VOID text */
+.brand-logo .void {
+    color: #A100ED; /* Different shade of purple */
+    font-size: 24px; /* Font size */
+    padding-left: 19px; /* Shift VOID slightly to the right */
+    transform: translateY(4px); /* Fine-tune the vertical position */
+}
+.login-box {
+    background: #2D2D2D; /* Dark gray background */
+    padding: 40px 60px; /* Spacing inside the box */
+    border-radius: 16px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25); /* Subtle shadow */
+    width: 500px; /* Fixed width for the box */
+    margin-top: 24px; /* Spacing between title and box */
+}
