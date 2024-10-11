@@ -1,5 +1,6 @@
 ﻿@model PROG3050_Team_Project.Models.Member
 
+
 <div class="container mt-5">
     <h2>User Profile</h2>
 
@@ -11,34 +12,51 @@
             <input type="text" class="form-control" id="Username" name="Username" value="@Model.UserName" readonly />
         </div>
 
+
+
         <div class="mb-3">
-            <label for="fullname" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="fullname" name="fullname" value="@Model.FullName" required />
+            <label for="Email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="Email" name="Email" value="@Model.Email" readonly />
         </div>
 
-@*             <div class="mb-3">
-    <label for="Gender" class="form-label">Gender</label>
-    <select class="form-select" id="Gender" name="Gender">
-        <option value="Male" @(Model.Gender == "Male" ? "selected" : "")>Male</option>
-        <option value="Female" @(Model.Gender == "Female" ? "selected" : "")>Female</option>
-        <option value="Other" @(Model.Gender == "Other" ? "selected" : "")>Other</option>
-    </select>
-</div>
- *@
+
+        <div class="mb-3">
+            <label for="Password" class="form-label">Password</label>
+            <input type="text" class="form-control" id="Password" name="Password" value="@Model.Password" readonly />
+        </div>
+
+
+        <div class="mb-3">
+            <label for="FullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="FullName" name="FullName" value="@Model.FullName" required />
+        </div>
+
+
+
+
+        <div class="mb-3">
+            <label for="Gender" class="form-label">Gender</label>
+            <select class="form-select" id="Gender" name="Gender">
+                <option value="Male" selected="@(Model.Gender == "Male")">Male</option>
+                <option value="Male" selected="@(Model.Gender == "Female")">Female</option>
+                <option value="Male" selected="@(Model.Gender == "Other")">Other</option>
+            </select>
+        </div>
 
         <div class="mb-3">
             <label for="Birthday" class="form-label">Birthday</label>
-            <input type="date" class="form-control" id="Birthday" name="Birthday" value="@Model.BirthDate required />
+            <input asp-for="@Model.BirthDate" type="date" value="@Model.BirthDate?.ToString("yyyy-MM-dd")" class="form-control" />
         </div>
-
         <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="PromotionalEmail" name="PromotionalEmail" @(Model.WantsPromotions == true ? "checked" : "") />
+            <input type="hidden" name="WantsPromotions" value="false" />
+
+            <input type="checkbox" class="form-check-input" id="PromotionalEmail" name="WantsPromotions" value="true" @(Model.WantsPromotions == true ? "checked" : "") />
             <label class="form-check-label" for="PromotionalEmail">Receive Promotional Emails</label>
         </div>
 
         <div class="mb-3">
-            <label for="ProfileImage" class="form-label">Profile Image</label>
-            <input type="file" class="form-control" id="ProfileImage" name="ProfileImage" />
+            <label for="profileImage" class="form-label">Profile Image</label>
+            <input type="file" class="form-control" id="profileImage" name="profileImage" />
             @if (!string.IsNullOrEmpty(Model.profileImage))
             {
                 <img src="@Model.profileImage" alt="Profile Image" class="rounded-circle" width="50" height="50" />

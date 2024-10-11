@@ -19,6 +19,9 @@ namespace PROG3050_Team_Project.Models
         public string? Password { get; set; }  // Nullable string 
 
 
+
+
+
         [NotMapped] // This will not be mapped to out database
         public string? ConfirmPassword { get; set; }
 
@@ -50,6 +53,6 @@ namespace PROG3050_Team_Project.Models
         public ICollection<Order>? Orders { get; set; }  // Nullable collections
         public ICollection<Event>? RegisteredEvents { get; set; }  // Nullable collections
         public bool IsEmailVerified { get; set; } = false;
-        public string profileImage { get; set; } = "/img/profile.png";
+        public string? profileImage { get; set; } = "/img/profile.png";
     }
 }
