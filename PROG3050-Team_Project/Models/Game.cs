@@ -9,10 +9,9 @@
         public string Category { get; set; }
         public DateTime ReleaseDate { get; set; }
         public decimal Price {  get; set; }
-<<<<<<< HEAD
+
         public string ImageUrl { get; set; } = "/img/default.jpg";    //default image
-=======
->>>>>>> admin-panel
+
         public decimal Rating { get; set; }
         public bool IsDownloadable { get; set; }
         public ICollection<WishList>? WishLists { get; set; } = null;
