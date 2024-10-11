@@ -44,6 +44,7 @@ namespace PROG3050_Team_Project.Controllers
                 _context.Games.Add(game);
                 await _context.SaveChangesAsync();
 
+                TempData["SuccessMessage"] = "Game has been successfully added.";
                 return RedirectToAction("Index", "Admin");
             }
             else
@@ -73,7 +74,9 @@ namespace PROG3050_Team_Project.Controllers
                 _context.Attach(game);
                 _context.Entry(game).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Game has been successfully edited.";
                 return RedirectToAction("Index", "Admin");
+
             }
             else
             {
@@ -89,10 +92,14 @@ namespace PROG3050_Team_Project.Controllers
             var game = await _context.Games.FindAsync(id);
             if (game == null)
             {
+                TempData["ErrorMessage"] = "Game not found.";
                 return NotFound();
             }
             _context.Games.Remove(game);
             await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Game has been successfully deleted.";
+
 
             return RedirectToAction("Index", "Admin");
         }

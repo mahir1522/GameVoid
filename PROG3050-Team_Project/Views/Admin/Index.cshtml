@@ -4,6 +4,23 @@
     ViewData["Title"] = "Admin Panel";
 }
 
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <script>
+        alert('@TempData["SuccessMessage"]');
+    </script>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        alert('@TempData["ErrorMessage"]');
+    </script>
+}
+
+
+
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <h1 class="display-4">Admin Panel</h1>
 
