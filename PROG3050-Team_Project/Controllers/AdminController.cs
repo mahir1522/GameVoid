@@ -37,7 +37,6 @@ namespace PROG3050_Team_Project.Controllers
                 }
                 return View(game);
             }
-
             // Adding game to table if game is valid
             if (ModelState.IsValid)
             {
@@ -80,7 +79,7 @@ namespace PROG3050_Team_Project.Controllers
             }
             else
             {
-                ViewBag.ConsoleMessage = "Inavlid input.";
+                ViewBag.ConsoleMessage = "Invalid input.";
             }
 
             return View();
