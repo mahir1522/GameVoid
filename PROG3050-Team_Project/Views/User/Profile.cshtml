@@ -1,0 +1,59 @@
+﻿@model PROG3050_Team_Project.Models.Member
+
+<div class="container mt-5">
+    <h2>User Profile</h2>
+
+    <form asp-action="Profile" enctype="multipart/form-data" method="post">
+
+        <input type="hidden" name="MemberID" value="@Model.MemberID" />
+        <div class="mb-3">
+            <label for="Username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="Username" name="Username" value="@Model.UserName" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullname" name="fullname" value="@Model.FullName" required />
+        </div>
+
+@*             <div class="mb-3">
+    <label for="Gender" class="form-label">Gender</label>
+    <select class="form-select" id="Gender" name="Gender">
+        <option value="Male" @(Model.Gender == "Male" ? "selected" : "")>Male</option>
+        <option value="Female" @(Model.Gender == "Female" ? "selected" : "")>Female</option>
+        <option value="Other" @(Model.Gender == "Other" ? "selected" : "")>Other</option>
+    </select>
+</div>
+ *@
+
+        <div class="mb-3">
+            <label for="Birthday" class="form-label">Birthday</label>
+            <input type="date" class="form-control" id="Birthday" name="Birthday" value="@Model.BirthDate required />
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="PromotionalEmail" name="PromotionalEmail" @(Model.WantsPromotions == true ? "checked" : "") />
+            <label class="form-check-label" for="PromotionalEmail">Receive Promotional Emails</label>
+        </div>
+
+        <div class="mb-3">
+            <label for="ProfileImage" class="form-label">Profile Image</label>
+            <input type="file" class="form-control" id="ProfileImage" name="ProfileImage" />
+            @if (!string.IsNullOrEmpty(Model.profileImage))
+            {
+                <img src="@Model.profileImage" alt="Profile Image" class="rounded-circle" width="50" height="50" />
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <hr class="my-4">
+
+    <h2>Address Information</h2>
+    <div>
+        <p>@Model.Address ?? "No address provided." </p>
+        <a asp-action="EditAddress" class="btn btn-secondary">Edit Address Info</a>
+        <a asp-action="DeleteAddress" class="btn btn-danger">Delete Address Info</a>
+    </div>
+</div>

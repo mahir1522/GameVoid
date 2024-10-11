@@ -12,7 +12,7 @@
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-light" href="#">Profile</a>
+                    <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">Profile</a>
                 </li>
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" href="#">Search</a>
@@ -21,7 +21,7 @@
                     <a class="nav-link text-light" href="#">Library</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Balance</a>
+                    <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
                 </li>
             </ul>
         </div>
@@ -31,7 +31,9 @@
             <!-- Search Bar -->
             <div class="mb-4 d-flex align-items-center">
                 <input type="text" class="form-control me-5" style="width: 46rem;" placeholder="Search..." aria-label="Search">
-                <img src=@Model.member.profileImage width="50" height="50" class="rounded-circle" alt="Profile Pic">
+                <a asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">
+                    <img src=@Model.member.profileImage width="50" height="50" class="rounded-circle" alt="Profile Pic">
+                </a>
             </div>
 
 

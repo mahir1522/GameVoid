@@ -28,6 +28,7 @@ namespace PROG3050_Team_Project.Controllers
 
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Index(string username, string password)
         {
