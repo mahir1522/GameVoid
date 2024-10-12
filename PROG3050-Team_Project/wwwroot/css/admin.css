@@ -1,0 +1,258 @@
+/* General Body Styling */
+body {
+    background-color: #242424; /* Main background color */
+    font-family: 'Quicksand', sans-serif;
+    color: white; /* Set default text color to white */
+    margin: 0;
+    padding: 0;
+}
+
+/* Title Styling */
+h1.display-4 {
+    color: #FFFFFF;
+    font-size: 48px; /* Increased font size for a more impactful title */
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: 2px; /* More spacing for elegance */
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #DA00FE;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 56px;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 24px;
+}
+
+.btn-primary:hover {
+    background-color: #A100ED; /* Darker purple on hover */
+}
+
+.btn-warning {
+    background-color: #FFC107;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 24px;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-warning:hover {
+    background-color: #FFA000;
+}
+
+.btn-danger {
+    background-color: #FF4C4C;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 24px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #D32F2F;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    max-width: 1000px;
+    background-color: #3a3a3a; /* Lighter gray background for table */
+    color: white; /* Ensure text inside table is white */
+    border-collapse: separate; /* Use separate for better spacing */
+    border-spacing: 0; /* Remove default spacing */
+    margin-top: 20px;
+    border-radius: 12px; /* Rounded corners for table */
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4); /* Soft shadow */
+}
+
+table th, table td {
+    padding: 24px 40px; /* Increased padding for larger cells */
+    text-align: center;
+    border-bottom: 1px solid #474747; /* Horizontal line at the bottom */
+    border-right: 1px solid #281a2f; /* Vertical line on the right */
+    color: white; /* Keep text white */
+    height: 60px; /* Set a fixed height for table rows */
+    min-width: 120px; /* Set a minimum width for cells */
+}
+
+/* Remove the right border from the last cell in each row */
+table td:last-child,
+table th:last-child {
+    border-right: none; /* Prevent the last column from having a right border */
+}
+
+thead {
+    background-color: #281a2f; /* Dark gray background for header */
+    color: white;
+    font-size: 18px;
+}
+
+tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+}
+
+
+
+/* Success/Error Messages */
+.alert {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: white;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #4CAF50; /* Green for success */
+}
+
+.alert-error {
+    background-color: #FF4C4C; /* Red for error */
+}
+
+/* Flexbox Container */
+.text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #242424;
+    padding: 40px;
+}
+
+/* Table Container for responsiveness */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Links */
+a {
+    color: #DA00FE;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #A100ED;
+}
+
+/* Input and form styling (optional, can remove if not needed for the panel) */
+input[type="text"], input[type="password"] {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(94, 94, 94, 0.35);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px;
+    font-weight: 400;
+}
+
+/* Box shadow for elevated look */
+.box-shadow {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4); /* Soft shadow effect */
+    border-radius: 16px;
+}
+/* Container for the Add Game button */
+.add-game-container {
+    display: flex;
+    justify-content: flex-end; /* Aligns the button to the right */
+    margin-bottom: 16px; /* Space between the button and the table */
+}
+
+.btn-primary {
+    background-color: #DA00FE;
+    border: none;
+    border-radius: 20px;
+    padding: 12px 40px; /* Adjusted padding for better look */
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #A100ED; /* Darker purple on hover */
+}
+/* Brand Logo Positioning */
+.brand-logo {
+    position: absolute; /* Keep it absolute */
+    top: 20px; /* Distance from the top */
+    left: 20px; /* Distance from the left */
+    font-family: 'Quicksand', sans-serif; /* Font as specified */
+    font-weight: 700; /* Bold text */
+    display: flex; /* Use flexbox to align the items */
+    flex-direction: column; /* Stack the items vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+/* Style for GAME text */
+.brand-logo .game {
+    color: #DA00FE; /* Purple color from Figma */
+    font-size: 24px; /* Font size */
+    margin-bottom: -8px; /* Negative margin to bring VOID closer */
+}
+
+/* Style for VOID text */
+.brand-logo .void {
+    color: #A100ED; /* Different shade of purple */
+    font-size: 24px; /* Font size */
+    padding-left: 19px; /* Shift VOID slightly to the right */
+    transform: translateY(-8px); /* Fine-tune the vertical position */
+}
+
+
+/* Edit Button Styles */
+.btn-edit {
+    background-color: #DA00FE; /* Purple color for Edit button */
+    border: none;
+    border-radius: 12px; /* Rounded corners */
+    padding: 10px 24px; /* Adjusted padding for a better look */
+    color: white;
+    font-size: 16px; /* Adjust font size if necessary */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+    background-color: #A100ED; /* Darker purple on hover */
+}
+
+/* Delete Button Styles */
+.btn-delete {
+    background-color: #FF4C4C; /* Red for Delete button */
+    border: none;
+    border-radius: 12px; /* Rounded corners */
+    padding: 10px 24px; /* Adjusted padding for a better look */
+    color: white;
+    font-size: 16px; /* Adjust font size if necessary */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #D32F2F; /* Darker red on hover */
+}
