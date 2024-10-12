@@ -1,14 +1,10 @@
 ﻿@model PROG3050_Team_Project.Models.Member
 
-<link rel="stylesheet" href="~/css/profile.css">
-<div class="brand-logo">
-    <div class="game">GAME</div>
-    <div class="void">VOID</div>
-</div>
-<div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-   
-    <h2>User Profile</h2> 
-    <div class="profile-box"> <form asp-action="Profile" enctype="multipart/form-data" method="post">
+
+<div class="container mt-5">
+    <h2>User Profile</h2>
+
+    <form asp-action="Profile" enctype="multipart/form-data" method="post">
 
         <input type="hidden" name="MemberID" value="@Model.MemberID" />
         <div class="mb-3">
@@ -54,9 +50,8 @@
         <div class="mb-3 form-check">
             <input type="hidden" name="WantsPromotions" value="false" />
 
-            <label class="form-check-label" for="PromotionalEmail">Receive Promotional Emails</label><br/>
             <input type="checkbox" class="form-check-input" id="PromotionalEmail" name="WantsPromotions" value="true" @(Model.WantsPromotions == true ? "checked" : "") />
-            
+            <label class="form-check-label" for="PromotionalEmail">Receive Promotional Emails</label>
         </div>
 
         <div class="mb-3">
@@ -78,7 +73,5 @@
         <p>@Model.Address ?? "No address provided." </p>
         <a asp-action="EditAddress" class="btn btn-secondary">Edit Address Info</a>
         <a asp-action="DeleteAddress" class="btn btn-danger">Delete Address Info</a>
-    </div></div>
-   
-    
+    </div>
 </div>

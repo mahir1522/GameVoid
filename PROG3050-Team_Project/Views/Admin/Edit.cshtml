@@ -3,12 +3,7 @@
 @{
     ViewData["Title"] = "Edit Game";
 }
-<link rel="stylesheet" href="~/css/adminAddEdit.css">
 
-<div class="brand-logo">
-    <div class="game">GAME</div>
-    <div class="void">VOID</div>
-</div>
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <h1 class="display-4">Edit Game</h1>
 
@@ -18,64 +13,42 @@
             @ViewBag.ConsoleMessage
         </div>
     }
-    <div class="add-box"> 
-
     <form asp-action="Edit" asp-controller="Admin" method="post">
-    <input type="hidden" asp-for="GameID" />
-
-   <div class="form-group">
-            <label asp-for="Title" class="form-label">Title</label>
-            <input asp-for="Title" class="form-control" placeholder="Enter Title" required />
-        </div>
-        <br />
-
-         <div class="form-group">
-            <label asp-for="Description" class="form-label">Description</label>
-            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter Description" required></textarea>
-        </div>
-        <br />
-
+        <input type="hidden" asp-for="GameID" />
         <div class="form-group">
-            <label asp-for="Platform" class="form-label">Platform</label>
-            <input asp-for="Platform" class="form-control" placeholder="Enter Platform" required />
+            <input asp-for="Title" class="form-control" style="width: 400px;" placeholder="Title" required />
         </div>
         <br />
-
         <div class="form-group">
-            <label asp-for="Category" class="form-label">Category</label>
-            <input asp-for="Category" class="form-control" placeholder="Enter Category" required />
+            <input asp-for="Description" class="form-control" style="width: 400px;" placeholder="Description" required />
         </div>
         <br />
-
         <div class="form-group">
-            <label asp-for="ReleaseDate" class="form-label">Release Date</label>
-            <input asp-for="ReleaseDate" class="form-control" placeholder="Enter Release Date" required />
+            <input asp-for="Platform" class="form-control" style="width: 400px;" placeholder="Platform" required />
         </div>
         <br />
-
         <div class="form-group">
-            <label asp-for="Price" class="form-label">Price</label>
-            <input asp-for="Price" class="form-control" placeholder="Enter Price" required />
+            <input asp-for="Category" class="form-control" style="width: 400px;" placeholder="Category" required />
         </div>
         <br />
-
         <div class="form-group">
-            <label asp-for="Rating" class="form-label">Rating</label>
-            <input asp-for="Rating" class="form-control" placeholder="Enter Rating" required />
+            <input asp-for="ReleaseDate" class="form-control" style="width: 400px;" placeholder="ReleaseDate" required />
         </div>
         <br />
-    <br />
-    <br />
-
-    <div class="form-group">
-        <label asp-for="IsDownloadable" class="form-label">Is Downloadable</label>
-        <input asp-for="IsDownloadable" class="text-center" placeholder="Yes/No" />
-    </div>
-    <br />
-
-    <button type="submit" class="btn btn-primary">Edit Game</button><br />
-</form>
-
-    </div>
+        <div class="form-group">
+            <input asp-for="Price" class="form-control" style="width: 400px;" placeholder="Price" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <input asp-for="Rating" class="form-control" style="width: 400px;" placeholder="Rating" required />
+        </div>
+        <br />
+        <div class="form-group">
+            <label>Is Downloadable</label>
+            <input asp-for="IsDownloadable" class="text-center" placeholder="IsDownloadable" />
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Edit Game</button><br />
+    </form>
 </div>
 
