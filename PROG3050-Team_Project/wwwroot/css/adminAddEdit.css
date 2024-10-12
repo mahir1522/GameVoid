@@ -1,0 +1,116 @@
+
+body {
+    background-color: #242424; /* Main background color */
+    font-family: 'Quicksand', sans-serif;
+    color: white; /* Set default text color to white */
+    margin: 0;
+    padding: 0;
+}
+/* Form Container Styling */
+.form-container {
+    max-width: 400px; /* Max width for the form */
+    margin: auto; /* Center the form */
+    background-color: #3a3a3a; /* Background color for the form */
+    padding: 24px; /* Padding around the form */
+    border-radius: 12px; /* Rounded corners for the form */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4); /* Soft shadow */
+}
+
+/* Form Title Styling */
+.form-container h1 {
+    color: #FFFFFF; /* Title color */
+    font-size: 36px; /* Adjusted font size */
+    margin-bottom: 24px; /* Space below the title */
+}
+
+/* Input Field Styling */
+.form-control {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border: 1px solid #474747; /* Border color */
+    border-radius: 8px; /* Rounded corners for inputs */
+    color: white; /* Text color */
+    padding: 12px; /* Padding inside inputs */
+    font-size: 16px; /* Font size for inputs */
+    margin-bottom: 16px; /* Space between inputs */
+    transition: border-color 0.3s ease; /* Smooth border transition */
+}
+
+.form-control:focus {
+    border-color: #DA00FE; /* Border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #DA00FE; /* Primary button background */
+    border: none; /* No border */
+    border-radius: 20px; /* Rounded corners */
+    padding: 12px 56px; /* Padding for button */
+    color: white; /* Button text color */
+    font-size: 20px; /* Button font size */
+    font-weight: 500; /* Button font weight */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+    margin-top: 16px; /* Space above the button */
+}
+
+.btn-primary:hover {
+    background-color: #A100ED; /* Darker purple on hover */
+}
+
+/* Alert Message Styling */
+.alert {
+    background-color: #FFC107; /* Alert background color */
+    color: black; /* Alert text color */
+    padding: 12px; /* Padding for alert */
+    border-radius: 8px; /* Rounded corners for alert */
+    margin-bottom: 20px; /* Space below alert */
+    text-align: center; /* Center text in alert */
+}
+.add-box {
+    background: #2D2D2D; /* Dark gray background */
+    padding: 40px 60px; /* Spacing inside the box */
+    border-radius: 16px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25); /* Subtle shadow */
+    width: 500px; /* Fixed width for the box */
+    margin-top: 24px; /* Spacing between title and box */
+}
+/* Brand Logo Positioning */
+.brand-logo {
+    position: absolute; /* Keep it absolute */
+    top: 20px; /* Distance from the top */
+    left: 20px; /* Distance from the left */
+    font-family: 'Quicksand', sans-serif; /* Font as specified */
+    font-weight: 700; /* Bold text */
+    display: flex; /* Use flexbox to align the items */
+    flex-direction: column; /* Stack the items vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+/* Style for GAME text */
+.brand-logo .game {
+    color: #DA00FE; /* Purple color from Figma */
+    font-size: 24px; /* Increased font size to match title */
+    font-weight: 700; /* Bold text */
+  
+    margin-bottom: -8px; /* Negative margin to bring VOID closer */
+}
+
+/* Style for VOID text */
+.brand-logo .void {
+    color: #A100ED; /* Different shade of purple */
+    font-size: 24px; /* Increased font size to match title */
+    font-weight: 700; /* Bold text */
+  
+    padding-left: 19px; /* Shift VOID slightly to the right */
+    transform: translateY(-8px); /* Fine-tune the vertical position */
+}
+
+
+.form-label {
+    color: #FFFFFF; /* White text color */
+    font-size: 16px; /* Adjust font size as needed */
+    margin-bottom: 6px; /* Space between the label and input field */
+    display: block; /* Ensure label takes full width */
+    text-align: left;
+}
