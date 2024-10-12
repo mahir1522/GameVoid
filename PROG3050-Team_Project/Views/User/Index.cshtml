@@ -16,14 +16,21 @@
         alert('@TempData["ErrorMessage"]');
     </script>
 }
+<link rel="stylesheet" href="~/css/user.css">
 
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
-        <div class="col-md-2 bg-secondary p-4">
+        <div class="sidebar">
             <div class="mb-5">
-                <h1 class="text-black">GAME VOID</h1>
+                <div class="brand-logo">
+                <div class="game">GAME</div>
+                <div class="void">VOID</div>
+                 </div> 
+                
+               
             </div>
+            <br/><br/>
             <ul class="nav flex-column">
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">Profile</a>
@@ -40,53 +47,54 @@
             </ul>
         </div>
 
-        <!-- Main Content -->
-        <div class="col-md-10 p-4">
-            <!-- Search Bar -->
-            <div class="mb-4 d-flex align-items-center">
-                <input type="text" class="form-control me-5" style="width: 46rem;" placeholder="Search..." aria-label="Search">
-                <a asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">
-                    <img src=@Model.member.profileImage width="50" height="50" class="rounded-circle" alt="Profile Pic">
-                </a>
-            </div>
+       <!-- Main Content -->
+<div class="main-content-container">
+    <!-- Search Bar -->
+    <div class="search-bar mb-4 d-flex align-items-center">
+        <input type="text" class="form-control me-5" style="width: 46rem;" placeholder="Search..." aria-label="Search">
+        <a asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">
+            <img src="@Model.member.profileImage" width="50" height="50" class="rounded-circle" alt="Profile Pic">
+        </a>
+    </div>
+
+   <!-- Banner -->
+<div class="custom-banner mb-4 text-center">
+    <img src="~/img/Cyberunk-PL.webp" class="custom-banner-img" alt="Cyberpunk 2007">
+    <div class="custom-banner-body">
+        <a href="#" class="btn">Order Now</a>
+    </div>
+</div>
 
 
+    <!-- Product Section -->
+    <div>
+        <h2 class="mb-3">Product</h2>
+        <div class="mb-4">
+    <button class="btn rounded">Top</button>
+    <button class="btn rounded">Popular</button> 
+    <button class="btn rounded">Recommended</button>
+    <button class="btn filter-btn">Filter</button>
+</div>
 
-            <!-- Banner -->
-            <div class="card mb-4 text-center">
-                <img src="~/img/default.jpg" class="card-img-top" alt="Cyberpunk 2007">
-                <div class="card-body">
-                    <a href="#" class="btn">Order Now</a>
-                </div>
-            </div>
 
-            <!-- Product Section -->
-            <div>
-                <h2 class="mb-3">Product</h2>
-                <div class="mb-4">
-                    <button class="btn">Top</button>
-                    <button class="btn">Popular</button>
-                    <button class="btn">Recommended</button>
-                    <button class="btn">Filter</button>
-                </div>
-
-                <!-- Game Cards Grid -->
-                <div class="row">
-                    @foreach (var game in Model.games)
-                    {
-                        <div class="col-md-3 mb-4">
-                            <div class="card bg-secondary text-light">
-                                <img src="@game.ImageUrl" class="card-img-top" alt="@game.Title">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">@game.Title</h5>
-                                    <p class="card-text">@game.Price.ToString("C")</p>
-                                    <a href="#" class="btn btn-purple">Add to Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                    }
+        <!-- Game Cards Grid -->
+<div class="custom-row">
+    @foreach (var game in Model.games)
+    {
+        <div class="custom-col">
+            <div class="custom-card">
+                <img src="@game.ImageUrl" class="custom-card-img" alt="@game.Title">
+                <div class="custom-card-body">
+                    <h5 class="custom-card-title">@game.Title</h5>
+                    <p class="custom-card-text">@game.Price.ToString("C")</p>
+                    <a href="#" class="custom-btn">Add to Cart</a>
                 </div>
             </div>
         </div>
+    }
+</div>
+    </div>
+</div>
+
     </div>
 </div>
