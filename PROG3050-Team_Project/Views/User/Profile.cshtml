@@ -93,9 +93,12 @@
                         <a asp-action="AddOrEditAddress" asp-route-memberId="@Model.MemberID" asp-route-addressId="@address.AddressID" class="btn btn-primary">
                             Edit Address
                         </a>
-                        <a asp-action="DeleteAddress" asp-route-memberId="@Model.MemberID" asp-route-addressId="@address.AddressID" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this address?');">
-                            Delete Address
-                        </a>
+                        <form asp-action="DeleteAddress" asp-route-memberId="@Model.MemberID" asp-route-addressId="@address.AddressID" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this address?');">
+                                Delete Address
+                            </button>
+                        </form>
+
 
                         <hr />
                     </div>
@@ -108,8 +111,5 @@
 
             <a asp-action="AddOrEditAddress" asp-route-memberId="@Model.MemberID" class="btn btn-primary">Add New Address</a>
         </div>
-
-
-
-
     </div>
+</div>
