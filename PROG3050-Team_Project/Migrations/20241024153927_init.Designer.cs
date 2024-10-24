@@ -12,8 +12,8 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    [Migration("20241011223803_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241024153927_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,10 @@ namespace PROG3050_Team_Project.Migrations
             modelBuilder.Entity("PROG3050_Team_Project.Models.Address", b =>
                 {
                     b.Property<int>("AddressID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressID"));
 
                     b.Property<string>("AptSuite")
                         .IsRequired()
@@ -83,6 +86,9 @@ namespace PROG3050_Team_Project.Migrations
                     b.Property<bool>("IsShippingSameAsMailing")
                         .HasColumnType("bit");
 
+                    b.Property<int>("MemberID")
+                        .HasColumnType("int");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -98,6 +104,10 @@ namespace PROG3050_Team_Project.Migrations
                     b.Property<string>("StreetAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AddressID");
+
+                    b.HasIndex("MemberID");
 
                     b.ToTable("Address");
                 });
@@ -256,7 +266,6 @@ namespace PROG3050_Team_Project.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("profileImage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MemberID");
@@ -374,6 +383,17 @@ namespace PROG3050_Team_Project.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Address", b =>
+                {
+                    b.HasOne("PROG3050_Team_Project.Models.Member", "Member")
+                        .WithMany("Addresses")
+                        .HasForeignKey("MemberID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Member");
+                });
+
             modelBuilder.Entity("PROG3050_Team_Project.Models.Game", b =>
                 {
                     b.HasOne("PROG3050_Team_Project.Models.Order", null)
@@ -412,6 +432,8 @@ namespace PROG3050_Team_Project.Migrations
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Member", b =>
                 {
+                    b.Navigation("Addresses");
+
                     b.Navigation("FriendsAndFamily");
 
                     b.Navigation("Orders");

@@ -1,0 +1,72 @@
+﻿@model PROG3050_Team_Project.Models.Address
+
+<form asp-action="AddOrEditAddress" method="post">
+    <input type="hidden" asp-for="AddressID" />
+    <input type="hidden" asp-for="MemberID" />
+
+    <div>
+        <label asp-for="Country"></label>
+        <input asp-for="Country" required />
+    </div>
+    <div>
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" required />
+    </div>
+    <div>
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" required />
+    </div>
+    <div>
+        <label asp-for="StreetAddress"></label>
+        <input asp-for="StreetAddress" required />
+    </div>
+    <div>
+        <label asp-for="AptSuite"></label>
+        <input asp-for="AptSuite" />
+    </div>
+    <div>
+        <label asp-for="City"></label>
+        <input asp-for="City" required />
+    </div>
+    <div>
+        <label asp-for="Province"></label>
+        <input asp-for="Province" required />
+    </div>
+    <div>
+        <label asp-for="PostalCode"></label>
+        <input asp-for="PostalCode" required />
+    </div>
+    <div>
+        <label asp-for="DeliveryInstructions"></label>
+        <textarea asp-for="DeliveryInstructions"></textarea>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox" asp-for="IsShippingSameAsMailing" /> Use as shipping address
+        </label>
+    </div>
+
+    <button type="submit">Save Address</button>
+</form>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div>@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div>@TempData["ErrorMessage"]</div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div>
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
