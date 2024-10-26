@@ -78,11 +78,11 @@ namespace PROG3050_Team_Project.Controllers
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "User has been successfully Edited.";
 
-                return RedirectToAction("Index", new { memberId = existingMember.MemberID });
+                return View(existingMember);
             }
 
             TempData["ErrorMessage"] = "Your account is not edited.";
-            return RedirectToAction("Index", new { memberId = existingMember.MemberID });
+            return View(member);
         }
 
         [HttpGet]
@@ -137,7 +137,7 @@ namespace PROG3050_Team_Project.Controllers
 
                     await _context.SaveChangesAsync();
                     TempData["SuccessMessage"] = "Address has been saved successfully.";
-                    return RedirectToAction("Profile", new { memberId = address.MemberID });
+                    return View(address);
                 }
                 catch (Exception ex)
                 {

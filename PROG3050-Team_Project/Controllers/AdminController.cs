@@ -27,32 +27,19 @@ namespace PROG3050_Team_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Game game)
         {
-            // Checking if game passes all inputs
             if (!ModelState.IsValid)
             {
-                ViewBag.ConsoleMessage = "Model is invalid. Please check the inputs.";
-                foreach (var error in ModelState.Values.SelectMany(x => x.Errors))
-                {
-                    ViewBag.ConsoleMessage = $"Model Error: {error.ErrorMessage}";
-                }
+                TempData["ErrorMessage"] = "Model is invalid. Please check the inputs.";
                 return View(game);
             }
-            // Adding game to table if game is valid
-            if (ModelState.IsValid)
-            {
-                _context.Games.Add(game);
-                await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Game has been successfully added.";
-                return RedirectToAction("Index", "Admin");
-            }
-            else
-            {
-                ViewBag.ConsoleMessage = "Game not valid.";
-            }
+            _context.Games.Add(game);
+            await _context.SaveChangesAsync();
 
-            return View();
+            TempData["SuccessMessage"] = "Game has been successfully added.";
+            return View(game);
         }
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -67,23 +54,20 @@ namespace PROG3050_Team_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Game game)
         {
-            // Tracks the existing game and modifies it based on the inputs
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Attach(game);
-                _context.Entry(game).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Game has been successfully edited.";
-                return RedirectToAction("Index", "Admin");
-
-            }
-            else
-            {
-                ViewBag.ConsoleMessage = "Invalid input.";
+                TempData["ErrorMessage"] = "Invalid input. Please check the inputs.";
+                return View(game);
             }
 
-            return View();
+            _context.Attach(game);
+            _context.Entry(game).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Game has been successfully edited.";
+            return View(game);
         }
+
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

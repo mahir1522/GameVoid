@@ -34,7 +34,7 @@ namespace PROG3050_Team_Project.Models
 
         public List<string>? FavoriteGameCategories { get; set; } = new List<string>();
 
-        public virtual ICollection<Address> Addresses { get; set; }
+        public virtual ICollection<Address>? Addresses { get; set; }
 
         public List<Member>? FriendsAndFamily { get; set; } = new List<Member>();  // Nullable list
 

@@ -1,10 +1,28 @@
 ﻿@model PROG3050_Team_Project.Models.Member
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
+
 <link rel="stylesheet" href="~/css/profile.css">
 <div class="brand-logo">
     <div class="game">GAME</div>
     <div class="void">VOID</div>
 </div>
+
+<a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.MemberID" class="btn btn-secondary">Back to User Panel</a>
+
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
    
     <h2>User Profile</h2> 
@@ -112,4 +130,8 @@
             <a asp-action="AddOrEditAddress" asp-route-memberId="@Model.MemberID" class="btn btn-primary">Add New Address</a>
         </div>
     </div>
+
+
+
 </div>
+
