@@ -8,31 +8,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROG3050_Team_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Address",
-                columns: table => new
-                {
-                    AddressID = table.Column<int>(type: "int", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AptSuite = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DeliveryInstructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsShippingSameAsMailing = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                });
-
             migrationBuilder.CreateTable(
                 name: "Events",
                 columns: table => new
@@ -66,7 +46,7 @@ namespace PROG3050_Team_Project.Migrations
                     FavoritePlatforms = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FavoriteGameCategories = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsEmailVerified = table.Column<bool>(type: "bit", nullable: false),
-                    profileImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    profileImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MemberID1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -77,6 +57,35 @@ namespace PROG3050_Team_Project.Migrations
                         column: x => x.MemberID1,
                         principalTable: "Members",
                         principalColumn: "MemberID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Address",
+                columns: table => new
+                {
+                    AddressID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AptSuite = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeliveryInstructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsShippingSameAsMailing = table.Column<bool>(type: "bit", nullable: false),
+                    MemberID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.AddressID);
+                    table.ForeignKey(
+                        name: "FK_Address_Members_MemberID",
+                        column: x => x.MemberID,
+                        principalTable: "Members",
+                        principalColumn: "MemberID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,6 +221,11 @@ namespace PROG3050_Team_Project.Migrations
                     { 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamerone@example.com", "[]", "[]", "John Doe", "Male", true, null, "hello@1234", "GamerOne", true, "/img/profile.png" },
                     { 2, new DateTime(1988, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamertwo@example.com", "[]", "[]", "Jane Smith", "Female", true, null, "hello@1234", "GamerTwo", false, "/img/profile.png" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Address_MemberID",
+                table: "Address",
+                column: "MemberID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EventMember_RegiteredMembersMemberID",

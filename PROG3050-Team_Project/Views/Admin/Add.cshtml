@@ -9,15 +9,22 @@
     <div class="void">VOID</div>
 </div>
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<a asp-action="Index" asp-controller="Admin" class="btn btn-secondary">Back to Game List</a>
+
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <h1 class="display-4">Add Game</h1>
-
-    @if (ViewBag.ConsoleMessage != null)
-    {
-        <div class="alert alert-warning">
-            @ViewBag.ConsoleMessage
-        </div>
-    }
 
 <div class="add-box"> 
     <form asp-action="Add" asp-controller="Admin" method="post">

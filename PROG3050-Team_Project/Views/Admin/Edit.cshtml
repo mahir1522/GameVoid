@@ -5,6 +5,21 @@
 }
 <link rel="stylesheet" href="~/css/adminAddEdit.css">
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<a asp-action="Index" asp-controller="Admin" class="btn btn-secondary">Back to Game List</a>
+
+
 <div class="brand-logo">
     <div class="game">GAME</div>
     <div class="void">VOID</div>
@@ -12,12 +27,6 @@
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <h1 class="display-4">Edit Game</h1>
 
-    @if (ViewBag.ConsoleMessage != null)
-    {
-        <div class="alert alert-warning">
-            @ViewBag.ConsoleMessage
-        </div>
-    }
     <div class="add-box"> 
 
     <form asp-action="Edit" asp-controller="Admin" method="post">

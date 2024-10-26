@@ -12,6 +12,8 @@ namespace PROG3050_Team_Project.Models
         public DbSet<WishList> WishLists { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Event> Events { get; set; }
+        
+        public DbSet<Address> Address { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -77,6 +79,15 @@ namespace PROG3050_Team_Project.Models
                 .WithMany(m => m.WishLists)
                 .HasForeignKey(w => w.MemberID);
 
+            modelBuilder.Entity<Address>().
+                HasKey(a => a.AddressID);
+
+            modelBuilder.Entity<Member>()
+                .HasMany(m => m.Addresses)
+                .WithOne(a => a.Member)
+                .HasForeignKey(a => a.MemberID);
+
+
             // Define relationships between Order and Member (Many to one)
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Member)
@@ -92,9 +103,6 @@ namespace PROG3050_Team_Project.Models
             modelBuilder.Entity<WishList>()
                 .HasMany(w => w.Games)
                 .WithMany(g => g.WishLists);
-
-            modelBuilder.Entity<Address>()
-                .HasNoKey();
         }
     }
 }

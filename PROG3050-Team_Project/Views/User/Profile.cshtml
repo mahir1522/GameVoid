@@ -1,10 +1,28 @@
 ﻿@model PROG3050_Team_Project.Models.Member
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
+
 <link rel="stylesheet" href="~/css/profile.css">
 <div class="brand-logo">
     <div class="game">GAME</div>
     <div class="void">VOID</div>
 </div>
+
+<a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.MemberID" class="btn btn-secondary">Back to User Panel</a>
+
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
    
     <h2>User Profile</h2> 
@@ -73,12 +91,47 @@
 
     <hr class="my-4">
 
-    <h2>Address Information</h2>
-    <div>
-        <p>@Model.Address ?? "No address provided." </p>
-        <a asp-action="EditAddress" class="btn btn-secondary">Edit Address Info</a>
-        <a asp-action="DeleteAddress" class="btn btn-danger">Delete Address Info</a>
-    </div></div>
-   
-    
+        <h2>Address Information</h2>
+
+        <div>
+            @if (Model.Addresses != null && Model.Addresses.Any())
+            {
+                foreach (var address in Model.Addresses)
+                {
+                    <div class="address-entry">
+                        <p>
+                            <strong>@address.FullName</strong><br />
+                            @address.StreetAddress, @address.AptSuite<br />
+                            @address.City, @address.Province, @address.PostalCode<br />
+                            @address.Country<br />
+                            Phone: @address.PhoneNumber<br />
+                            Delivery Instructions: @address.DeliveryInstructions
+                        </p>
+
+                        <a asp-action="AddOrEditAddress" asp-route-memberId="@Model.MemberID" asp-route-addressId="@address.AddressID" class="btn btn-primary">
+                            Edit Address
+                        </a>
+                        <form asp-action="DeleteAddress" asp-route-memberId="@Model.MemberID" asp-route-addressId="@address.AddressID" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this address?');">
+                                Delete Address
+                            </button>
+                        </form>
+
+
+                        <hr />
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No addresses provided.</p>
+            }
+
+            <a asp-action="AddOrEditAddress" asp-route-memberId="@Model.MemberID" class="btn btn-primary">Add New Address</a>
+        </div>
+    </div>
+
+
+
 </div>
+

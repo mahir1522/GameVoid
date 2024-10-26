@@ -19,9 +19,6 @@ namespace PROG3050_Team_Project.Models
         public string? Password { get; set; }  // Nullable string 
 
 
-
-
-
         [NotMapped] // This will not be mapped to out database
         public string? ConfirmPassword { get; set; }
 
@@ -37,8 +34,7 @@ namespace PROG3050_Team_Project.Models
 
         public List<string>? FavoriteGameCategories { get; set; } = new List<string>();
 
-        [NotMapped]
-        public Address? Address { get; set; }  // Nullable Address
+        public virtual ICollection<Address>? Addresses { get; set; }
 
         public List<Member>? FriendsAndFamily { get; set; } = new List<Member>();  // Nullable list
 
