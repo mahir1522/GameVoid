@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROG3050_Team_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,6 +65,7 @@ namespace PROG3050_Team_Project.Migrations
                 {
                     AddressID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    MemberID = table.Column<int>(type: "int", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -74,8 +75,7 @@ namespace PROG3050_Team_Project.Migrations
                     Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeliveryInstructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsShippingSameAsMailing = table.Column<bool>(type: "bit", nullable: false),
-                    MemberID = table.Column<int>(type: "int", nullable: false)
+                    IsShippingSameAsMailing = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

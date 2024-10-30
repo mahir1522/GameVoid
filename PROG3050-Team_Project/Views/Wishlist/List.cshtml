@@ -1,0 +1,78 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model PROG3050_Team_Project.Models.WishList
+
+<link rel="stylesheet" href="~/css/profile.css">
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="mb-5">
+                <div class="brand-logo">
+                    <div class="game">GAME</div>
+                    <div class="void">VOID</div>
+                </div>
+
+
+            </div>
+            <br /><br />
+            <ul class="nav flex-column">
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.MemberID">Profile</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" href="#">Search</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" href="#">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.MemberID">WishList</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+        <!-- Main Content -->
+    <div class="custom-row">
+        <div class="main-content-container">
+            <h2>Wishlist</h2>
+
+            @if (Model?.Games != null && Model.Games.Any())
+            {
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Game Name</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var game in Model.Games)
+                        {
+                            <tr>
+                                <td>@game.Title</td>
+                                <td>@game.Price.ToString("C")</td>
+                                <td>
+                                    <a asp-action="RemoveFromWishlist" asp-route-memberId="@Model.MemberID" asp-route-gameId="@game.GameID">Remove</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>Your wishlist is empty.</p>
+            }
+        </div>
+    </div>
+</div>
+https://localhost:7269/Wishlist/List?memberId=3

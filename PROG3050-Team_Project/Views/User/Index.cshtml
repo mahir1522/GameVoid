@@ -43,6 +43,9 @@
                     <a class="nav-link text-light" href="#">Library</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.member.MemberID">WishList</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
                 </li>
             </ul>
@@ -79,21 +82,22 @@
 
 
         <!-- Game Cards Grid -->
-<div class="custom-row">
-    @foreach (var game in Model.games)
-    {
-        <div class="custom-col">
-            <div class="custom-card">
-                <img src="@game.ImageUrl" class="custom-card-img" alt="@game.Title">
-                <div class="custom-card-body">
-                    <h5 class="custom-card-title">@game.Title</h5>
-                    <p class="custom-card-text">@game.Price.ToString("C")</p>
-                    <a href="#" class="custom-btn">Add to Cart</a>
+    <div class="custom-row">
+        @foreach (var game in Model.games)
+        {
+            <div class="custom-col">
+                <div class="custom-card">
+                    <img src="@game.ImageUrl" class="custom-card-img" alt="@game.Title">
+                    <div class="custom-card-body">
+                        <h5 class="custom-card-title">@game.Title</h5>
+                        <p class="custom-card-text">@game.Price.ToString("C")</p>
+                                    <a href="#" class="custom-btn">Add to Cart</a>
+                                    <a class="custom-btn" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to View list</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
     </div>
 </div>
 
