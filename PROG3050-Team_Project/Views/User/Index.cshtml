@@ -92,7 +92,7 @@
                         <h5 class="custom-card-title">@game.Title</h5>
                         <p class="custom-card-text">@game.Price.ToString("C")</p>
                                     <a href="#" class="custom-btn">Add to Cart</a>
-                                    <a class="custom-btn" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to View list</a>
+                                    <a class="custom-btn" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.Wish" asp-route-gameId="@game.GameID">Add to View list</a>
                     </div>
                 </div>
             </div>
@@ -103,3 +103,5 @@
 
     </div>
 </div>
+@* // Testing *@
+@* // Testing *@
