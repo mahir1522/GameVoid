@@ -3,7 +3,17 @@
 *@
 @{
 }
-@model PROG3050_Team_Project.Models.WishList
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model PROG3050_Team_Project.Models.Cart
 <link rel="stylesheet" href="~/css/admin.css">
 
 
@@ -35,9 +45,6 @@
                     <a class="nav-link text-light" href="#">Search</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-light" href="#">Library</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.MemberID">WishList</a>
                 </li>
                 <li class="nav-item mb-3">
@@ -52,7 +59,7 @@
 </nav>
 
 <div class="text-center">
-    <h1 class="display-4">Wishlist</h1>
+    <h1 class="display-4">Cart</h1>
     @* Checking if model is null or if database is empty *@
     @if (Model?.Games != null && Model.Games.Any())
     {
@@ -71,15 +78,19 @@
                         <td>@game.Title</td>
                         <td>@game.Price.ToString("C")</td>
                         <td>
-                            <a asp-action="RemoveFromWishlist" asp-route-memberId="@Model.MemberID" asp-route-gameId="@game.GameID">Remove</a>
+                            <a asp-action="RemoveFromCart" asp-route-memberId="@Model.MemberID" asp-route-gameId="@game.GameID">Remove</a>
                         </td>
                     </tr>
                 }
+                <tr>
+                    <td>Total Price</td>
+                    <td>@Model.TotalPrice</td>
+                </tr>
             </tbody>
         </table>
     }
     else
     {
-        <p>Your wishlist is empty.</p>
+        <p>Your Cart is empty.</p>
     }
 </div>

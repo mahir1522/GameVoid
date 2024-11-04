@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROG3050_Team_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -82,6 +82,25 @@ namespace PROG3050_Team_Project.Migrations
                     table.PrimaryKey("PK_Address", x => x.AddressID);
                     table.ForeignKey(
                         name: "FK_Address_Members_MemberID",
+                        column: x => x.MemberID,
+                        principalTable: "Members",
+                        principalColumn: "MemberID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    CartId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MemberID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => x.CartId);
+                    table.ForeignKey(
+                        name: "FK_Carts_Members_MemberID",
                         column: x => x.MemberID,
                         principalTable: "Members",
                         principalColumn: "MemberID",
@@ -181,6 +200,30 @@ namespace PROG3050_Team_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CartGame",
+                columns: table => new
+                {
+                    CartsCartId = table.Column<int>(type: "int", nullable: false),
+                    GamesGameID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartGame", x => new { x.CartsCartId, x.GamesGameID });
+                    table.ForeignKey(
+                        name: "FK_CartGame_Carts_CartsCartId",
+                        column: x => x.CartsCartId,
+                        principalTable: "Carts",
+                        principalColumn: "CartId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartGame_Games_GamesGameID",
+                        column: x => x.GamesGameID,
+                        principalTable: "Games",
+                        principalColumn: "GameID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GameWishList",
                 columns: table => new
                 {
@@ -222,10 +265,39 @@ namespace PROG3050_Team_Project.Migrations
                     { 2, new DateTime(1988, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamertwo@example.com", "[]", "[]", "Jane Smith", "Female", true, null, "hello@1234", "GamerTwo", false, "/img/profile.png" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Carts",
+                columns: new[] { "CartId", "MemberID" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "WishLists",
+                columns: new[] { "WishListId", "MemberID" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Address_MemberID",
                 table: "Address",
                 column: "MemberID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartGame_GamesGameID",
+                table: "CartGame",
+                column: "GamesGameID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Carts_MemberID",
+                table: "Carts",
+                column: "MemberID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_EventMember_RegiteredMembersMemberID",
@@ -255,7 +327,8 @@ namespace PROG3050_Team_Project.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_WishLists_MemberID",
                 table: "WishLists",
-                column: "MemberID");
+                column: "MemberID",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -265,10 +338,16 @@ namespace PROG3050_Team_Project.Migrations
                 name: "Address");
 
             migrationBuilder.DropTable(
+                name: "CartGame");
+
+            migrationBuilder.DropTable(
                 name: "EventMember");
 
             migrationBuilder.DropTable(
                 name: "GameWishList");
+
+            migrationBuilder.DropTable(
+                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "Events");

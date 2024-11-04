@@ -14,6 +14,7 @@ namespace PROG3050_Team_Project.Models
         public DbSet<Event> Events { get; set; }
         
         public DbSet<Address> Address { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,7 +45,23 @@ namespace PROG3050_Team_Project.Models
                     IsDownloadable = true
                 }
             );
+            modelBuilder.Entity<WishList>().HasData(
+                new WishList
+                {
+                    WishListId = 1,
+                    MemberID = 1,
+                },
+                new WishList
+                {
+                    WishListId = 2,
+                    MemberID = 2,
+                }
+            );
 
+            modelBuilder.Entity<Cart>().HasData(
+                new Cart { CartId = 1, MemberID = 1 },
+                new Cart { CartId = 2, MemberID = 2 }
+            );
             // Seed data for Members
             modelBuilder.Entity<Member>().HasData(
                 new Member
@@ -71,13 +88,18 @@ namespace PROG3050_Team_Project.Models
                     WantsPromotions = false,
                     IsEmailVerified = true
                 }
+              
             );
 
             // Define relationships between WishList and Member(Many to one)
             modelBuilder.Entity<WishList>()
                 .HasOne(w => w.Member)
-                .WithMany(m => m.WishLists)
-                .HasForeignKey(w => w.MemberID);
+                .WithOne(m => m.WishList)
+                .HasForeignKey<WishList>(w => w.MemberID);
+            modelBuilder.Entity<Cart>()
+                .HasOne(w => w.Member)
+                .WithOne(m => m.Cart)
+                .HasForeignKey<Cart>(w => w.MemberID);
 
             modelBuilder.Entity<Address>().
                 HasKey(a => a.AddressID);
@@ -103,6 +125,11 @@ namespace PROG3050_Team_Project.Models
             modelBuilder.Entity<WishList>()
                 .HasMany(w => w.Games)
                 .WithMany(g => g.WishLists);
+
+            // Define relationships between Game and WishList (many to many)
+            modelBuilder.Entity<Cart>()
+                .HasMany(w => w.Games)
+                .WithMany(g => g.Carts);
         }
     }
 }

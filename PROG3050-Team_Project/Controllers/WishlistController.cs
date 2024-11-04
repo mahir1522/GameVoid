@@ -40,25 +40,63 @@ namespace PROG3050_Team_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToWishlist(int memberId, int gameId)
         {
-            var wishlist = await _context.WishLists
+            // Check if the member exists
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null)
+            {
+                return NotFound("Member does not exist.");
+            }
+
+            // Check if the game exists
+            var game = await _context.Games.FindAsync(gameId);
+            if (game == null)
+            {
+                return NotFound("Game does not exist.");
+            }
+
+            // Create a new wishlist or add to an existing one
+            var wishList = await _context.WishLists
                 .Include(w => w.Games)
                 .FirstOrDefaultAsync(w => w.MemberID == memberId);
 
-            if (wishlist == null)
+            if (wishList == null)
             {
-                wishlist = new WishList { MemberID = memberId };
-                _context.WishLists.Add(wishlist);
+                wishList = new WishList
+                {
+                    MemberID = memberId,
+                    Member = member
+                };
+                _context.WishLists.Add(wishList);
             }
 
-            var game = await _context.Games.FindAsync(gameId);
-            if (game != null && !wishlist.Games.Contains(game))
-            {
-                wishlist.AddToWishList(game);
-                await _context.SaveChangesAsync();
-                return View();
-            }
+            wishList.Games.Add(game);
+            await _context.SaveChangesAsync();
 
-            return BadRequest();
+            return RedirectToAction("List", new { memberId });
+
+            //var wishlist = await _context.WishLists
+            //    .Include(w => w.Games)
+            //    .FirstOrDefaultAsync(w => w.MemberID == memberId);
+
+            //if (wishlist == null)
+            //{
+            //    wishlist = new WishList { MemberID = memberId };
+            //    _context.WishLists.Add(wishlist);
+            //}
+
+            //var game = await _context.Games.FindAsync(gameId);
+            //if (game != null && !wishlist.Games.Contains(game))
+            //{
+            //    wishlist.AddToWishList(game);
+            //    await _context.SaveChangesAsync();
+            //    TempData["SuccessMessage"] = "Game has been successfully added to your wishlist.";
+            //}
+            //else
+            //{
+            //    TempData["ErrorMessage"] = "Game could not be added to the wishlist.";
+            //}
+
+            //return RedirectToAction("List", "Wishlist");
         }
 
         //public async Task<IActionResult> AddToWishlist(int memberId, int gameId)
@@ -108,7 +146,71 @@ namespace PROG3050_Team_Project.Controllers
                 TempData["ErrorMessage"] = "Game could not be found in wishlist.";
             }
 
-            return RedirectToAction("Index", new { memberId });
+            return RedirectToAction("List", new { memberId });
+        }
+        public IActionResult ShareWishlist(int memberId)
+        {
+            // Generate a shareable URL, e.g., /wishlist/view/1
+            string baseUrl = $"{Request.Scheme}://{Request.Host}";
+            string shareUrl = $"{baseUrl}/wishlist/view/{memberId}";
+
+            // Pass the URL to the view or share logic
+            return View("ShareWishlist", new { ShareUrl = shareUrl });
+        }
+
+        public async Task<IActionResult> Cart(int memberId)
+        {
+            var cart = await _context.Carts
+                .Include(w => w.Games)
+                .FirstOrDefaultAsync(w => w.MemberID == memberId);
+
+            if (cart == null)
+            {
+                cart = new Cart { MemberID = memberId };
+                _context.Carts.Add(cart);
+                await _context.SaveChangesAsync();
+            }
+
+            return View(cart);
+        }
+
+        // Add a game to the wishlist
+        [HttpPost]
+        public async Task<IActionResult> AddToCart(int memberId, int gameId)
+        {
+            // Check if the member exists
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null)
+            {
+                return NotFound("Member does not exist.");
+            }
+
+            // Check if the game exists
+            var game = await _context.Games.FindAsync(gameId);
+            if (game == null)
+            {
+                return NotFound("Game does not exist.");
+            }
+
+            // Create a new wishlist or add to an existing one
+            var cart = await _context.Carts
+                .Include(w => w.Games)
+                .FirstOrDefaultAsync(w => w.MemberID == memberId);
+
+            if (cart == null)
+            {
+                cart = new Cart
+                {
+                    MemberID = memberId,
+                    Member = member
+                };
+                _context.Carts.Add(cart);
+            }
+
+            cart.Games.Add(game);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "User", new { memberId });
         }
     }
 }
