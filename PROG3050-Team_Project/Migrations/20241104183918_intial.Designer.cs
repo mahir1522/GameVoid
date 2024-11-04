@@ -12,8 +12,8 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    [Migration("20241103234337_moregaemsadded")]
-    partial class moregaemsadded
+    [Migration("20241104183918_intial")]
+    partial class intial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -407,6 +407,126 @@ namespace PROG3050_Team_Project.Migrations
                             Password = "hello@1234",
                             UserName = "GamerTwo",
                             WantsPromotions = false,
+                            profileImage = "/img/profile.png"
+                        },
+                        new
+                        {
+                            MemberID = 3,
+                            BirthDate = new DateTime(1995, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "progamer@example.com",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
+                            FullName = "Alex Johnson",
+                            Gender = "Non-binary",
+                            IsEmailVerified = true,
+                            Password = "hello@1234",
+                            UserName = "ProGamer",
+                            WantsPromotions = true,
+                            profileImage = "/img/profile.png"
+                        },
+                        new
+                        {
+                            MemberID = 4,
+                            BirthDate = new DateTime(1992, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "eliteplayer@example.com",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
+                            FullName = "Emily Davis",
+                            Gender = "Female",
+                            IsEmailVerified = true,
+                            Password = "hello@1234",
+                            UserName = "ElitePlayer",
+                            WantsPromotions = true,
+                            profileImage = "/img/profile.png"
+                        },
+                        new
+                        {
+                            MemberID = 5,
+                            BirthDate = new DateTime(1985, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "gamemaster@example.com",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
+                            FullName = "Michael Brown",
+                            Gender = "Male",
+                            IsEmailVerified = true,
+                            Password = "hello@1234",
+                            UserName = "GameMaster",
+                            WantsPromotions = false,
+                            profileImage = "/img/profile.png"
+                        },
+                        new
+                        {
+                            MemberID = 6,
+                            BirthDate = new DateTime(1993, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "speedygamer@example.com",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
+                            FullName = "Sarah Wilson",
+                            Gender = "Female",
+                            IsEmailVerified = true,
+                            Password = "hello@1234",
+                            UserName = "SpeedyGamer",
+                            WantsPromotions = true,
+                            profileImage = "/img/profile.png"
+                        },
+                        new
+                        {
+                            MemberID = 7,
+                            BirthDate = new DateTime(1987, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "retrogamer@example.com",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
+                            FullName = "Chris Miller",
+                            Gender = "Male",
+                            IsEmailVerified = true,
+                            Password = "hello@1234",
+                            UserName = "RetroGamer",
+                            WantsPromotions = false,
+                            profileImage = "/img/profile.png"
+                        },
+                        new
+                        {
+                            MemberID = 8,
+                            BirthDate = new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "arcadequeen@example.com",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
+                            FullName = "Megan Taylor",
+                            Gender = "Female",
+                            IsEmailVerified = true,
+                            Password = "hello@1234",
+                            UserName = "ArcadeQueen",
+                            WantsPromotions = true,
+                            profileImage = "/img/profile.png"
+                        },
+                        new
+                        {
+                            MemberID = 9,
+                            BirthDate = new DateTime(1991, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "fpsking@example.com",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
+                            FullName = "Luke Anderson",
+                            Gender = "Male",
+                            IsEmailVerified = true,
+                            Password = "hello@1234",
+                            UserName = "FPSKing",
+                            WantsPromotions = false,
+                            profileImage = "/img/profile.png"
+                        },
+                        new
+                        {
+                            MemberID = 10,
+                            BirthDate = new DateTime(1996, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "puzzlemaster@example.com",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
+                            FullName = "Lisa Thomas",
+                            Gender = "Female",
+                            IsEmailVerified = true,
+                            Password = "hello@1234",
+                            UserName = "PuzzleMaster",
+                            WantsPromotions = true,
                             profileImage = "/img/profile.png"
                         });
                 });

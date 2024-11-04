@@ -182,5 +182,84 @@ namespace PROG3050_Team_Project.Controllers
             return View("Index", viewModel); // Return the filtered games with member info
         }
 
+        // Redirect to Friends Page
+        public IActionResult GoToFriends(int memberId)
+        {
+            return RedirectToAction("Friends", new { memberId });
+        }
+
+        // Friends Page Action
+        // Display Friends and All Members
+        public IActionResult Friends(int memberId)
+        {
+            // Get the current member
+            var currentMember = _context.Members.Include(m => m.FriendsAndFamily)
+                                                 .FirstOrDefault(m => m.MemberID == memberId);
+
+            if (currentMember == null)
+            {
+                return NotFound();
+            }
+
+            // Get all members excluding the current member
+            var allMembers = _context.Members.Where(m => m.MemberID != memberId).ToList();
+
+            // Create a ViewModel or use the Member model directly
+            var viewModel = new FriendsViewModel
+            {
+                CurrentMember = currentMember,
+                AllMembers = allMembers
+            };
+
+            return View(viewModel);
+        }
+
+
+        // Add Friend Action
+        [HttpPost]
+        public IActionResult AddFriend(int memberId, int friendId)
+        {
+            var member = _context.Members.Include(m => m.FriendsAndFamily)
+                                          .FirstOrDefault(m => m.MemberID == memberId);
+            var friend = _context.Members.FirstOrDefault(m => m.MemberID == friendId);
+
+            if (member != null && friend != null)
+            {
+                member.FriendsAndFamily.Add(friend);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Friends", new { memberId });
+        }
+
+        // Remove Friend Action
+        [HttpPost]
+        public IActionResult RemoveFriend(int memberId, int friendId)
+        {
+            var member = _context.Members.Include(m => m.FriendsAndFamily)
+                                          .FirstOrDefault(m => m.MemberID == memberId);
+            var friend = member?.FriendsAndFamily.FirstOrDefault(f => f.MemberID == friendId);
+
+            if (friend != null)
+            {
+                member.FriendsAndFamily.Remove(friend);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Friends", new { memberId });
+        }
+
+        // Search for Friends Action
+        public IActionResult SearchFriends(string query, int memberId)
+        {
+            var searchResults = _context.Members
+                .Where(m => m.UserName.Contains(query) && m.MemberID != memberId) // Exclude self
+                .ToList();
+
+            ViewBag.SearchResults = searchResults;
+
+            // Redirect to the Friends view
+            return RedirectToAction("Friends", new { memberId });
+        }
     }
 }

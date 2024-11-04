@@ -145,30 +145,127 @@ new Game
 
             // Seed data for Members
             modelBuilder.Entity<Member>().HasData(
-                new Member
-                {
-                    MemberID = 1,
-                    UserName = "GamerOne",
-                    Email = "gamerone@example.com",
-                    Password = "hello@1234",
-                    FullName = "John Doe",
-                    Gender = "Male",
-                    BirthDate = new DateTime(1990, 1, 1),
-                    WantsPromotions = true,
-                    IsEmailVerified = true
-                },
-                new Member
-                {
-                    MemberID = 2,
-                    UserName = "GamerTwo",
-                    Email = "gamertwo@example.com",
-                    Password = "hello@1234",
-                    FullName = "Jane Smith",
-                    Gender = "Female",
-                    BirthDate = new DateTime(1988, 7, 15),
-                    WantsPromotions = false,
-                    IsEmailVerified = true
-                }
+             new Member
+             {
+                 MemberID = 1,
+                 UserName = "GamerOne",
+                 Email = "gamerone@example.com",
+                 Password = "hello@1234",
+                 FullName = "John Doe",
+                 Gender = "Male",
+                 BirthDate = new DateTime(1990, 1, 1),
+                 WantsPromotions = true,
+                 IsEmailVerified = true
+             },
+new Member
+{
+    MemberID = 2,
+    UserName = "GamerTwo",
+    Email = "gamertwo@example.com",
+    Password = "hello@1234",
+    FullName = "Jane Smith",
+    Gender = "Female",
+    BirthDate = new DateTime(1988, 7, 15),
+    WantsPromotions = false,
+    IsEmailVerified = true
+},
+new Member
+{
+    MemberID = 3,
+    UserName = "ProGamer",
+    Email = "progamer@example.com",
+    Password = "hello@1234",
+    FullName = "Alex Johnson",
+    Gender = "Non-binary",
+    BirthDate = new DateTime(1995, 3, 22),
+    WantsPromotions = true,
+    IsEmailVerified = true
+},
+new Member
+{
+    MemberID = 4,
+    UserName = "ElitePlayer",
+    Email = "eliteplayer@example.com",
+    Password = "hello@1234",
+    FullName = "Emily Davis",
+    Gender = "Female",
+    BirthDate = new DateTime(1992, 5, 10),
+    WantsPromotions = true,
+    IsEmailVerified = true
+},
+new Member
+{
+    MemberID = 5,
+    UserName = "GameMaster",
+    Email = "gamemaster@example.com",
+    Password = "hello@1234",
+    FullName = "Michael Brown",
+    Gender = "Male",
+    BirthDate = new DateTime(1985, 11, 2),
+    WantsPromotions = false,
+    IsEmailVerified = true
+},
+new Member
+{
+    MemberID = 6,
+    UserName = "SpeedyGamer",
+    Email = "speedygamer@example.com",
+    Password = "hello@1234",
+    FullName = "Sarah Wilson",
+    Gender = "Female",
+    BirthDate = new DateTime(1993, 9, 28),
+    WantsPromotions = true,
+    IsEmailVerified = true
+},
+new Member
+{
+    MemberID = 7,
+    UserName = "RetroGamer",
+    Email = "retrogamer@example.com",
+    Password = "hello@1234",
+    FullName = "Chris Miller",
+    Gender = "Male",
+    BirthDate = new DateTime(1987, 12, 14),
+    WantsPromotions = false,
+    IsEmailVerified = true
+},
+new Member
+{
+    MemberID = 8,
+    UserName = "ArcadeQueen",
+    Email = "arcadequeen@example.com",
+    Password = "hello@1234",
+    FullName = "Megan Taylor",
+    Gender = "Female",
+    BirthDate = new DateTime(1994, 6, 5),
+    WantsPromotions = true,
+    IsEmailVerified = true
+},
+new Member
+{
+    MemberID = 9,
+    UserName = "FPSKing",
+    Email = "fpsking@example.com",
+    Password = "hello@1234",
+    FullName = "Luke Anderson",
+    Gender = "Male",
+    BirthDate = new DateTime(1991, 2, 18),
+    WantsPromotions = false,
+    IsEmailVerified = true
+},
+new Member
+{
+    MemberID = 10,
+    UserName = "PuzzleMaster",
+    Email = "puzzlemaster@example.com",
+    Password = "hello@1234",
+    FullName = "Lisa Thomas",
+    Gender = "Female",
+    BirthDate = new DateTime(1996, 4, 25),
+    WantsPromotions = true,
+    IsEmailVerified = true
+}
+
             );
 
             // Define relationships between WishList and Member(Many to one)
