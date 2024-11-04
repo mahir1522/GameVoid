@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PROG3050_Team_Project.Models;
 using PROG3050_Team_Project.Services;
+using System.Dynamic;
 
 namespace PROG3050_Team_Project.Controllers
 {
@@ -164,6 +165,21 @@ namespace PROG3050_Team_Project.Controllers
 
             TempData["SuccessMessage"] = "Address has been deleted successfully.";
             return RedirectToAction("Profile", new { memberId });
+        }
+
+        public IActionResult Search(string query, int memberId)
+        {
+            var member = _context.Members.FirstOrDefault(m => m.MemberID == memberId); // Get member based on ID
+
+            var viewModel = new MemberGamesViewModel
+            {
+                member = member, // Set the member in the view model
+                games = _context.Games
+                    .Where(g => string.IsNullOrEmpty(query) || g.Title.Contains(query) || g.Description.Contains(query))
+                    .ToList()
+            };
+
+            return View("Index", viewModel); // Return the filtered games with member info
         }
 
     }
