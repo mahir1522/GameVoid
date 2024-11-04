@@ -12,7 +12,7 @@ namespace PROG3050_Team_Project.Models
         public DbSet<WishList> WishLists { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Event> Events { get; set; }
-        
+
         public DbSet<Address> Address { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,7 +42,105 @@ namespace PROG3050_Team_Project.Models
                     Price = 39.99M,
                     Rating = 4.9M,
                     IsDownloadable = true
-                }
+                },
+                new Game
+                {
+                    GameID = 3,
+                    Title = "Red Dead Redemption 2",
+                    Description = "An epic tale of life in America’s unforgiving heartland.",
+                    Platform = "PlayStation",
+                    Category = "Action-Adventure",
+                    ReleaseDate = new DateTime(2018, 10, 26),
+                    Price = 49.99M,
+                    Rating = 4.8M,
+                    IsDownloadable = true
+                },
+new Game
+{
+    GameID = 4,
+    Title = "Halo Infinite",
+    Description = "Master Chief returns to confront the most ruthless foe he’s ever faced.",
+    Platform = "Xbox",
+    Category = "Shooter",
+    ReleaseDate = new DateTime(2021, 12, 8),
+    Price = 59.99M,
+    Rating = 4.4M,
+    IsDownloadable = true
+},
+new Game
+{
+    GameID = 5,
+    Title = "Minecraft",
+    Description = "A game about placing blocks and going on adventures.",
+    Platform = "PC",
+    Category = "Sandbox",
+    ReleaseDate = new DateTime(2011, 11, 18),
+    Price = 26.95M,
+    Rating = 4.7M,
+    IsDownloadable = true
+},
+new Game
+{
+    GameID = 6,
+    Title = "Among Us",
+    Description = "A multiplayer game where Crewmates work together to complete tasks while avoiding the Impostor.",
+    Platform = "Mobile",
+    Category = "Party",
+    ReleaseDate = new DateTime(2018, 6, 15),
+    Price = 4.99M,
+    Rating = 4.3M,
+    IsDownloadable = true
+},
+new Game
+{
+    GameID = 7,
+    Title = "The Legend of Zelda: Breath of the Wild",
+    Description = "A game that reinvents the boundaries of an open-world adventure.",
+    Platform = "Nintendo Switch",
+    Category = "Adventure",
+    ReleaseDate = new DateTime(2017, 3, 3),
+    Price = 59.99M,
+    Rating = 4.9M,
+    IsDownloadable = false
+},
+new Game
+{
+    GameID = 8,
+    Title = "Fortnite",
+    Description = "A battle royale game where players fight to be the last one standing.",
+    Platform = "PC",
+    Category = "Battle Royale",
+    ReleaseDate = new DateTime(2017, 7, 21),
+    Price = 0.00M,
+    Rating = 4.5M,
+    IsDownloadable = true
+},
+new Game
+{
+    GameID = 9,
+    Title = "Grand Theft Auto V",
+    Description = "An open-world game that allows players to explore Los Santos and complete missions.",
+    Platform = "PC",
+    Category = "Action-Adventure",
+    ReleaseDate = new DateTime(2013, 9, 17),
+    Price = 29.99M,
+    Rating = 4.6M,
+    IsDownloadable = true
+},
+new Game
+{
+    GameID = 10,
+    Title = "Overwatch",
+    Description = "A team-based shooter set on a near-future Earth.",
+    Platform = "PlayStation",
+    Category = "Shooter",
+    ReleaseDate = new DateTime(2016, 5, 24),
+    Price = 39.99M,
+    Rating = 4.4M,
+    IsDownloadable = true
+}
+
+
             );
 
             // Seed data for Members
