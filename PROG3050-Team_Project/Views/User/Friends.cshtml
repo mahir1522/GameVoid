@@ -1,0 +1,47 @@
+﻿@model PROG3050_Team_Project.Models.FriendsViewModel // Adjust to your namespace
+
+
+
+<a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.CurrentMember.MemberID" class="btn btn-secondary">Back to User Panel</a>
+
+
+<div class="search-bar mb-4">
+    <form asp-action="SearchFriends" method="get">
+        <input type="text" name="query" class="form-control" placeholder="Search for friends..." required />
+        <input type="hidden" name="memberId" value="@Model.CurrentMember.MemberID" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<h3>Your Friends</h3>
+<ul>
+    @foreach (var friend in Model.CurrentMember.FriendsAndFamily)
+    {
+        <li>
+            <strong>@friend.UserName</strong> - @friend.FullName
+            <form asp-action="RemoveFriend" method="post" asp-route-memberId="@Model.CurrentMember.MemberID" asp-route-friendId="@friend.MemberID" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+            </form>
+        </li>
+    }
+</ul>
+
+<h4>All Members</h4>
+<ul>
+    @foreach (var member in Model.AllMembers)
+    {
+        <li>
+            <strong>@member.UserName</strong> - @member.FullName
+            @if (!Model.CurrentMember.FriendsAndFamily.Any(f => f.MemberID == member.MemberID))
+            {
+                <form asp-action="AddFriend" method="post" asp-route-memberId="@Model.CurrentMember.MemberID" asp-route-friendId="@member.MemberID" style="display:inline;">
+                    <button type="submit" class="btn btn-success btn-sm">Add Friend</button>
+                </form>
+            }
+            else
+            {
+                <span class="text-muted"> (Already Friends)</span>
+            }
+        </li>
+    }
+</ul>
