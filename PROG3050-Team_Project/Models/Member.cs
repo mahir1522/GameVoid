@@ -45,8 +45,8 @@ namespace PROG3050_Team_Project.Models
             FriendsAndFamily = new List<Member>();
         }
 
-        public WishList WishList { get; set; }  // Nullable collections
-        public Cart Cart { get; set; }  // Nullable collections
+        public WishList? WishList { get; set; }  // Nullable collections
+        public Cart? Cart { get; set; }  // Nullable collections
         public ICollection<Order>? Orders { get; set; }  // Nullable collections
         public ICollection<Event>? RegisteredEvents { get; set; }  // Nullable collections
         public bool IsEmailVerified { get; set; } = false;

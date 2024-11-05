@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROG3050_Team_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class intials : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

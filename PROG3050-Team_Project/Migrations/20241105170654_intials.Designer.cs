@@ -12,8 +12,8 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    [Migration("20241104174933_init")]
-    partial class init
+    [Migration("20241105170654_intials")]
+    partial class intials
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -519,15 +519,13 @@ namespace PROG3050_Team_Project.Migrations
                 {
                     b.Navigation("Addresses");
 
-                    b.Navigation("Cart")
-                        .IsRequired();
+                    b.Navigation("Cart");
 
                     b.Navigation("FriendsAndFamily");
 
                     b.Navigation("Orders");
 
-                    b.Navigation("WishList")
-                        .IsRequired();
+                    b.Navigation("WishList");
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Order", b =>

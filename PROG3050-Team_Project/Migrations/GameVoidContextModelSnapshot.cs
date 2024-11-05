@@ -516,15 +516,13 @@ namespace PROG3050_Team_Project.Migrations
                 {
                     b.Navigation("Addresses");
 
-                    b.Navigation("Cart")
-                        .IsRequired();
+                    b.Navigation("Cart");
 
                     b.Navigation("FriendsAndFamily");
 
                     b.Navigation("Orders");
 
-                    b.Navigation("WishList")
-                        .IsRequired();
+                    b.Navigation("WishList");
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Order", b =>
