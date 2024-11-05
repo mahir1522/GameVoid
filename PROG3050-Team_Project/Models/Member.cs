@@ -38,17 +38,19 @@ namespace PROG3050_Team_Project.Models
 
         public List<Member>? FriendsAndFamily { get; set; } = new List<Member>();  // Nullable list
 
+        public ICollection<Event>? RegisteredEvents { get; set; }
+
         public Member()
         {
             FavoritePlatforms = new List<string>();
             FavoriteGameCategories = new List<string>();
             FriendsAndFamily = new List<Member>();
+            RegisteredEvents = new List<Event>();
         }
 
-        public WishList WishList { get; set; }  // Nullable collections
-        public Cart Cart { get; set; }  // Nullable collections
-        public ICollection<Order>? Orders { get; set; }  // Nullable collections
-        public ICollection<Event>? RegisteredEvents { get; set; }  // Nullable collections
+        public WishList? WishList { get; set; }  // Nullable collections
+        public Cart? Cart { get; set; }  // Nullable collections
+        public ICollection<Order>? Orders { get; set; }  // Nullable collections  // Nullable collections
         public bool IsEmailVerified { get; set; } = false;
         public string? profileImage { get; set; } = "/img/profile.png";
     }

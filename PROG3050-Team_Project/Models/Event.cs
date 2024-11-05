@@ -9,15 +9,11 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Location { get; set; }
-        public ICollection<Member> RegiteredMembers { get; set; }
+        public ICollection<Member> RegisteredMembers { get; set; }
 
         public Event()
         {
-            RegiteredMembers = new List<Member>();
-        }
-        public void RegisterForEvent(Member member)
-        {
-            RegiteredMembers.Add(member);
+            RegisteredMembers = new List<Member>();
         }
     }
 }

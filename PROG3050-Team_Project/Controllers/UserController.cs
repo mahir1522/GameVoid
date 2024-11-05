@@ -25,7 +25,8 @@ namespace PROG3050_Team_Project.Controllers
             var userGamesViewModel = new MemberGamesViewModel
             {
                 member = user,
-                games = games
+                games = games,
+
             };
             return View(userGamesViewModel);
         }

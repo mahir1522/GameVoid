@@ -210,7 +210,69 @@ namespace PROG3050_Team_Project.Controllers
             cart.Games.Add(game);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index", "User", new { memberId });
+            return RedirectToAction("Cart", new { memberId });
+        }
+
+        public async Task<IActionResult> RemoveFromCart(int memberId, int gameId)
+        {
+            var cart = await _context.Carts
+                .Include(w => w.Games)
+                .FirstOrDefaultAsync(w => w.MemberID == memberId);
+
+            var game = cart?.Games.FirstOrDefault(g => g.GameID == gameId);
+
+            if (game != null)
+            {
+                cart.RemoveFromCart(game);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Game removed from wishlist successfully.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Game could not be found in wishlist.";
+            }
+
+            return RedirectToAction("Cart", new { memberId });
+        }
+
+        public async Task<IActionResult> Event(int memberId)
+        {
+
+            var user = await _context.Members.FindAsync(memberId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var games = _context.Games.ToList();
+            var events = await _context.Events.ToListAsync();
+
+            var viewModel = new MemberGamesViewModel
+            {
+                member = user,
+                games = games,
+                events = events,
+                IsRegistered = false
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(int eventId, int memberId)
+        {
+            var member = _context.Members
+                .Include(m => m.RegisteredEvents)
+                .FirstOrDefault(m => m.MemberID == memberId);
+            var eventToRegister = _context.Events.FirstOrDefault(e => e.EventId == eventId);
+
+            if (member != null && eventToRegister != null && !member.RegisteredEvents.Contains(eventToRegister))
+            {
+                member.RegisteredEvents.Add(eventToRegister);
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "You have successfully registered for the event.";
+            }
+
+            return RedirectToAction("Event", new { memberId = memberId });
         }
     }
 }
