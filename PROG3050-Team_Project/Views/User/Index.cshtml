@@ -37,10 +37,10 @@
                     <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">Profile</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.member.MemberID">Events</a>
+                    <a class ="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Friends & Family</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-light" href="#">Library</a>
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.member.MemberID">Events</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.member.MemberID">WishList</a>
@@ -54,16 +54,23 @@
             </ul>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content-container">
-            <!-- Search Bar -->
+
+       <!-- Main Content -->
+<div class="main-content-container">
+    <!-- Search Bar -->
             <div class="search-bar mb-4 d-flex align-items-center">
-                <input type="text" class="form-control me-5" style="width: 46rem;" placeholder="Search..." aria-label="Search">
+                <form asp-controller="User" asp-action="Search" method="get" class="d-flex align-items-center" style="width: 100%;">
+                    <input type="hidden" name="memberId" value="@Model.member.MemberID" />
+                    <input type="text" name="query" class="form-control me-5" style="width: 46rem;" placeholder="Search..." aria-label="Search">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+              
                 <a asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">
                     <img src="@Model.member.profileImage" width="50" height="50" class="rounded-circle" alt="Profile Pic">
                 </a>
             </div>
-
+  
+  
             <!-- Banner -->
             <div class="custom-banner mb-4 text-center">
                 <img src="~/img/Cyberunk-PL.webp" class="custom-banner-img" alt="Cyberpunk 2007">
@@ -82,6 +89,7 @@
                     <button class="btn rounded">Recommended</button>
                     <button class="btn filter-btn">Filter</button>
                 </div>
+
 
 
                 <!-- Game Cards Grid -->
@@ -108,7 +116,100 @@
             </div>
         </div>
 
+        <!-- Game Cards Grid -->
+                <div class="custom-row">
+                    @if (Model.games.Any())
+                    {
+                        @foreach (var game in Model.games)
+                        {
+                            <div class="custom-col">
+                                <div class="custom-card"
+                                     data-title="@game.Title"
+                                     data-description="@game.Description"
+                                     data-platform="@game.Platform"
+                                     data-category="@game.Category"
+                                     data-releaseDate="@game.ReleaseDate.ToShortDateString()"
+                                     data-price="@game.Price.ToString("C")"
+                                     data-rating="@game.Rating"
+                                     data-imageUrl="@game.ImageUrl"
+                                     onclick="openGameModal(this)">
+                                    <img src="@game.ImageUrl" class="custom-card-img" alt="@game.Title">
+                                    <div class="custom-card-body">
+                                        <h5 class="custom-card-title">@game.Title</h5>
+                                        <p class="custom-card-text">@game.Price.ToString("C")</p>
+                                        <a href="#" class="custom-btn">Add to Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No games found matching your search.</p>
+                    }
+                </div>
+
     </div>
 </div>
-@* // Testing *@
-@* // Testing *@
+
+    </div>
+</div>
+
+<!-- Modal for Game Details -->
+<div class="modal fade " style="color:black" id="gameDetailModal" tabindex="-1" aria-labelledby="gameDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gameDetailModalLabel">Game Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3 id="modalGameTitle"></h3>
+                <p id="modalGameDescription"></p>
+                <p><strong>Platform:</strong> <span id="modalGamePlatform"></span></p>
+                <p><strong>Category:</strong> <span id="modalGameCategory"></span></p>
+                <p><strong>Release Date:</strong> <span id="modalGameReleaseDate"></span></p>
+                <p><strong>Price:</strong> <span id="modalGamePrice"></span></p>
+                <p><strong>Rating:</strong> <span id="modalGameRating"></span></p>
+                <img id="modalGameImage" src="" alt="Game Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openGameModal(element) {
+        // Retrieve data attributes
+        const title = element.getAttribute("data-title");
+        const description = element.getAttribute("data-description");
+        const platform = element.getAttribute("data-platform");
+        const category = element.getAttribute("data-category");
+        const releaseDate = element.getAttribute("data-releaseDate");
+        const price = element.getAttribute("data-price");
+        const rating = element.getAttribute("data-rating");
+        const imageUrl = element.getAttribute("data-imageUrl");
+
+        // Populate modal fields
+        document.getElementById("modalGameTitle").textContent = title;
+        document.getElementById("modalGameDescription").textContent = description;
+        document.getElementById("modalGamePlatform").textContent = platform;
+        document.getElementById("modalGameCategory").textContent = category;
+        document.getElementById("modalGameReleaseDate").textContent = releaseDate;
+        document.getElementById("modalGamePrice").textContent = price;
+        document.getElementById("modalGameRating").textContent = rating;
+        document.getElementById("modalGameImage").src = imageUrl;
+
+        // Show the modal
+        var modal = new bootstrap.Modal(document.getElementById('gameDetailModal'));
+        modal.show();
+    }
+
+</script>
+
+
+<!-- Bootstrap CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap Bundle with Popper.js -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
