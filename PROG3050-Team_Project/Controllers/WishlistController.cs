@@ -235,7 +235,6 @@ namespace PROG3050_Team_Project.Controllers
             return RedirectToAction("Cart", new { memberId });
         }
 
-        [HttpPost]
         public async Task<IActionResult> Event(int memberId)
         {
             var user = await _context.Members
@@ -284,6 +283,25 @@ namespace PROG3050_Team_Project.Controllers
             }
 
             return RedirectToAction("Event", new { memberId });
+        }
+
+        public async Task<IActionResult> RegisteredEvent(int memberId)
+        {
+            var user = await _context.Members
+                .Include(m => m.MemberEvents)
+                    .ThenInclude(me => me.Event)
+                .FirstOrDefaultAsync(m => m.MemberID == memberId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new MemberGamesViewModel
+            {
+                member = user,
+            };
+            return View(viewModel);
         }
 
     }

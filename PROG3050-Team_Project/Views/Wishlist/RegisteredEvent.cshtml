@@ -45,6 +45,9 @@
         <div class="main-content-container">
             <div class="text-center">
                 <h1 class="display-4">Events</h1>
+                <div class="add-game-container">
+                    <a asp-controller="Wishlist" asp-action="Event" method="post" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">All Events</a>
+                </div>
                 <div class="custom-row">
                     @foreach (var eventItem in Model.member.MemberEvents)
                     {

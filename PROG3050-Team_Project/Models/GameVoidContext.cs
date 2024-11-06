@@ -47,6 +47,98 @@ namespace PROG3050_Team_Project.Models
                     IsDownloadable = true
                 }
             );
+            modelBuilder.Entity<Event>().HasData(
+                new Event
+                {
+                    EventId = 1,
+                    Title = "Unity Developer Meet",
+                    Description = "It is a networking event for game to collabrate ",
+                    StartDate = new DateTime(2024, 11, 11, 09,00,00),
+                    EndDate = new DateTime(2024, 11, 11, 17, 00, 00), 
+                    Location = "108 University Avenue East, Waterloo, Ontario, Canada"
+                },
+                new Event
+                {
+                    EventId = 2,
+                    Title = "AI in Gaming Symposium",
+                    Description = "An interactive symposium exploring AI trends in the gaming industry.",
+                    StartDate = new DateTime(2024, 12, 5, 10, 0, 0),
+                    EndDate = new DateTime(2024, 12, 5, 16, 0, 0),
+                    Location = "Tech Hall, 25 King Street West, Toronto, Ontario, Canada"
+                },
+                new Event
+                {
+                    EventId = 3,
+                    Title = "Virtual Reality Game Jam",
+                    Description = "A 48-hour event to create immersive VR gaming experiences.",
+                    StartDate = new DateTime(2024, 11, 18, 18, 0, 0),
+                    EndDate = new DateTime(2024, 11, 20, 18, 0, 0),
+                    Location = "Conestoga College, Doon Campus, Kitchener, Ontario, Canada"
+                },
+
+                new Event
+                {
+                    EventId = 4,
+                    Title = "Esports Tournament 2024",
+                    Description = "Competitive tournament for students to showcase their gaming skills.",
+                    StartDate = new DateTime(2024, 11, 25, 12, 0, 0),
+                    EndDate = new DateTime(2024, 11, 25, 20, 0, 0),
+                    Location = "Recreation Center, 15 Elm Street, Waterloo, Ontario, Canada"
+                },
+
+                new Event
+                {
+                    EventId = 5,
+                    Title = "Game Development Workshop",
+                    Description = "Hands-on workshop covering game design, coding, and art.",
+                    StartDate = new DateTime(2024, 12, 3, 9, 30, 0),
+                    EndDate = new DateTime(2024, 12, 3, 15, 30, 0),
+                    Location = "Innovation Hub, 99 Bloor Street, Toronto, Ontario, Canada"
+                },
+
+                new Event
+                {
+                    EventId = 6,
+                    Title = "Indie Game Showcase",
+                    Description = "An event for indie game developers to present their latest projects.",
+                    StartDate = new DateTime(2024, 12, 10, 14, 0, 0),
+                    EndDate = new DateTime(2024, 12, 10, 18, 0, 0),
+                    Location = "The Game Lounge, 50 King Street North, Kitchener, Ontario, Canada"
+                },
+
+                new Event
+                {
+                    EventId = 7,
+                    Title = "Gaming & Mental Health Seminar",
+                    Description = "A seminar discussing the impact of gaming on mental health.",
+                    StartDate = new DateTime(2024, 11, 15, 11, 0, 0),
+                    EndDate = new DateTime(2024, 11, 15, 13, 0, 0),
+                    Location = "Wellness Center, 20 Queen Street West, Toronto, Ontario, Canada"
+                },
+
+                new Event
+                {
+                    EventId = 8,
+                    Title = "Women in Gaming Conference",
+                    Description = "A conference celebrating and supporting women in the gaming industry.",
+                    StartDate = new DateTime(2024, 11, 30, 9, 0, 0),
+                    EndDate = new DateTime(2024, 11, 30, 17, 0, 0),
+                    Location = "Unity Center, 60 Wellington Street, Waterloo, Ontario, Canada"
+                },
+
+                new Event
+                {
+                    EventId = 9,
+                    Title = "Game Sound Design Workshop",
+                    Description = "Learn about sound design and audio engineering for games.",
+                    StartDate = new DateTime(2024, 12, 8, 10, 0, 0),
+                    EndDate = new DateTime(2024, 12, 8, 16, 0, 0),
+                    Location = "Arts & Media Building, 101 College Street, Toronto, Ontario, Canada"
+                }
+
+
+            );
+
             modelBuilder.Entity<WishList>().HasData(
                 new WishList
                 {
