@@ -51,5 +51,8 @@ namespace PROG3050_Team_Project.Models
         public ICollection<Event>? RegisteredEvents { get; set; }  // Nullable collections
         public bool IsEmailVerified { get; set; } = false;
         public string? profileImage { get; set; } = "/img/profile.png";
+
+        public ICollection<MemberEvent>? MemberEvents { get; set; } = new List<MemberEvent>();
+
     }
 }

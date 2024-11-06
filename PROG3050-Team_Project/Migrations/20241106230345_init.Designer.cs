@@ -12,13 +12,8 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-<<<<<<<< HEAD:PROG3050-Team_Project/Migrations/20241105170654_intials.Designer.cs
-    [Migration("20241105170654_intials")]
-    partial class intials
-========
-    [Migration("20241106182851_init")]
+    [Migration("20241106230345_init")]
     partial class init
->>>>>>>> ae262cd6990ae71dc48bc6aa1af67ec06ce8ba5a:PROG3050-Team_Project/Migrations/20241106182851_init.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -167,6 +162,9 @@ namespace PROG3050_Team_Project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("MemberID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
@@ -175,6 +173,8 @@ namespace PROG3050_Team_Project.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EventId");
+
+                    b.HasIndex("MemberID");
 
                     b.ToTable("Events");
 
@@ -578,6 +578,13 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("Member");
                 });
 
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Event", b =>
+                {
+                    b.HasOne("PROG3050_Team_Project.Models.Member", null)
+                        .WithMany("RegisteredEvents")
+                        .HasForeignKey("MemberID");
+                });
+
             modelBuilder.Entity("PROG3050_Team_Project.Models.Game", b =>
                 {
                     b.HasOne("PROG3050_Team_Project.Models.Order", null)
@@ -668,6 +675,8 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("MemberEvents");
 
                     b.Navigation("Orders");
+
+                    b.Navigation("RegisteredEvents");
 
                     b.Navigation("WishList");
                 });

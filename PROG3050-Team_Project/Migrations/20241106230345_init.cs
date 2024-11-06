@@ -8,28 +8,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROG3050_Team_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class intials : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Events",
-                columns: table => new
-                {
-                    EventId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Events", x => x.EventId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Members",
                 columns: table => new
@@ -108,27 +91,26 @@ namespace PROG3050_Team_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MemberEvents",
+                name: "Events",
                 columns: table => new
                 {
-                    MemberId = table.Column<int>(type: "int", nullable: false),
                     EventId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MemberID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MemberEvents", x => new { x.MemberId, x.EventId });
+                    table.PrimaryKey("PK_Events", x => x.EventId);
                     table.ForeignKey(
-                        name: "FK_MemberEvents_Events_EventId",
-                        column: x => x.EventId,
-                        principalTable: "Events",
-                        principalColumn: "EventId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MemberEvents_Members_MemberId",
-                        column: x => x.MemberId,
+                        name: "FK_Events_Members_MemberID",
+                        column: x => x.MemberID,
                         principalTable: "Members",
-                        principalColumn: "MemberID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "MemberID");
                 });
 
             migrationBuilder.CreateTable(
@@ -148,6 +130,49 @@ namespace PROG3050_Team_Project.Migrations
                     table.ForeignKey(
                         name: "FK_Orders_Members_MemberID",
                         column: x => x.MemberID,
+                        principalTable: "Members",
+                        principalColumn: "MemberID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WishLists",
+                columns: table => new
+                {
+                    WishListId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MemberID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WishLists", x => x.WishListId);
+                    table.ForeignKey(
+                        name: "FK_WishLists_Members_MemberID",
+                        column: x => x.MemberID,
+                        principalTable: "Members",
+                        principalColumn: "MemberID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MemberEvents",
+                columns: table => new
+                {
+                    MemberId = table.Column<int>(type: "int", nullable: false),
+                    EventId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MemberEvents", x => new { x.MemberId, x.EventId });
+                    table.ForeignKey(
+                        name: "FK_MemberEvents_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
+                        principalColumn: "EventId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MemberEvents_Members_MemberId",
+                        column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "MemberID",
                         onDelete: ReferentialAction.Cascade);
@@ -175,25 +200,6 @@ namespace PROG3050_Team_Project.Migrations
                     table.ForeignKey(
                         name: "FK_Registration_Members_MemberId",
                         column: x => x.MemberId,
-                        principalTable: "Members",
-                        principalColumn: "MemberID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WishLists",
-                columns: table => new
-                {
-                    WishListId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MemberID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WishLists", x => x.WishListId);
-                    table.ForeignKey(
-                        name: "FK_WishLists_Members_MemberID",
-                        column: x => x.MemberID,
                         principalTable: "Members",
                         principalColumn: "MemberID",
                         onDelete: ReferentialAction.Cascade);
@@ -276,18 +282,18 @@ namespace PROG3050_Team_Project.Migrations
 
             migrationBuilder.InsertData(
                 table: "Events",
-                columns: new[] { "EventId", "Description", "EndDate", "Location", "StartDate", "Title" },
+                columns: new[] { "EventId", "Description", "EndDate", "Location", "MemberID", "StartDate", "Title" },
                 values: new object[,]
                 {
-                    { 1, "It is a networking event for game to collabrate ", new DateTime(2024, 11, 11, 17, 0, 0, 0, DateTimeKind.Unspecified), "108 University Avenue East, Waterloo, Ontario, Canada", new DateTime(2024, 11, 11, 9, 0, 0, 0, DateTimeKind.Unspecified), "Unity Developer Meet" },
-                    { 2, "An interactive symposium exploring AI trends in the gaming industry.", new DateTime(2024, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified), "Tech Hall, 25 King Street West, Toronto, Ontario, Canada", new DateTime(2024, 12, 5, 10, 0, 0, 0, DateTimeKind.Unspecified), "AI in Gaming Symposium" },
-                    { 3, "A 48-hour event to create immersive VR gaming experiences.", new DateTime(2024, 11, 20, 18, 0, 0, 0, DateTimeKind.Unspecified), "Conestoga College, Doon Campus, Kitchener, Ontario, Canada", new DateTime(2024, 11, 18, 18, 0, 0, 0, DateTimeKind.Unspecified), "Virtual Reality Game Jam" },
-                    { 4, "Competitive tournament for students to showcase their gaming skills.", new DateTime(2024, 11, 25, 20, 0, 0, 0, DateTimeKind.Unspecified), "Recreation Center, 15 Elm Street, Waterloo, Ontario, Canada", new DateTime(2024, 11, 25, 12, 0, 0, 0, DateTimeKind.Unspecified), "Esports Tournament 2024" },
-                    { 5, "Hands-on workshop covering game design, coding, and art.", new DateTime(2024, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified), "Innovation Hub, 99 Bloor Street, Toronto, Ontario, Canada", new DateTime(2024, 12, 3, 9, 30, 0, 0, DateTimeKind.Unspecified), "Game Development Workshop" },
-                    { 6, "An event for indie game developers to present their latest projects.", new DateTime(2024, 12, 10, 18, 0, 0, 0, DateTimeKind.Unspecified), "The Game Lounge, 50 King Street North, Kitchener, Ontario, Canada", new DateTime(2024, 12, 10, 14, 0, 0, 0, DateTimeKind.Unspecified), "Indie Game Showcase" },
-                    { 7, "A seminar discussing the impact of gaming on mental health.", new DateTime(2024, 11, 15, 13, 0, 0, 0, DateTimeKind.Unspecified), "Wellness Center, 20 Queen Street West, Toronto, Ontario, Canada", new DateTime(2024, 11, 15, 11, 0, 0, 0, DateTimeKind.Unspecified), "Gaming & Mental Health Seminar" },
-                    { 8, "A conference celebrating and supporting women in the gaming industry.", new DateTime(2024, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified), "Unity Center, 60 Wellington Street, Waterloo, Ontario, Canada", new DateTime(2024, 11, 30, 9, 0, 0, 0, DateTimeKind.Unspecified), "Women in Gaming Conference" },
-                    { 9, "Learn about sound design and audio engineering for games.", new DateTime(2024, 12, 8, 16, 0, 0, 0, DateTimeKind.Unspecified), "Arts & Media Building, 101 College Street, Toronto, Ontario, Canada", new DateTime(2024, 12, 8, 10, 0, 0, 0, DateTimeKind.Unspecified), "Game Sound Design Workshop" }
+                    { 1, "It is a networking event for game to collabrate ", new DateTime(2024, 11, 11, 17, 0, 0, 0, DateTimeKind.Unspecified), "108 University Avenue East, Waterloo, Ontario, Canada", null, new DateTime(2024, 11, 11, 9, 0, 0, 0, DateTimeKind.Unspecified), "Unity Developer Meet" },
+                    { 2, "An interactive symposium exploring AI trends in the gaming industry.", new DateTime(2024, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified), "Tech Hall, 25 King Street West, Toronto, Ontario, Canada", null, new DateTime(2024, 12, 5, 10, 0, 0, 0, DateTimeKind.Unspecified), "AI in Gaming Symposium" },
+                    { 3, "A 48-hour event to create immersive VR gaming experiences.", new DateTime(2024, 11, 20, 18, 0, 0, 0, DateTimeKind.Unspecified), "Conestoga College, Doon Campus, Kitchener, Ontario, Canada", null, new DateTime(2024, 11, 18, 18, 0, 0, 0, DateTimeKind.Unspecified), "Virtual Reality Game Jam" },
+                    { 4, "Competitive tournament for students to showcase their gaming skills.", new DateTime(2024, 11, 25, 20, 0, 0, 0, DateTimeKind.Unspecified), "Recreation Center, 15 Elm Street, Waterloo, Ontario, Canada", null, new DateTime(2024, 11, 25, 12, 0, 0, 0, DateTimeKind.Unspecified), "Esports Tournament 2024" },
+                    { 5, "Hands-on workshop covering game design, coding, and art.", new DateTime(2024, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified), "Innovation Hub, 99 Bloor Street, Toronto, Ontario, Canada", null, new DateTime(2024, 12, 3, 9, 30, 0, 0, DateTimeKind.Unspecified), "Game Development Workshop" },
+                    { 6, "An event for indie game developers to present their latest projects.", new DateTime(2024, 12, 10, 18, 0, 0, 0, DateTimeKind.Unspecified), "The Game Lounge, 50 King Street North, Kitchener, Ontario, Canada", null, new DateTime(2024, 12, 10, 14, 0, 0, 0, DateTimeKind.Unspecified), "Indie Game Showcase" },
+                    { 7, "A seminar discussing the impact of gaming on mental health.", new DateTime(2024, 11, 15, 13, 0, 0, 0, DateTimeKind.Unspecified), "Wellness Center, 20 Queen Street West, Toronto, Ontario, Canada", null, new DateTime(2024, 11, 15, 11, 0, 0, 0, DateTimeKind.Unspecified), "Gaming & Mental Health Seminar" },
+                    { 8, "A conference celebrating and supporting women in the gaming industry.", new DateTime(2024, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified), "Unity Center, 60 Wellington Street, Waterloo, Ontario, Canada", null, new DateTime(2024, 11, 30, 9, 0, 0, 0, DateTimeKind.Unspecified), "Women in Gaming Conference" },
+                    { 9, "Learn about sound design and audio engineering for games.", new DateTime(2024, 12, 8, 16, 0, 0, 0, DateTimeKind.Unspecified), "Arts & Media Building, 101 College Street, Toronto, Ontario, Canada", null, new DateTime(2024, 12, 8, 10, 0, 0, 0, DateTimeKind.Unspecified), "Game Sound Design Workshop" }
                 });
 
             migrationBuilder.InsertData(
@@ -341,6 +347,11 @@ namespace PROG3050_Team_Project.Migrations
                 table: "Carts",
                 column: "MemberID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Events_MemberID",
+                table: "Events",
+                column: "MemberID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Games_OrderId",
