@@ -42,13 +42,13 @@
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.member.MemberID">Events</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.member.MemberID">WishList</a>
                 </li>
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.member.MemberID">Cart</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
                 </li>
             </ul>
@@ -74,9 +74,6 @@
             <!-- Banner -->
             <div class="custom-banner mb-4 text-center">
                 <img src="~/img/Cyberunk-PL.webp" class="custom-banner-img" alt="Cyberpunk 2007">
-                <div class="custom-banner-body">
-                    <a href="#" class="btn">Order Now</a>
-                </div>
             </div>
 
 
@@ -88,30 +85,6 @@
                     <button class="btn rounded">Popular</button>
                     <button class="btn rounded">Recommended</button>
                     <button class="btn filter-btn">Filter</button>
-                </div>
-
-
-
-                <!-- Game Cards Grid -->
-                <div class="custom-row">
-                    @foreach (var game in Model.games)
-                    {
-                        <div class="custom-col">
-                            <div class="custom-card">
-                                <img src="@game.ImageUrl" class="custom-card-img" alt="@game.Title">
-                                <div class="custom-card-body">
-                                    <h5 class="custom-card-title">@game.Title</h5>
-                                    <p class="custom-card-text">@game.Price.ToString("C")</p>
-                                    <form asp-controller="Wishlist" asp-action="AddToCart" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
-                                        <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToCart" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Cart</button>
-                                    </form>
-                                    <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
-                                        <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Wishlist</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    }
                 </div>
             </div>
         </div>
@@ -137,7 +110,13 @@
                                     <div class="custom-card-body">
                                         <h5 class="custom-card-title">@game.Title</h5>
                                         <p class="custom-card-text">@game.Price.ToString("C")</p>
-                                        <a href="#" class="custom-btn">Add to Cart</a>
+                                <form asp-controller="Wishlist" asp-action="AddToCart" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
+                                    <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToCart" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Cart</button>
+                                </form>
+                                <br />
+                                <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
+                                    <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Wishlist</button>
+                                </form>
                                     </div>
                                 </div>
                             </div>

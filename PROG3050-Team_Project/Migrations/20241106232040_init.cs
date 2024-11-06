@@ -302,7 +302,15 @@ namespace PROG3050_Team_Project.Migrations
                 values: new object[,]
                 {
                     { 1, "RPG", "An open-world, action-adventure story set in Night City.", "/img/default.jpg", true, null, "PC", 59.99m, 4.2m, new DateTime(2020, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cyberpunk 2077" },
-                    { 2, "RPG", "A story-driven, open-world RPG set in a visually stunning fantasy universe.", "/img/default.jpg", true, null, "Xbox", 39.99m, 4.9m, new DateTime(2015, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Witcher 3: Wild Hunt" }
+                    { 2, "RPG", "A story-driven, open-world RPG set in a visually stunning fantasy universe.", "/img/default.jpg", true, null, "Xbox", 39.99m, 4.9m, new DateTime(2015, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Witcher 3: Wild Hunt" },
+                    { 3, "Action-Adventure", "An epic tale of life in America’s unforgiving heartland.", "/img/default.jpg", true, null, "PlayStation", 49.99m, 4.8m, new DateTime(2018, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "Red Dead Redemption 2" },
+                    { 4, "Shooter", "Master Chief returns to confront the most ruthless foe he’s ever faced.", "/img/default.jpg", true, null, "Xbox", 59.99m, 4.4m, new DateTime(2021, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Halo Infinite" },
+                    { 5, "Sandbox", "A game about placing blocks and going on adventures.", "/img/default.jpg", true, null, "PC", 26.95m, 4.7m, new DateTime(2011, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Minecraft" },
+                    { 6, "Party", "A multiplayer game where Crewmates work together to complete tasks while avoiding the Impostor.", "/img/default.jpg", true, null, "Mobile", 4.99m, 4.3m, new DateTime(2018, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Among Us" },
+                    { 7, "Adventure", "A game that reinvents the boundaries of an open-world adventure.", "/img/default.jpg", false, null, "Nintendo Switch", 59.99m, 4.9m, new DateTime(2017, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Legend of Zelda: Breath of the Wild" },
+                    { 8, "Battle Royale", "A battle royale game where players fight to be the last one standing.", "/img/default.jpg", true, null, "PC", 0.00m, 4.5m, new DateTime(2017, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fortnite" },
+                    { 9, "Action-Adventure", "An open-world game that allows players to explore Los Santos and complete missions.", "/img/default.jpg", true, null, "PC", 29.99m, 4.6m, new DateTime(2013, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Grand Theft Auto V" },
+                    { 10, "Shooter", "A team-based shooter set on a near-future Earth.", "/img/default.jpg", true, null, "PlayStation", 39.99m, 4.4m, new DateTime(2016, 5, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Overwatch" }
                 });
 
             migrationBuilder.InsertData(
@@ -311,7 +319,15 @@ namespace PROG3050_Team_Project.Migrations
                 values: new object[,]
                 {
                     { 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamerone@example.com", "[]", "[]", "John Doe", "Male", true, null, "hello@1234", "GamerOne", true, "/img/profile.png" },
-                    { 2, new DateTime(1988, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamertwo@example.com", "[]", "[]", "Jane Smith", "Female", true, null, "hello@1234", "GamerTwo", false, "/img/profile.png" }
+                    { 2, new DateTime(1988, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamertwo@example.com", "[]", "[]", "Jane Smith", "Female", true, null, "hello@1234", "GamerTwo", false, "/img/profile.png" },
+                    { 3, new DateTime(1995, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "progamer@example.com", "[]", "[]", "Alex Johnson", "Non-binary", true, null, "hello@1234", "ProGamer", true, "/img/profile.png" },
+                    { 4, new DateTime(1992, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "eliteplayer@example.com", "[]", "[]", "Emily Davis", "Female", true, null, "hello@1234", "ElitePlayer", true, "/img/profile.png" },
+                    { 5, new DateTime(1985, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamemaster@example.com", "[]", "[]", "Michael Brown", "Male", true, null, "hello@1234", "GameMaster", false, "/img/profile.png" },
+                    { 6, new DateTime(1993, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "speedygamer@example.com", "[]", "[]", "Sarah Wilson", "Female", true, null, "hello@1234", "SpeedyGamer", true, "/img/profile.png" },
+                    { 7, new DateTime(1987, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "retrogamer@example.com", "[]", "[]", "Chris Miller", "Male", true, null, "hello@1234", "RetroGamer", false, "/img/profile.png" },
+                    { 8, new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "arcadequeen@example.com", "[]", "[]", "Megan Taylor", "Female", true, null, "hello@1234", "ArcadeQueen", true, "/img/profile.png" },
+                    { 9, new DateTime(1991, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "fpsking@example.com", "[]", "[]", "Luke Anderson", "Male", true, null, "hello@1234", "FPSKing", false, "/img/profile.png" },
+                    { 10, new DateTime(1996, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "puzzlemaster@example.com", "[]", "[]", "Lisa Thomas", "Female", true, null, "hello@1234", "PuzzleMaster", true, "/img/profile.png" }
                 });
 
             migrationBuilder.InsertData(
