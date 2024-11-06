@@ -210,8 +210,100 @@ namespace PROG3050_Team_Project.Controllers
             cart.Games.Add(game);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index", "User", new { memberId });
+            return RedirectToAction("Cart", new { memberId });
         }
+
+        public async Task<IActionResult> RemoveFromCart(int memberId, int gameId)
+        {
+            var cart = await _context.Carts
+                .Include(w => w.Games)
+                .FirstOrDefaultAsync(w => w.MemberID == memberId);
+
+            var game = cart?.Games.FirstOrDefault(g => g.GameID == gameId);
+
+            if (game != null)
+            {
+                cart.RemoveFromCart(game);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Game removed from wishlist successfully.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Game could not be found in wishlist.";
+            }
+
+            return RedirectToAction("Cart", new { memberId });
+        }
+
+        public async Task<IActionResult> Event(int memberId)
+        {
+            var user = await _context.Members
+                .Include(m => m.MemberEvents)
+                    .ThenInclude(me => me.Event)
+                .FirstOrDefaultAsync(m => m.MemberID == memberId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var events = await _context.Events.ToListAsync();
+
+            var viewModel = new MemberGamesViewModel
+            {
+                member = user,
+                events = events,
+                IsRegistered = false
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterForEvent(int memberId, int eventId)
+        {
+            var memberEventExists = await _context.MemberEvents
+                .AnyAsync(me => me.MemberId == memberId && me.EventId == eventId);
+
+            if (!memberEventExists)
+            {
+                var memberEvent = new MemberEvent
+                {
+                    MemberId = memberId,
+                    EventId = eventId
+                };
+
+                _context.MemberEvents.Add(memberEvent);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "You have successfully registered for the event.";
+            }
+            else
+            {
+                TempData["WarningMessage"] = "You are already registered for this event.";
+            }
+
+            return RedirectToAction("Event", new { memberId });
+        }
+
+        public async Task<IActionResult> RegisteredEvent(int memberId)
+        {
+            var user = await _context.Members
+                .Include(m => m.MemberEvents)
+                    .ThenInclude(me => me.Event)
+                .FirstOrDefaultAsync(m => m.MemberID == memberId);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new MemberGamesViewModel
+            {
+                member = user,
+            };
+            return View(viewModel);
+        }
+
     }
 }
 

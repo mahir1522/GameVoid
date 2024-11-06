@@ -37,21 +37,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.ToTable("CartGame");
                 });
 
-            modelBuilder.Entity("EventMember", b =>
-                {
-                    b.Property<int>("RegisteredEventsEventId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RegiteredMembersMemberID")
-                        .HasColumnType("int");
-
-                    b.HasKey("RegisteredEventsEventId", "RegiteredMembersMemberID");
-
-                    b.HasIndex("RegiteredMembersMemberID");
-
-                    b.ToTable("EventMember");
-                });
-
             modelBuilder.Entity("GameWishList", b =>
                 {
                     b.Property<int>("GamesGameID")
@@ -184,6 +169,89 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasKey("EventId");
 
                     b.ToTable("Events");
+
+                    b.HasData(
+                        new
+                        {
+                            EventId = 1,
+                            Description = "It is a networking event for game to collabrate ",
+                            EndDate = new DateTime(2024, 11, 11, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "108 University Avenue East, Waterloo, Ontario, Canada",
+                            StartDate = new DateTime(2024, 11, 11, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Unity Developer Meet"
+                        },
+                        new
+                        {
+                            EventId = 2,
+                            Description = "An interactive symposium exploring AI trends in the gaming industry.",
+                            EndDate = new DateTime(2024, 12, 5, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "Tech Hall, 25 King Street West, Toronto, Ontario, Canada",
+                            StartDate = new DateTime(2024, 12, 5, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "AI in Gaming Symposium"
+                        },
+                        new
+                        {
+                            EventId = 3,
+                            Description = "A 48-hour event to create immersive VR gaming experiences.",
+                            EndDate = new DateTime(2024, 11, 20, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "Conestoga College, Doon Campus, Kitchener, Ontario, Canada",
+                            StartDate = new DateTime(2024, 11, 18, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Virtual Reality Game Jam"
+                        },
+                        new
+                        {
+                            EventId = 4,
+                            Description = "Competitive tournament for students to showcase their gaming skills.",
+                            EndDate = new DateTime(2024, 11, 25, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "Recreation Center, 15 Elm Street, Waterloo, Ontario, Canada",
+                            StartDate = new DateTime(2024, 11, 25, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Esports Tournament 2024"
+                        },
+                        new
+                        {
+                            EventId = 5,
+                            Description = "Hands-on workshop covering game design, coding, and art.",
+                            EndDate = new DateTime(2024, 12, 3, 15, 30, 0, 0, DateTimeKind.Unspecified),
+                            Location = "Innovation Hub, 99 Bloor Street, Toronto, Ontario, Canada",
+                            StartDate = new DateTime(2024, 12, 3, 9, 30, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Game Development Workshop"
+                        },
+                        new
+                        {
+                            EventId = 6,
+                            Description = "An event for indie game developers to present their latest projects.",
+                            EndDate = new DateTime(2024, 12, 10, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "The Game Lounge, 50 King Street North, Kitchener, Ontario, Canada",
+                            StartDate = new DateTime(2024, 12, 10, 14, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Indie Game Showcase"
+                        },
+                        new
+                        {
+                            EventId = 7,
+                            Description = "A seminar discussing the impact of gaming on mental health.",
+                            EndDate = new DateTime(2024, 11, 15, 13, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "Wellness Center, 20 Queen Street West, Toronto, Ontario, Canada",
+                            StartDate = new DateTime(2024, 11, 15, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Gaming & Mental Health Seminar"
+                        },
+                        new
+                        {
+                            EventId = 8,
+                            Description = "A conference celebrating and supporting women in the gaming industry.",
+                            EndDate = new DateTime(2024, 11, 30, 17, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "Unity Center, 60 Wellington Street, Waterloo, Ontario, Canada",
+                            StartDate = new DateTime(2024, 11, 30, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Women in Gaming Conference"
+                        },
+                        new
+                        {
+                            EventId = 9,
+                            Description = "Learn about sound design and audio engineering for games.",
+                            EndDate = new DateTime(2024, 12, 8, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            Location = "Arts & Media Building, 101 College Street, Toronto, Ontario, Canada",
+                            StartDate = new DateTime(2024, 12, 8, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Game Sound Design Workshop"
+                        });
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Game", b =>
@@ -350,6 +418,21 @@ namespace PROG3050_Team_Project.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PROG3050_Team_Project.Models.MemberEvent", b =>
+                {
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MemberId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("MemberEvents");
+                });
+
             modelBuilder.Entity("PROG3050_Team_Project.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -376,6 +459,32 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasIndex("MemberID");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Registration", b =>
+                {
+                    b.Property<int>("RegistrationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RegistrationId"));
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("RegistrationId");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("MemberId");
+
+                    b.ToTable("Registration");
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.WishList", b =>
@@ -420,21 +529,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasOne("PROG3050_Team_Project.Models.Game", null)
                         .WithMany()
                         .HasForeignKey("GamesGameID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EventMember", b =>
-                {
-                    b.HasOne("PROG3050_Team_Project.Models.Event", null)
-                        .WithMany()
-                        .HasForeignKey("RegisteredEventsEventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PROG3050_Team_Project.Models.Member", null)
-                        .WithMany()
-                        .HasForeignKey("RegiteredMembersMemberID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -490,6 +584,25 @@ namespace PROG3050_Team_Project.Migrations
                         .HasForeignKey("MemberID1");
                 });
 
+            modelBuilder.Entity("PROG3050_Team_Project.Models.MemberEvent", b =>
+                {
+                    b.HasOne("PROG3050_Team_Project.Models.Event", "Event")
+                        .WithMany("MemberEvents")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PROG3050_Team_Project.Models.Member", "Member")
+                        .WithMany("MemberEvents")
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("Member");
+                });
+
             modelBuilder.Entity("PROG3050_Team_Project.Models.Order", b =>
                 {
                     b.HasOne("PROG3050_Team_Project.Models.Member", "Member")
@@ -497,6 +610,25 @@ namespace PROG3050_Team_Project.Migrations
                         .HasForeignKey("MemberID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Member");
+                });
+
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Registration", b =>
+                {
+                    b.HasOne("PROG3050_Team_Project.Models.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PROG3050_Team_Project.Models.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
 
                     b.Navigation("Member");
                 });
@@ -512,6 +644,11 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("Member");
                 });
 
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Event", b =>
+                {
+                    b.Navigation("MemberEvents");
+                });
+
             modelBuilder.Entity("PROG3050_Team_Project.Models.Member", b =>
                 {
                     b.Navigation("Addresses");
@@ -519,6 +656,8 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("Cart");
 
                     b.Navigation("FriendsAndFamily");
+
+                    b.Navigation("MemberEvents");
 
                     b.Navigation("Orders");
 
