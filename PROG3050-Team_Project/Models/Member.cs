@@ -45,10 +45,14 @@ namespace PROG3050_Team_Project.Models
             FriendsAndFamily = new List<Member>();
         }
 
-        public ICollection<WishList>? WishLists { get; set; }  // Nullable collections
+        public WishList? WishList { get; set; }  // Nullable collections
+        public Cart? Cart { get; set; }  // Nullable collections
         public ICollection<Order>? Orders { get; set; }  // Nullable collections
         public ICollection<Event>? RegisteredEvents { get; set; }  // Nullable collections
         public bool IsEmailVerified { get; set; } = false;
         public string? profileImage { get; set; } = "/img/profile.png";
+
+        public ICollection<MemberEvent>? MemberEvents { get; set; } = new List<MemberEvent>();
+
     }
 }

@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model PROG3050_Team_Project.Models.Event
+
+@{
+    ViewData["Title"] = "Edit Event";
+}
+<link rel="stylesheet" href="~/css/adminAddEdit.css">
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<a asp-action="Event" asp-controller="Admin" class="btn btn-secondary">Back to Event List</a>
+
+
+<div class="brand-logo">
+    <div class="game">GAME</div>
+    <div class="void">VOID</div>
+</div>
+<div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <h1 class="display-4">Edit Event</h1>
+
+    <div class="add-box">
+
+        <form asp-action="EditEvent" asp-controller="Admin" method="post">
+            <input type="hidden" asp-for="EventId" />
+
+            <div class="form-group">
+                <label asp-for="Title" class="form-label">Title</label>
+                <input asp-for="Title" class="form-control" placeholder="Enter Title" required />
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="Description" class="form-label">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter Description" required></textarea>
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="StartDate" class="form-label">StartDate</label>
+                <input asp-for="StartDate" class="form-control" placeholder="Enter StartDate" required />
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="EndDate" class="form-label">EndDate</label>
+                <input asp-for="EndDate" class="form-control" placeholder="Enter EndDate" required />
+            </div>
+            <br />
+
+            <div class="form-group">
+                <label asp-for="Location" class="form-label">Location</label>
+                <input asp-for="Location" class="form-control" placeholder="Enter Location" required />
+            </div>
+            <br />
+
+
+            <button type="submit" class="btn btn-primary">Edit Game</button><br />
+        </form>
+
+    </div>
+</div>
+
+
+
+

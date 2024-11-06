@@ -1,0 +1,85 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model MemberGamesViewModel
+<link rel="stylesheet" href="~/css/user.css">
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="mb-5">
+                <div class="brand-logo">
+                    <div class="game">GAME</div>
+                    <div class="void">VOID</div>
+                </div>
+
+
+            </div>
+            <br /><br />
+            <ul class="nav flex-column">
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">Profile</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="Model.member.MemberID">Events</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" href="#">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.member.MemberID">WishList</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.member.MemberID">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-content-container">
+            <div class="text-center">
+                <h1 class="display-4">Events</h1>
+                <div class="add-game-container">
+                    <a asp-controller="Wishlist" asp-action="RegisteredEvent" method="post" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Registered Event</a>
+                </div>
+                    <div class="custom-row">
+                    @foreach (var eventItem in Model.events)
+                        {
+                        var isRegistered = Model.member.MemberEvents.Any(me => me.EventId == eventItem.EventId);
+                        <div class="custom-col">
+                                <div class="custom-card">
+                                    <div class="custom-card-body">
+                                        <h5 class="custom-card-title">@eventItem.Title</h5>
+                                        <p class="custom-card-text">@eventItem.StartDate - @eventItem.EndDate</p>
+                                        <p class="custom-card-text">@eventItem.Location</p>
+                                        <p class="custom-card-text">@eventItem.Description</p>
+                                        <p class="custom-card-text">
+                                            @if (isRegistered)
+                                            {
+                                                <button class="btn btn-secondary" disabled>Registered</button>
+                                            }
+                                            else
+                                            {
+                                                <form asp-action="RegisterForEvent" method="post">
+                                                    <input type="hidden" name="memberId" value="@Model.member.MemberID" />
+                                                    <input type="hidden" name="eventId" value="@eventItem.EventId" />
+                                                    <button type="submit" class="btn btn-primary">Register</button>
+                                                </form>
+                                            }
+                                        </p>   
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+              

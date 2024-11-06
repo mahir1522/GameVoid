@@ -15,7 +15,6 @@
         public decimal Rating { get; set; }
         public bool IsDownloadable { get; set; }
         public ICollection<WishList>? WishLists { get; set; } = null;
-
-
+        public ICollection<Cart>? Carts { get; set; } = null;
     }
 }

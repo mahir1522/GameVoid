@@ -25,28 +25,35 @@
         <div class="sidebar">
             <div class="mb-5">
                 <div class="brand-logo">
-                <div class="game">GAME</div>
-                <div class="void">VOID</div>
-                 </div> 
-                
-               
+                    <div class="game">GAME</div>
+                    <div class="void">VOID</div>
+                </div>
+
+
             </div>
-            <br/><br/>
+            <br /><br />
             <ul class="nav flex-column">
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">Profile</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-light" href="#">Library</a>
+                    <a class ="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Friends & Family</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a class ="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Friends & Family</a>
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.member.MemberID">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.member.MemberID">WishList</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.member.MemberID">Cart</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
                 </li>
             </ul>
         </div>
+
 
        <!-- Main Content -->
 <div class="main-content-container">
@@ -57,31 +64,57 @@
                     <input type="text" name="query" class="form-control me-5" style="width: 46rem;" placeholder="Search..." aria-label="Search">
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
+              
                 <a asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">
                     <img src="@Model.member.profileImage" width="50" height="50" class="rounded-circle" alt="Profile Pic">
                 </a>
             </div>
+  
+  
+            <!-- Banner -->
+            <div class="custom-banner mb-4 text-center">
+                <img src="~/img/Cyberunk-PL.webp" class="custom-banner-img" alt="Cyberpunk 2007">
+                <div class="custom-banner-body">
+                    <a href="#" class="btn">Order Now</a>
+                </div>
+            </div>
 
 
-   <!-- Banner -->
-<div class="custom-banner mb-4 text-center">
-    <img src="~/img/Cyberunk-PL.webp" class="custom-banner-img" alt="Cyberpunk 2007">
-    <div class="custom-banner-body">
-        <a href="#" class="btn">Order Now</a>
-    </div>
-</div>
+            <!-- Product Section -->
+            <div>
+                <h2 class="mb-3">Product</h2>
+                <div class="mb-4">
+                    <button class="btn rounded">Top</button>
+                    <button class="btn rounded">Popular</button>
+                    <button class="btn rounded">Recommended</button>
+                    <button class="btn filter-btn">Filter</button>
+                </div>
 
 
-    <!-- Product Section -->
-    <div>
-        <h2 class="mb-3">Product</h2>
-        <div class="mb-4">
-    <button class="btn rounded">Top</button>
-    <button class="btn rounded">Popular</button> 
-    <button class="btn rounded">Recommended</button>
-    <button class="btn filter-btn">Filter</button>
-</div>
 
+                <!-- Game Cards Grid -->
+                <div class="custom-row">
+                    @foreach (var game in Model.games)
+                    {
+                        <div class="custom-col">
+                            <div class="custom-card">
+                                <img src="@game.ImageUrl" class="custom-card-img" alt="@game.Title">
+                                <div class="custom-card-body">
+                                    <h5 class="custom-card-title">@game.Title</h5>
+                                    <p class="custom-card-text">@game.Price.ToString("C")</p>
+                                    <form asp-controller="Wishlist" asp-action="AddToCart" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
+                                        <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToCart" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Cart</button>
+                                    </form>
+                                    <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
+                                        <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Wishlist</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
 
         <!-- Game Cards Grid -->
                 <div class="custom-row">
@@ -122,10 +155,6 @@
     </div>
 </div>
 
-
-
-
-
 <!-- Modal for Game Details -->
 <div class="modal fade " style="color:black" id="gameDetailModal" tabindex="-1" aria-labelledby="gameDetailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -147,8 +176,6 @@
         </div>
     </div>
 </div>
-
-
 
 <script>
     function openGameModal(element) {
@@ -177,8 +204,6 @@
         modal.show();
     }
 
-
-
 </script>
 
 
@@ -187,3 +212,4 @@
 
 <!-- Bootstrap Bundle with Popper.js -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+

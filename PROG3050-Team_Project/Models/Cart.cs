@@ -3,6 +3,7 @@
     public class Cart
     {
         public int CartId { get; set; }
+        public int MemberID { get; set; }
 
         public Member Member { get; set; }
 

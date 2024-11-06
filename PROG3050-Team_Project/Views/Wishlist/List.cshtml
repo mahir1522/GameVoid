@@ -1,0 +1,97 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model PROG3050_Team_Project.Models.WishList
+<link rel="stylesheet" href="~/css/admin.css">
+
+
+
+<a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- Logo and brand name -->
+        <a class="navbar-brand" href="@Url.Action("Index", "User")">
+            <div class="brand-logo">
+                <span class="game">GAME</span>
+                <span class="void">VOID</span>
+            </div>
+        </a>
+
+        <!-- Toggler button for smaller screens -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.MemberID">Profile</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" href="#">Search</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" href="#">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.MemberID">WishList</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.MemberID">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="text-center">
+    <div class="share-buttons">
+        <p>Share this wishlist:</p>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Context.Request.Scheme)" target="_blank">Share on Facebook
+            <img src="path/to/facebook-icon.png" alt="Share on Facebook" />
+        </a>
+        <a href="https://twitter.com/share?url=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Context.Request.Scheme)&text=Check out this wishlist!" target="_blank">
+            <img src="path/to/twitter-icon.png" alt="Share on Twitter" />
+        </a>
+        <a href="https://www.linkedin.com/shareArticle?url=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Context.Request.Scheme)&title=Wishlist&summary=Check out this wishlist!" target="_blank">
+            <img src="path/to/linkedin-icon.png" alt="Share on LinkedIn" />
+        </a>
+    </div>
+    <h1 class="display-4">Wishlist</h1>
+    @* Checking if model is null or if database is empty *@
+    @if (Model?.Games != null && Model.Games.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Game Name</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var game in Model.Games)
+                {
+                    <tr>
+                        <td>@game.Title</td>
+                        <td>@game.Price.ToString("C")</td>
+                        <td>
+                            <a asp-action="RemoveFromWishlist" asp-route-memberId="@Model.MemberID" asp-route-gameId="@game.GameID">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Your wishlist is empty.</p>
+    }
+</div>
