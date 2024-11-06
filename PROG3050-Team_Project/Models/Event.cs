@@ -9,11 +9,7 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Location { get; set; }
-        public ICollection<Member> RegisteredMembers { get; set; }
+        public ICollection<MemberEvent> MemberEvents { get; set; } = new List<MemberEvent>();
 
-        public Event()
-        {
-            RegisteredMembers = new List<Member>();
-        }
     }
 }

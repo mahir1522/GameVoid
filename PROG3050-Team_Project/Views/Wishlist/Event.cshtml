@@ -45,10 +45,13 @@
         <div class="main-content-container">
             <div class="text-center">
                 <h1 class="display-4">Events</h1>
+                <div class="add-game-container">
+                    <a asp-controller="Wishlist" asp-action="RegisteredEvent" method="post" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Registered Event</a>
+                </div>
                     <div class="custom-row">
                     @foreach (var eventItem in Model.events)
                         {
-                            var isRegistered = Model.member?.RegisteredEvents?.Any(e => e.EventId == eventItem.EventId) ?? false;
+                            var isRegistered = Model.member.MemberEvent.Any(e => e.EventId == eventItem.EventId) ?? false;
                             <div class="custom-col">
                                 <div class="custom-card">
                                     <div class="custom-card-body">

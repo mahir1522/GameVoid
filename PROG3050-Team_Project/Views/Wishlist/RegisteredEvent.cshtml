@@ -46,20 +46,31 @@
             <div class="text-center">
                 <h1 class="display-4">Events</h1>
                 <div class="custom-row">
-                    @foreach (var eventItem in Model.member.RegisteredEvents)
+                    @foreach (var eventItem in Model.member.MemberEvents)
                     {
-                        var isRegistered = Model.member?.RegisteredEvents?.Any(e => e.EventId == eventItem.EventId) ?? false;
+                        var isRegistered = Model.member?.MemberEvents?.Any(e => e.EventId == eventItem.EventId) ?? false;
                         <div class="custom-col">
                             <div class="custom-card">
                                 <div class="custom-card-body">
-                                    <h5 class="custom-card-title">@eventItem.Title</h5>
-                                    <p class="custom-card-text">@eventItem.StartDate - @eventItem.EndDate</p>
-                                    <p class="custom-card-text">@eventItem.Location</p>
-                                    <p class="custom-card-text">@eventItem.Description</p>
+                                    <h5 class="custom-card-title">@eventItem.Event.Title</h5>
+                                    <p class="custom-card-text">@eventItem.Event.StartDate - @eventItem.Event.EndDate</p>
+                                    <p class="custom-card-text">@eventItem.Event.Location</p>
+                                    <p class="custom-card-text">@eventItem.Event.Description</p>
                                     <p>
-                                        <button class="btn btn-secondary" disabled>Registered</button>                                      
+                                        @if (isRegistered)
+                                        {
+                                            <button class="btn btn-secondary" disabled>Registered</button>
+                                        }
+                                        else
+                                        {
+                                            <form asp-action="RegisterForEvent" method="post">
+                                                <input type="hidden" name="memberId" value="@Model.member.MemberID" />
+                                                <input type="hidden" name="eventId" value="@eventItem.EventId" />
+                                                <button type="submit" class="btn btn-primary">Register</button>
+                                            </form>
+                                        }
                                     </p>
-
+                                    <p></p>
                                 </div>
                             </div>
                         </div>

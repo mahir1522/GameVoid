@@ -38,14 +38,14 @@ namespace PROG3050_Team_Project.Models
 
         public List<Member>? FriendsAndFamily { get; set; } = new List<Member>();  // Nullable list
 
-        public ICollection<Event>? RegisteredEvents { get; set; }
+        public ICollection<MemberEvent>? MemberEvents { get; set; } = new List<MemberEvent>();
 
         public Member()
         {
             FavoritePlatforms = new List<string>();
             FavoriteGameCategories = new List<string>();
             FriendsAndFamily = new List<Member>();
-            RegisteredEvents = new List<Event>();
+
         }
 
         public WishList? WishList { get; set; }  // Nullable collections

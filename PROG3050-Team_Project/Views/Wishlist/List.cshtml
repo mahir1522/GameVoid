@@ -54,13 +54,13 @@
 <div class="text-center">
     <div class="share-buttons">
         <p>Share this wishlist:</p>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Request.Scheme)" target="_blank">Share on Facebook
+        <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Context.Request.Scheme)" target="_blank">Share on Facebook
             <img src="path/to/facebook-icon.png" alt="Share on Facebook" />
         </a>
-        <a href="https://twitter.com/share?url=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Request.Scheme)&text=Check out this wishlist!" target="_blank">
+        <a href="https://twitter.com/share?url=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Context.Request.Scheme)&text=Check out this wishlist!" target="_blank">
             <img src="path/to/twitter-icon.png" alt="Share on Twitter" />
         </a>
-        <a href="https://www.linkedin.com/shareArticle?url=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Request.Scheme)&title=Wishlist&summary=Check out this wishlist!" target="_blank">
+        <a href="https://www.linkedin.com/shareArticle?url=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Context.Request.Scheme)&title=Wishlist&summary=Check out this wishlist!" target="_blank">
             <img src="path/to/linkedin-icon.png" alt="Share on LinkedIn" />
         </a>
     </div>

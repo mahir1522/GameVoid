@@ -12,8 +12,8 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    [Migration("20241104174933_init")]
-    partial class init
+    [Migration("20241105205755_AddMemberEventRelationship")]
+    partial class AddMemberEventRelationship
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,21 +40,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.ToTable("CartGame");
                 });
 
-            modelBuilder.Entity("EventMember", b =>
-                {
-                    b.Property<int>("RegisteredEventsEventId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RegiteredMembersMemberID")
-                        .HasColumnType("int");
-
-                    b.HasKey("RegisteredEventsEventId", "RegiteredMembersMemberID");
-
-                    b.HasIndex("RegiteredMembersMemberID");
-
-                    b.ToTable("EventMember");
-                });
-
             modelBuilder.Entity("GameWishList", b =>
                 {
                     b.Property<int>("GamesGameID")
@@ -68,6 +53,21 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasIndex("WishListsWishListId");
 
                     b.ToTable("GameWishList");
+                });
+
+            modelBuilder.Entity("MemberEvent", b =>
+                {
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MemberID")
+                        .HasColumnType("int");
+
+                    b.HasKey("EventId", "MemberID");
+
+                    b.HasIndex("MemberID");
+
+                    b.ToTable("MemberEvent");
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Address", b =>
@@ -381,6 +381,32 @@ namespace PROG3050_Team_Project.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Registration", b =>
+                {
+                    b.Property<int>("RegistrationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RegistrationId"));
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("RegistrationId");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("MemberId");
+
+                    b.ToTable("Registrations");
+                });
+
             modelBuilder.Entity("PROG3050_Team_Project.Models.WishList", b =>
                 {
                     b.Property<int>("WishListId")
@@ -427,21 +453,6 @@ namespace PROG3050_Team_Project.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EventMember", b =>
-                {
-                    b.HasOne("PROG3050_Team_Project.Models.Event", null)
-                        .WithMany()
-                        .HasForeignKey("RegisteredEventsEventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PROG3050_Team_Project.Models.Member", null)
-                        .WithMany()
-                        .HasForeignKey("RegiteredMembersMemberID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GameWishList", b =>
                 {
                     b.HasOne("PROG3050_Team_Project.Models.Game", null)
@@ -453,6 +464,21 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasOne("PROG3050_Team_Project.Models.WishList", null)
                         .WithMany()
                         .HasForeignKey("WishListsWishListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MemberEvent", b =>
+                {
+                    b.HasOne("PROG3050_Team_Project.Models.Event", null)
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PROG3050_Team_Project.Models.Member", null)
+                        .WithMany()
+                        .HasForeignKey("MemberID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -504,6 +530,25 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("Member");
                 });
 
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Registration", b =>
+                {
+                    b.HasOne("PROG3050_Team_Project.Models.Event", "Event")
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PROG3050_Team_Project.Models.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("Member");
+                });
+
             modelBuilder.Entity("PROG3050_Team_Project.Models.WishList", b =>
                 {
                     b.HasOne("PROG3050_Team_Project.Models.Member", "Member")
@@ -519,15 +564,13 @@ namespace PROG3050_Team_Project.Migrations
                 {
                     b.Navigation("Addresses");
 
-                    b.Navigation("Cart")
-                        .IsRequired();
+                    b.Navigation("Cart");
 
                     b.Navigation("FriendsAndFamily");
 
                     b.Navigation("Orders");
 
-                    b.Navigation("WishList")
-                        .IsRequired();
+                    b.Navigation("WishList");
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Order", b =>

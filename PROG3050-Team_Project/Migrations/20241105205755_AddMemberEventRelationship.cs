@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROG3050_Team_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class AddMemberEventRelationship : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -108,24 +108,24 @@ namespace PROG3050_Team_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventMember",
+                name: "MemberEvent",
                 columns: table => new
                 {
-                    RegisteredEventsEventId = table.Column<int>(type: "int", nullable: false),
-                    RegiteredMembersMemberID = table.Column<int>(type: "int", nullable: false)
+                    EventId = table.Column<int>(type: "int", nullable: false),
+                    MemberID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventMember", x => new { x.RegisteredEventsEventId, x.RegiteredMembersMemberID });
+                    table.PrimaryKey("PK_MemberEvent", x => new { x.EventId, x.MemberID });
                     table.ForeignKey(
-                        name: "FK_EventMember_Events_RegisteredEventsEventId",
-                        column: x => x.RegisteredEventsEventId,
+                        name: "FK_MemberEvent_Events_EventId",
+                        column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "EventId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventMember_Members_RegiteredMembersMemberID",
-                        column: x => x.RegiteredMembersMemberID,
+                        name: "FK_MemberEvent_Members_MemberID",
+                        column: x => x.MemberID,
                         principalTable: "Members",
                         principalColumn: "MemberID",
                         onDelete: ReferentialAction.Cascade);
@@ -148,6 +148,33 @@ namespace PROG3050_Team_Project.Migrations
                     table.ForeignKey(
                         name: "FK_Orders_Members_MemberID",
                         column: x => x.MemberID,
+                        principalTable: "Members",
+                        principalColumn: "MemberID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Registrations",
+                columns: table => new
+                {
+                    RegistrationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MemberId = table.Column<int>(type: "int", nullable: false),
+                    EventId = table.Column<int>(type: "int", nullable: false),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Registrations", x => x.RegistrationId);
+                    table.ForeignKey(
+                        name: "FK_Registrations_Events_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Events",
+                        principalColumn: "EventId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Registrations_Members_MemberId",
+                        column: x => x.MemberId,
                         principalTable: "Members",
                         principalColumn: "MemberID",
                         onDelete: ReferentialAction.Cascade);
@@ -300,11 +327,6 @@ namespace PROG3050_Team_Project.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventMember_RegiteredMembersMemberID",
-                table: "EventMember",
-                column: "RegiteredMembersMemberID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Games_OrderId",
                 table: "Games",
                 column: "OrderId");
@@ -315,6 +337,11 @@ namespace PROG3050_Team_Project.Migrations
                 column: "WishListsWishListId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MemberEvent_MemberID",
+                table: "MemberEvent",
+                column: "MemberID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Members_MemberID1",
                 table: "Members",
                 column: "MemberID1");
@@ -323,6 +350,16 @@ namespace PROG3050_Team_Project.Migrations
                 name: "IX_Orders_MemberID",
                 table: "Orders",
                 column: "MemberID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Registrations_EventId",
+                table: "Registrations",
+                column: "EventId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Registrations_MemberId",
+                table: "Registrations",
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WishLists_MemberID",
@@ -341,22 +378,25 @@ namespace PROG3050_Team_Project.Migrations
                 name: "CartGame");
 
             migrationBuilder.DropTable(
-                name: "EventMember");
-
-            migrationBuilder.DropTable(
                 name: "GameWishList");
 
             migrationBuilder.DropTable(
-                name: "Carts");
+                name: "MemberEvent");
 
             migrationBuilder.DropTable(
-                name: "Events");
+                name: "Registrations");
+
+            migrationBuilder.DropTable(
+                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "Games");
 
             migrationBuilder.DropTable(
                 name: "WishLists");
+
+            migrationBuilder.DropTable(
+                name: "Events");
 
             migrationBuilder.DropTable(
                 name: "Orders");

@@ -15,7 +15,7 @@ namespace PROG3050_Team_Project.Models
         
         public DbSet<Address> Address { get; set; }
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<Registration> Registrations { get; set; }
+        public DbSet<MemberEvent> MemberEvents { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -121,14 +121,18 @@ namespace PROG3050_Team_Project.Models
             // Define relationships between Event and Members who have registered (many to many)
            modelBuilder.Entity<Registration>()
             .HasKey(r => r.RegistrationId);
+            modelBuilder.Entity<MemberEvent>()
+            .HasKey(me => new { me.MemberId, me.EventId }); // Composite primary key
 
-            modelBuilder.Entity<Member>()
-            .HasMany(m => m.RegisteredEvents)
-            .WithMany(e => e.RegisteredMembers)
-            .UsingEntity<Dictionary<string, object>>(
-                "MemberEvent",
-                j => j.HasOne<Event>().WithMany().HasForeignKey("EventId"),
-                j => j.HasOne<Member>().WithMany().HasForeignKey("MemberID"));
+            modelBuilder.Entity<MemberEvent>()
+                .HasOne(me => me.Member)
+                .WithMany(m => m.MemberEvents)
+                .HasForeignKey(me => me.MemberId);
+
+            modelBuilder.Entity<MemberEvent>()
+                .HasOne(me => me.Event)
+                .WithMany(e => e.MemberEvents)
+                .HasForeignKey(me => me.EventId);
 
 
             // Define relationships between Game and WishList (many to many)
