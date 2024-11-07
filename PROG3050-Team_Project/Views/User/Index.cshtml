@@ -3,7 +3,7 @@
     ViewData["Title"] = "UserPage";
 }
 
-@* @if (TempData["SuccessMessage"] != null)
+@if (TempData["SuccessMessage"] != null)
 {
     <script>
         alert('@TempData["SuccessMessage"]');
@@ -15,7 +15,7 @@
     <script>
         alert('@TempData["ErrorMessage"]');
     </script>
-} *@
+}
 
 <link rel="stylesheet" href="~/css/user.css">
 
@@ -86,10 +86,7 @@
                     <button class="btn rounded">Recommended</button>
                     <button class="btn filter-btn">Filter</button>
                 </div>
-            </div>
-        </div>
-
-        <!-- Game Cards Grid -->
+                <!-- Game Cards Grid -->
                 <div class="custom-row">
                     @if (Model.games.Any())
                     {
@@ -110,13 +107,13 @@
                                     <div class="custom-card-body">
                                         <h5 class="custom-card-title">@game.Title</h5>
                                         <p class="custom-card-text">@game.Price.ToString("C")</p>
-                                <form asp-controller="Wishlist" asp-action="AddToCart" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
-                                    <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToCart" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Cart</button>
-                                </form>
-                                <br />
-                                <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
-                                    <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Wishlist</button>
-                                </form>
+                                        <form asp-controller="Wishlist" asp-action="AddToCart" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
+                                            <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToCart" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Cart</button>
+                                        </form>
+                                        <br />
+                                        <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
+                                            <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Wishlist</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -128,6 +125,8 @@
                     }
                 </div>
 
+            </div>
+        </div>
     </div>
 </div>
 

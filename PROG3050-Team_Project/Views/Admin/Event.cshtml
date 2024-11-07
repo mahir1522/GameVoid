@@ -1,5 +1,17 @@
 ﻿@model IEnumerable<PROG3050_Team_Project.Models.Event>
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 <link rel="stylesheet" href="~/css/admin.css">
 
 <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>

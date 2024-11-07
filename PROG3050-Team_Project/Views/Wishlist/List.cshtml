@@ -4,6 +4,7 @@
 @{
 }
 @model PROG3050_Team_Project.Models.WishList
+@using System.Net
 <link rel="stylesheet" href="~/css/admin.css">
 
 
@@ -32,18 +33,18 @@
                     <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.MemberID">Profile</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-light" href="#">Search</a>
+                    <a class ="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.MemberID" class="btn btn-primary">Friends & Family</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-light" href="#">Library</a>
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.MemberID">Events</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.MemberID">WishList</a>
                 </li>
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.MemberID">Cart</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
                 </li>
             </ul>
@@ -52,22 +53,20 @@
 </nav>
 
 <div class="text-center">
-    <div class="share-buttons">
-        <p>Share this wishlist:</p>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Context.Request.Scheme)" target="_blank">Share on Facebook
-            <img src="path/to/facebook-icon.png" alt="Share on Facebook" />
-        </a>
-        <a href="https://twitter.com/share?url=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Context.Request.Scheme)&text=Check out this wishlist!" target="_blank">
-            <img src="path/to/twitter-icon.png" alt="Share on Twitter" />
-        </a>
-        <a href="https://www.linkedin.com/shareArticle?url=@Url.Action("Share", "Wishlist", new { memberId = Model.MemberID }, Context.Request.Scheme)&title=Wishlist&summary=Check out this wishlist!" target="_blank">
-            <img src="path/to/linkedin-icon.png" alt="Share on LinkedIn" />
-        </a>
-    </div>
     <h1 class="display-4">Wishlist</h1>
     @* Checking if model is null or if database is empty *@
     @if (Model?.Games != null && Model.Games.Any())
     {
+        var wishlistText = $"Check out my wishlist: " +
+        string.Join(", ", Model.Games.Select(g => g.Title));
+        var encodedText = WebUtility.UrlEncode(wishlistText);
+        <div class="share-buttons">
+            <div class="social-share-buttons">
+                <!-- Twitter -->
+                <a href="https://twitter.com/intent/tweet?text=@encodedText"
+                   target="_blank" class="btn btn-primary">Share on Twitter</a>
+            </div>
+        </div>
         <table>
             <thead>
                 <tr>

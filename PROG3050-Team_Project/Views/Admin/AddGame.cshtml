@@ -2,13 +2,6 @@
 @{
     ViewData["Title"] = "Add Game";
 }
-<link rel="stylesheet" href="~/css/adminAddEdit.css">
-
-<div class="brand-logo">
-    <div class="game">GAME</div>
-    <div class="void">VOID</div>
-</div>
-
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success">
@@ -21,8 +14,44 @@
         @TempData["ErrorMessage"]
     </div>
 }
+<link rel="stylesheet" href="~/css/adminAddEdit.css">
+
 <a asp-action="Index" asp-controller="Admin" class="btn btn-secondary">Back to Game List</a>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- Logo and brand name -->
+        <a class="navbar-brand" href="@Url.Action("Index", "Admin")">
+            <div class="brand-logo">
+                <span class="game">GAME</span>
+                <span class="void">VOID</span>
+            </div>
+        </a>
+
+        <!-- Toggler button for smaller screens -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Admin")">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Event", "Admin")">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action()">Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action()">Game Reviews</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <h1 class="display-4">Add Game</h1>
 

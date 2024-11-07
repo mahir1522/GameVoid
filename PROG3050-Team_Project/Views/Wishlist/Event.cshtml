@@ -6,7 +6,18 @@
 
 @model MemberGamesViewModel
 <link rel="stylesheet" href="~/css/user.css">
-
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" style="align-content:center">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
@@ -20,23 +31,23 @@
 
             </div>
             <br /><br />
-            <ul class="nav flex-column">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">Profile</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="Model.member.MemberID">Events</a>
+                    <a class="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Friends & Family</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a class="nav-link text-light" href="#">Library</a>
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.member.MemberID">Events</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.member.MemberID">WishList</a>
                 </li>
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.member.MemberID">Cart</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
                 </li>
             </ul>

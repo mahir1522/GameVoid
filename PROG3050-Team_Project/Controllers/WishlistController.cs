@@ -72,6 +72,7 @@ namespace PROG3050_Team_Project.Controllers
             wishList.Games.Add(game);
             await _context.SaveChangesAsync();
 
+            TempData["SuccessMessage"] = "Game added to Wishlist successfully.";
             return RedirectToAction("List", new { memberId });
 
             //var wishlist = await _context.WishLists
@@ -148,16 +149,30 @@ namespace PROG3050_Team_Project.Controllers
 
             return RedirectToAction("List", new { memberId });
         }
-        public IActionResult ShareWishlist(int memberId)
+        [HttpGet]
+        public async Task<IActionResult> ShareWishlist(int memberId)
         {
-            // Generate a shareable URL, e.g., /wishlist/view/1
-            string baseUrl = $"{Request.Scheme}://{Request.Host}";
-            string shareUrl = $"{baseUrl}/wishlist/view/{memberId}";
+            var wishlist = await _context.WishLists
+                .Include(w => w.Games)
+                .FirstOrDefaultAsync(w => w.MemberID == memberId);
 
-            // Pass the URL to the view or share logic
-            return View("ShareWishlist", new { ShareUrl = shareUrl });
+            if (wishlist == null || !wishlist.Games.Any())
+            {
+                TempData["ErrorMessage"] = "Your wishlist is empty.";
+                return RedirectToAction("Index", "Games");
+            }
+
+            // Generate text to share
+            var wishlistText = $"Check out my wishlist: " +
+                string.Join(", ", wishlist.Games.Select(g => g.Title));
+
+            // Pass the text as a model or ViewBag to your view
+            ViewBag.WishlistText = wishlistText;
+
+            return View(wishlistText);
         }
 
+       
         public async Task<IActionResult> Cart(int memberId)
         {
             var cart = await _context.Carts
@@ -210,6 +225,7 @@ namespace PROG3050_Team_Project.Controllers
             cart.Games.Add(game);
             await _context.SaveChangesAsync();
 
+            TempData["SuccessMessage"] = "Game added to Cart successfully.";
             return RedirectToAction("Cart", new { memberId });
         }
 
@@ -225,11 +241,11 @@ namespace PROG3050_Team_Project.Controllers
             {
                 cart.RemoveFromCart(game);
                 await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Game removed from wishlist successfully.";
+                TempData["SuccessMessage"] = "Game removed from Cart successfully.";
             }
             else
             {
-                TempData["ErrorMessage"] = "Game could not be found in wishlist.";
+                TempData["ErrorMessage"] = "Game could not be found in Cart.";
             }
 
             return RedirectToAction("Cart", new { memberId });
@@ -302,6 +318,28 @@ namespace PROG3050_Team_Project.Controllers
                 member = user,
             };
             return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Unregister(int eventId, int memberId)
+        {
+            // Find the registration entry for this member and event
+            var memberEvent = _context.MemberEvents
+                .FirstOrDefault(me => me.EventId == eventId && me.MemberId == memberId);
+
+            if (memberEvent != null)
+            {
+                // Remove the entry from the database to unregister the member from the event
+                _context.MemberEvents.Remove(memberEvent);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "You have been unregistered from the event.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "You were not registered for this event.";
+            }
+
+            return RedirectToAction("RegisteredEvent", new { memberId = memberId });
         }
 
     }
