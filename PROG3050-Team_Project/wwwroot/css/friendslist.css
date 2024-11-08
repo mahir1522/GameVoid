@@ -78,3 +78,32 @@ a:hover {
     text-decoration: underline;
     color: #A100ED;
 }
+/* Style for GAME text */
+.brand-logo .game {
+    color: #DA00FE; /* Purple color from Figma */
+    font-size: 24px; /* Increased font size to match title */
+    font-weight: 700; /* Bold text */
+  
+    margin-bottom: -8px; /* Negative margin to bring VOID closer */
+}
+
+/* Style for VOID text */
+.brand-logo .void {
+    color: #A100ED; /* Different shade of purple */
+    font-size: 24px; /* Increased font size to match title */
+    font-weight: 700; /* Bold text */
+  
+    padding-left: 19px; /* Shift VOID slightly to the right */
+    transform: translateY(-8px); /* Fine-tune the vertical position */
+}
+/* Brand Logo Positioning */
+.brand-logo {
+    position: absolute; /* Keep it absolute */
+    top: 20px; /* Distance from the top */
+    left: 20px; /* Distance from the left */
+    font-family: 'Quicksand', sans-serif; /* Font as specified */
+    font-weight: 700; /* Bold text */
+    display: flex; /* Use flexbox to align the items */
+    flex-direction: column; /* Stack the items vertically */
+    align-items: flex-start; /* Align items to the start */
+}
