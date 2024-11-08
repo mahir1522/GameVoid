@@ -1,36 +1,47 @@
 ﻿@model PROG3050_Team_Project.Models.FriendsViewModel // Adjust to your namespace
 
+<a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.CurrentMember.MemberID" class="btn btn-secondary mb-3">
+    Back to User Panel
+</a>
 
-
-<a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.CurrentMember.MemberID" class="btn btn-secondary">Back to User Panel</a>
-
+<link rel="stylesheet" href="~/css/friendslist.css">
 
 <div class="search-bar mb-4">
-    <form asp-action="SearchFriends" method="get">
-        <input type="text" name="query" class="form-control" placeholder="Search for friends..." required />
-        <input type="hidden" name="memberId" value="@Model.CurrentMember.MemberID" />
+    <form asp-action="SearchFriends" method="get" class="d-flex">
+        <input 
+            type="text" 
+            name="query" 
+            class="form-control me-2" 
+            placeholder="Search for friends..." 
+            required 
+        />
+        <input 
+            type="hidden" 
+            name="memberId" 
+            value="@Model.CurrentMember.MemberID" 
+        />
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
 
 <h3>Your Friends</h3>
-<ul>
+<div class="friend-list">
     @foreach (var friend in Model.CurrentMember.FriendsAndFamily)
     {
-        <li>
+        <div class="friend-item">
             <strong>@friend.UserName</strong> - @friend.FullName
             <form asp-action="RemoveFriend" method="post" asp-route-memberId="@Model.CurrentMember.MemberID" asp-route-friendId="@friend.MemberID" style="display:inline;">
                 <button type="submit" class="btn btn-danger btn-sm">Remove</button>
             </form>
-        </li>
+        </div>
     }
-</ul>
+</div>
 
 <h4>All Members</h4>
-<ul>
+<div class="member-list">
     @foreach (var member in Model.AllMembers)
     {
-        <li>
+        <div class="member-item">
             <strong>@member.UserName</strong> - @member.FullName
             @if (!Model.CurrentMember.FriendsAndFamily.Any(f => f.MemberID == member.MemberID))
             {
@@ -40,8 +51,8 @@
             }
             else
             {
-                <span class="text-muted"> (Already Friends)</span>
+                <span class="text-muted">(Already Friends)</span>
             }
-        </li>
+        </div>
     }
-</ul>
+</div>

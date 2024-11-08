@@ -1,0 +1,80 @@
+/* General Styles */
+body {
+    background-color: #242424;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+/* Search Bar */
+.search-bar {
+    margin-bottom: 30px;
+}
+
+.search-bar form {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Friend & Member List Styling */
+.friend-list, .member-list {
+    margin-top: 20px;
+}
+
+.friend-item, .member-item {
+    background-color: #3a3a3a;
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    padding: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.friend-item:hover, .member-item:hover {
+    background-color: #474747;
+}
+
+/* Button Styling for Actions */
+.btn-sm {
+    margin-left: 10px;
+}
+
+.btn-danger {
+    background-color: #FF4C4C;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-danger:hover {
+    background-color: #D32F2F;
+}
+
+.btn-success {
+    background-color: #DA00FE;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-success:hover {
+    background-color: #6c1a79;
+}
+
+/* Typography and Spacing */
+h3, h4 {
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Styling for the entire page */
+a {
+    color: #DA00FE;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #A100ED;
+}
