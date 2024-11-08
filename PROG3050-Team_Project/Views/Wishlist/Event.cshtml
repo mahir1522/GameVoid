@@ -50,33 +50,34 @@
                 </div>
                     <div class="custom-row">
                     @foreach (var eventItem in Model.events)
-                        {
-                        var isRegistered = Model.member.MemberEvents.Any(me => me.EventId == eventItem.EventId);
-                        <div class="custom-col">
-                                <div class="custom-card">
-                                    <div class="custom-card-body">
-                                        <h5 class="custom-card-title">@eventItem.Title</h5>
-                                        <p class="custom-card-text">@eventItem.StartDate - @eventItem.EndDate</p>
-                                        <p class="custom-card-text">@eventItem.Location</p>
-                                        <p class="custom-card-text">@eventItem.Description</p>
-                                        <p class="custom-card-text">
-                                            @if (isRegistered)
-                                            {
-                                                <button class="btn btn-secondary" disabled>Registered</button>
-                                            }
-                                            else
-                                            {
-                                                <form asp-action="RegisterForEvent" method="post">
-                                                    <input type="hidden" name="memberId" value="@Model.member.MemberID" />
-                                                    <input type="hidden" name="eventId" value="@eventItem.EventId" />
-                                                    <button type="submit" class="btn btn-primary">Register</button>
-                                                </form>
-                                            }
-                                        </p>   
+                            {
+                                var isRegistered = Model.member.MemberEvents.Any(me => me.EventId == eventItem.EventId);
+                                <div class="custom-col">
+                                    <div class="custom-card">
+                                        <div class="custom-card-body">
+                                            <h5 class="custom-card-title">@eventItem.Title</h5>
+                                            <p class="custom-card-text">@eventItem.StartDate - @eventItem.EndDate</p>
+                                            <p class="custom-card-text">@eventItem.Location</p>
+                                            <p class="custom-card-text custom-card-text event-description">@eventItem.Description</p>
+                                        </div>
+                                    </div>
+                                    <div class="custom-card-footer">
+                                        @if (isRegistered)
+                                        {
+                                            <button class="btn btn-secondary" disabled>Registered</button>
+                                        }
+                                        else
+                                        {
+                                            <form asp-action="RegisterForEvent" method="post">
+                                                <input type="hidden" name="memberId" value="@Model.member.MemberID" />
+                                                <input type="hidden" name="eventId" value="@eventItem.EventId" />
+                                                <button type="submit" class="btn btn-primary">Register</button>
+                                            </form>
+                                        }
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
+
                     </div>
             </div>
         </div>
