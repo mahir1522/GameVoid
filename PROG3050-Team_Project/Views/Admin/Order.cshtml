@@ -1,4 +1,9 @@
-﻿@model IEnumerable<PROG3050_Team_Project.Models.Event>
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<PROG3050_Team_Project.Models.Order>
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -40,6 +45,9 @@
                     <a class="nav-link" href="@Url.Action("Event", "Admin")">Events</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Order", "Admin")">Order</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="@Url.Action()">Reports</a>
                 </li>
                 <li class="nav-item">
@@ -52,10 +60,7 @@
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <h1 class="display-4">Events</h1>
 
-
-    <a href="@Url.Action("AddEvent", "Admin")" class="btn btn-primary">Add Event</a>
-    <form asp-action="Index" asp-controller="Admin" method="post">
-        @* Checking if model is null or if database is empty *@
+ @* Checking if model is null or if database is empty *@
         @if (Model == null || !Model.Any())
         {
             <p>No events available.</p>
@@ -66,31 +71,43 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>StartDate</th>
-                        <th>EndDate</th>
-                        <th>Location</th>
+                        <th>OrderDate</th>
+                        <th>Total Amount</th>
+                        <th>Games</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var eve in Model)
+                    @foreach (var order in Model)
                     {
-                        <tr>
-                            <td>@eve.Title</td>
-                            <td>@eve.Description</td>
-                            <td>@eve.StartDate</td>
-                            <td>@eve.EndDate</td>
-                            <td>@eve.Location</td>
-                            <td>
-                                <a href="@Url.Action("EditEvent", "Admin", new { id = eve.EventId })" class="btn btn-warning">Edit</a>
-                                <button type="submit" name="action" value="Delete" formaction="@Url.Action("DeleteEvent", "Admin", new { id = eve.EventId })" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
-                            </td>
-                        </tr>
+                        <td>@order.OrderDate</td>
+                        <td>@order.TotalAmount</td>
+                        <td>
+                            <ul>
+                                @foreach (var item in order.Games)
+                                {
+                                    <li>
+                                            @item.Title - @item.Price.ToString("C")
+                                    </li>
+                                }
+                            </ul>
+                        </td>
+                        <td>
+                            @if (order.OrderStatus == "Pending")
+                            {
+                                <p>Pending</p>
+                                <form asp-action="ProcessedOrder" asp-controller="Admin" asp-route-orderId="@order.OrderId" method="post">
+                                    <button class="btn btn-primary btn-sm" type="submit">Processed</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <button disabled>Processed</button>
+                            }
+                        </td>
                     }
                 </tbody>
             </table>
         }
-    </form>
 </div>
 

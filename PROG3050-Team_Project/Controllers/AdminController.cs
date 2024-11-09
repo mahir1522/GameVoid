@@ -187,6 +187,44 @@ namespace PROG3050_Team_Project.Controllers
 
             return RedirectToAction("Index", "Admin");
         }
+        
+        public async Task<IActionResult> Order()
+        {
+            var orders = await _context.Orders
+                .Include(o => o.Games)
+                .ThenInclude(oi => oi.Orders)
+                .ToListAsync();
 
+
+            if (orders == null || !orders.Any())
+            {
+                TempData["InfoMessage"] = "No Order found.";
+            }
+
+            return View(orders);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ProcessedOrder(int orderId)
+        {
+            var order = await _context.Orders
+                .Include(o => o.Member)
+                .Include(o => o.Games)
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            order.OrderStatus = "Processed";
+
+            var orders = await _context.Orders
+                .Include(o => o.Games)
+                .ThenInclude(oi => oi.Orders)
+                .ToListAsync();
+
+
+            if (orders == null || !orders.Any())
+            {
+                TempData["InfoMessage"] = "No purchases found for this user.";
+            }
+
+            return RedirectToAction("Order", "Admin");
+        }
     }
 }

@@ -1,16 +1,5 @@
 ﻿@model PROG3050_Team_Project.Models.FriendsViewModel // Adjust to your namespace
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SuccessMessage"]
-    </div>
-}
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["ErrorMessage"]
-    </div>
-}
+
 
 
 <a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.CurrentMember.MemberID" class="btn btn-secondary">Back to User Panel</a>
@@ -30,7 +19,7 @@
     {
         <li>
             <strong>@friend.UserName</strong> - @friend.FullName
-            <form asp-controller="Wishlist" asp-action="List" method="post" asp-route-memberId="@friend.MemberID" style="display:inline;">
+            <form asp-controller="Wishlist" asp-action="FriendList" method="post" asp-route-memberId="@Model.CurrentMember.MemberID" asp-route-friendId="@friend.MemberID" style="display:inline;">
                 <button type="submit" class="btn btn-danger btn-sm">Wishlist</button>
             </form>
             <form asp-action="RemoveFriend" method="post" asp-route-memberId="@Model.CurrentMember.MemberID" asp-route-friendId="@friend.MemberID" style="display:inline;">

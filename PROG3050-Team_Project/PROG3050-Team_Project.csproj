@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\GameInfo.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Google.Api.Gax" Version="4.9.0" />
     <PackageReference Include="Google.Cloud.RecaptchaEnterprise.V1" Version="2.15.0" />
     <PackageReference Include="Google.Cloud.Storage.V1" Version="4.10.0" />
@@ -28,10 +32,6 @@
     <PackageReference Include="NUnit" Version="4.2.2" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
     <PackageReference Include="xunit.extensibility.execution" Version="2.9.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>

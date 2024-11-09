@@ -48,9 +48,13 @@
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.member.MemberID">Cart</a>
                 </li>
+                <li>
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="UserPurchases" asp-route-memberId="@Model.member.MemberID">My Purchases</a>
+                </li>
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
                 </li>
+                    
             </ul>
         </div>
 

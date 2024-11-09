@@ -1,0 +1,49 @@
+﻿@model IEnumerable<PROG3050_Team_Project.Models.Order>
+
+<link rel="stylesheet" href="~/css/admin.css">
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
+<a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+
+
+<div class="text-center">
+    <h1 class="display-4">My Purchased Games</h1>
+    @if (TempData["InfoMessage"] != null)
+    {
+        <div class="alert alert-info">
+            @TempData["InfoMessage"]
+        </div>
+    }
+    else
+    {
+        @foreach (var order in Model)
+        {
+            <ul>
+                @foreach (var item in order.Games)
+                {
+                    <li>
+                        @item.Title - @item.Price.ToString("C")
+                        @if (order.OrderStatus == "Processed")
+                        {
+                            <a asp-controller="Wishlist" asp-action="DownloadGameFile" class="btn btn-primary btn-sm">Download</a>
+                        }
+                    </li>
+
+                }
+            </ul>
+        }
+    }
+</div>
+

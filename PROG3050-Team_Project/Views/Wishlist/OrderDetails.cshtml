@@ -1,7 +1,9 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model PROG3050_Team_Project.Models.Cart
+@{
+}
+@model PROG3050_Team_Project.Models.Order
 <link rel="stylesheet" href="~/css/admin.css">
 @if (TempData["SuccessMessage"] != null)
 {
@@ -61,40 +63,24 @@
     </div>
 </nav>
 
+
 <div class="text-center">
-    <h1 class="display-4">Cart</h1>
-    @* Checking if model is null or if database is empty *@
-    @if (Model?.Games != null && Model.Games.Any())
-    {
-        <table>
-            <thead>
-                <tr>
-                    <th>Game Name</th>
-                    <th>Price</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var game in Model.Games)
-                {
-                    <tr>
-                        <td>@game.Title</td>
-                        <td>@game.Price.ToString("C")</td>
-                        <td>
-                            <a asp-action="RemoveFromCart" asp-route-memberId="@Model.MemberID" asp-route-gameId="@game.GameID">Remove</a>
-                        </td>
-                    </tr>
-                }
-                <tr>
-                    <td>Total Price</td>
-                    <td>@Model.TotalPrice</td>
-                </tr>
-            </tbody>
-        </table>
-        <a asp-action="Checkout" asp-controller="Wishlist" asp-route-memberId="@Model.MemberID" class="btn btn-primary">Proceed to Checkout</a>
-    }
-    else
-    {
-        <p>Your Cart is empty.</p>
-    }
+    <h1 class="display-4">Order Details</h1>
+
+    <div>
+        <p><strong>Order Date:</strong> @Model.OrderDate.ToShortDateString()</p>
+        <p><strong>Member:</strong> @Model.Member.FullName</p>
+        <p><strong>Status:</strong> @Model.OrderStatus</p>
+        <p><strong>Total Amount:</strong> $@Model.TotalAmount.ToString("0.00")</p>
+    </div>
+
+    <h4>Games in Order:</h4>
+    <ul>
+        @foreach (var game in Model.Games)
+        {
+            <li>@game.Title - $@game.Price.ToString("0.00")</li>
+        }
+    </ul>
 </div>
+
+

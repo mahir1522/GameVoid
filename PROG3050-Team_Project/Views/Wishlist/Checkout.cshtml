@@ -16,9 +16,6 @@
     </div>
 }
 
-
-<a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <!-- Logo and brand name -->
@@ -61,40 +58,42 @@
     </div>
 </nav>
 
+
 <div class="text-center">
-    <h1 class="display-4">Cart</h1>
-    @* Checking if model is null or if database is empty *@
-    @if (Model?.Games != null && Model.Games.Any())
-    {
-        <table>
-            <thead>
-                <tr>
-                    <th>Game Name</th>
-                    <th>Price</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var game in Model.Games)
+    <h1 class="display-4">Checkout</h1>
+
+    <form asp-action="SubmitCheckout" asp-controller="Wishlist" asp-route-memberId="@Model.MemberID" method="post">
+        <div>
+            <label for="CardHolderName">Cardholder Name:</label>
+            <input type="text" id="CardHolderName" name="CardHolderName" required />
+        </div>
+
+        <div>
+            <label for="CardNumber">Card Number:</label>
+            <input type="text" id="CardNumber" name="CardNumber" maxlength="16" required />
+        </div>
+
+        <div>
+            <label for="ExpirationMonth">Expiration Date:</label>
+            <select id="ExpirationMonth" name="ExpirationMonth" required>
+                @for (int month = 1; month <= 12; month++)
                 {
-                    <tr>
-                        <td>@game.Title</td>
-                        <td>@game.Price.ToString("C")</td>
-                        <td>
-                            <a asp-action="RemoveFromCart" asp-route-memberId="@Model.MemberID" asp-route-gameId="@game.GameID">Remove</a>
-                        </td>
-                    </tr>
+                    <option value="@month">@month.ToString("D2")</option>
                 }
-                <tr>
-                    <td>Total Price</td>
-                    <td>@Model.TotalPrice</td>
-                </tr>
-            </tbody>
-        </table>
-        <a asp-action="Checkout" asp-controller="Wishlist" asp-route-memberId="@Model.MemberID" class="btn btn-primary">Proceed to Checkout</a>
-    }
-    else
-    {
-        <p>Your Cart is empty.</p>
-    }
+            </select>
+            <select id="ExpirationYear" name="ExpirationYear" required>
+                @for (int year = DateTime.Now.Year; year <= DateTime.Now.Year + 10; year++)
+                {
+                    <option value="@year">@year</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <label for="CVC">CVC:</label>
+            <input type="text" id="CVC" name="CVC" maxlength="3" required />
+        </div>
+
+        <button type="submit">Complete Checkout</button>
+    </form>
 </div>

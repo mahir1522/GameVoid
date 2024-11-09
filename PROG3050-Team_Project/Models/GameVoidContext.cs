@@ -431,6 +431,10 @@ new Member
             modelBuilder.Entity<Cart>()
                 .HasMany(w => w.Games)
                 .WithMany(g => g.Carts);
+
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.Games)
+                .WithMany(g => g.Orders);
         }
     }
 }

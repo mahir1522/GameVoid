@@ -35,6 +35,25 @@ namespace PROG3050_Team_Project.Controllers
 
             return View(wishlist);
         }
+        public async Task<IActionResult> FriendList(int memberId, int friendId)
+        {
+            var Friend = _context.Members.FirstOrDefault(m => m.MemberID == friendId);
+            var member = _context.Members.FirstOrDefault(m => m.MemberID == memberId);
+            var allMembers = _context.Members.Where(m => m.MemberID != memberId).ToList();
+            var friendWishlist = await _context.WishLists
+                .Include(w => w.Games)
+                .FirstOrDefaultAsync(w => w.MemberID == friendId);
+
+            var model = new FriendsViewModel
+            {
+                CurrentMember = member,
+                Friend = Friend,
+                AllMembers = allMembers,
+                WishList = friendWishlist
+            };
+            
+            return View(model);
+        }
 
         // Add a game to the wishlist
         [HttpPost]
@@ -342,6 +361,101 @@ namespace PROG3050_Team_Project.Controllers
             return RedirectToAction("RegisteredEvent", new { memberId = memberId });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Checkout(int memberId)
+        {
+            var cart = await _context.Carts
+                .Include(w => w.Games)
+                .FirstOrDefaultAsync(w => w.MemberID == memberId);
+            return View(cart);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SubmitCheckout(int memberId, string CardHolderName, string CardNumber, int ExpirationMonth, int ExpirationYear, string CVC)
+        {
+            var cart = await _context.Carts
+                            .Include(w => w.Games)
+                            .FirstOrDefaultAsync(w => w.MemberID == memberId);
+
+            if (cart == null || !cart.Games.Any())
+            {
+                TempData["ErrorMessage"] = "Your cart is empty.";
+                return RedirectToAction("Checkout", new { memberId });
+            }
+
+            var order = new Order
+            {
+                MemberID = memberId,
+                Member = await _context.Members.FindAsync(memberId),
+                Games = cart.Games.ToList(),
+                TotalAmount = cart.Games.Sum(g => g.Price),
+                OrderDate = DateTime.Now,
+                OrderStatus = "Pending"
+            };
+
+            // Save the order to the database
+            _context.Orders.Add(order);
+
+            // Clear the wishlist after checkout
+            cart.Games.Clear();
+            _context.Carts.Update(cart);
+
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Your order has been successfully placed!";
+            return RedirectToAction("OrderDetails", new { orderId = order.OrderId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> OrderDetails(int orderId)
+        {
+            var order = await _context.Orders
+                .Include(o => o.Member)
+                .Include(o => o.Games)
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
+
+        public async Task<IActionResult> UserPurchases(int memberId)
+        {
+            var orders = await _context.Orders
+                .Include(o => o.Games)
+                    .ThenInclude(oi => oi.Orders)
+                .Where(o => o.MemberID == memberId)
+                .ToListAsync();
+
+            if (orders == null || !orders.Any())
+            {
+                TempData["InfoMessage"] = "No purchases found for this user.";
+            }
+
+            return View(orders);
+        }
+        public IActionResult DownloadGameFile()
+        {
+            // Define the path of the file to download (replace with your actual file logic if per game)
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "GameInfo.txt");
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                TempData["ErrorMessage"] = "File not found.";
+                return RedirectToAction("UserPurchases");  // Replace with the page you want to redirect to if the file is missing
+            }
+
+            // Set file name for download
+            var fileName = "GameInfo.txt";  // Customize based on the game, if needed
+
+            // Return the file as a download
+            return PhysicalFile(filePath, "application/octet-stream", fileName);
+        }
+
+        
     }
 }
 
