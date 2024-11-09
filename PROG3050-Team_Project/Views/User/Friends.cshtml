@@ -9,23 +9,15 @@
     <div class="game">GAME</div>
     <div class="void">VOID</div>
 </div>
+
 <div class="search-bar mb-4">
-    <form asp-action="SearchFriends" method="get" class="d-flex">
-        <input 
-            type="text" 
-            name="query" 
-            class="form-control me-2" 
-            placeholder="Search for friends..." 
-            required 
-        />
-        <input 
-            type="hidden" 
-            name="memberId" 
-            value="@Model.CurrentMember.MemberID" 
-        />
+    <form asp-action="SearchFriends" method="get">
+        <input type="text" name="query" class="form-control" placeholder="Search for friends by username..." required />
+        <input type="hidden" name="memberId" value="@Model.CurrentMember.MemberID" />
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
+
 
 <h3>Your Friends</h3>
 <div class="friend-list">
@@ -42,6 +34,12 @@
 
 <h4>All Members</h4>
 <div class="member-list">
+    @if (!Model.AllMembers.Any())
+    {
+        <li>No members found matching that username.</li>
+    }
+    else
+    { 
     @foreach (var member in Model.AllMembers)
     {
         <div class="member-item">
@@ -57,5 +55,6 @@
                 <span class="text-muted">(Already Friends)</span>
             }
         </div>
+    }
     }
 </div>
