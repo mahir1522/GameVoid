@@ -5,7 +5,7 @@
 }
 
 @model MemberGamesViewModel
-<link rel="stylesheet" href="~/css/user.css">
+<link rel="stylesheet" href="~/css/events.css">
 
 <div class="container-fluid">
     <div class="row">
@@ -59,25 +59,25 @@
                                     <p class="custom-card-text">@eventItem.Event.StartDate - @eventItem.Event.EndDate</p>
                                     <p class="custom-card-text">@eventItem.Event.Location</p>
                                     <p class="custom-card-text">@eventItem.Event.Description</p>
-                                    <p>
-                                        @if (isRegistered)
-                                        {
-                                            <button class="btn btn-secondary" disabled>Registered</button>
-                                        }
-                                        else
-                                        {
-                                            <form asp-action="RegisterForEvent" method="post">
-                                                <input type="hidden" name="memberId" value="@Model.member.MemberID" />
-                                                <input type="hidden" name="eventId" value="@eventItem.EventId" />
-                                                <button type="submit" class="btn btn-primary">Register</button>
-                                            </form>
-                                        }
-                                    </p>
-                                    <p></p>
                                 </div>
+                            </div>
+                            <div class="custom-card-footer">
+                                @if (isRegistered)
+                                {
+                                    <button class="btn btn-secondary" disabled>Registered</button>
+                                }
+                                else
+                                {
+                                    <form asp-action="RegisterForEvent" method="post">
+                                        <input type="hidden" name="memberId" value="@Model.member.MemberID" />
+                                        <input type="hidden" name="eventId" value="@eventItem.EventId" />
+                                        <button type="submit" class="btn btn-primary">Register</button>
+                                    </form>
+                                }
                             </div>
                         </div>
                     }
+
                 </div>
             </div>
         </div>
