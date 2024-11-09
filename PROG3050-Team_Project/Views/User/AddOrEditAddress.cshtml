@@ -12,7 +12,15 @@
         @TempData["ErrorMessage"]
     </div>
 }
+<link rel="stylesheet" href="~/css/profile.css">
+<div class="brand-logo">
+    <div class="game">GAME</div>
+    <div class="void">VOID</div>
+</div>
+<div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
 
+<h1>Address Information</h1>
+  <div class="profile-box">
 <form asp-action="AddOrEditAddress" method="post" class="mt-4">
     <input type="hidden" asp-for="AddressID" />
     <input type="hidden" asp-for="MemberID" />
@@ -53,11 +61,15 @@
         <label asp-for="DeliveryInstructions" class="form-label"></label>
         <textarea asp-for="DeliveryInstructions" class="form-control"></textarea>
     </div>
-    <div class="mb-3 form-check">
+    <div class="mb-3 form-check"> 
+        <div style="display: flex; justify-content: center;">
         <input type="checkbox" asp-for="IsShippingSameAsMailing" class="form-check-input" />
+        </div>
         <label asp-for="IsShippingSameAsMailing" class="form-check-label">Use as shipping address</label>
     </div>
 
     <button type="submit" class="btn btn-primary">Save Address</button>
     <a asp-action="Profile" asp-route-memberId="@Model.MemberID" class="btn btn-secondary ms-2">Back to Profile</a>
 </form>
+  </div>
+</div>

@@ -1,0 +1,241 @@
+body {
+    background-color: #242424; /* Main background color */
+    font-family: 'Quicksand', sans-serif;
+    color: white; /* Set default text color to white */
+    margin: 0;
+    padding: 0;
+}
+/* Sidebar Styles */
+.sidebar {
+    background-color: #2D2D2D; /* Custom background color */
+    height: 100vh; /* Full height of the viewport */
+    position: fixed; /* Fixed position */
+    left: 0; /* Align to the left */
+    top: 0; /* Align to the top */
+    width: 250px; /* Width of the sidebar */
+    padding: 20px; /* Padding inside the sidebar */
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
+}/* Brand Logo Positioning */
+.brand-logo {
+    position: absolute; /* Keep it absolute */
+    top: 20px; /* Distance from the top */
+    left: 20px; /* Distance from the left */
+    font-family: 'Quicksand', sans-serif; /* Font as specified */
+    font-weight: 700; /* Bold text */
+    display: flex; /* Use flexbox to align the items */
+    flex-direction: column; /* Stack the items vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+/* Style for GAME text */
+.brand-logo .game {
+    color: #DA00FE; /* Purple color from Figma */
+    font-size: 24px; /* Increased font size to match title */
+    font-weight: 700; /* Bold text */
+  
+    margin-bottom: -8px; /* Negative margin to bring VOID closer */
+}
+
+/* Style for VOID text */
+.brand-logo .void {
+    color: #A100ED; /* Different shade of purple */
+    font-size: 24px; /* Increased font size to match title */
+    font-weight: 700; /* Bold text */
+  
+    padding-left: 19px; /* Shift VOID slightly to the right */
+    transform: translateY(-8px); /* Fine-tune the vertical position */
+}/* Main Content Container */
+.main-content-container {
+    margin-left: 250px; /* Space for the sidebar */
+    padding: 20px; /* Equivalent to Bootstrap's p-4 */
+    width: calc(100% - 250px); /* Ensure the content takes the full width minus the sidebar */
+}
+
+/* Search Bar Styling */
+.search-bar {
+    display: flex; /* Flex layout for aligning items */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 16px; /* Space below the search bar */
+}
+
+/* Card Styles */
+.card {
+    background-color: #2D2D2D; /* Background color for the card */
+    border: none; /* Remove border */
+}
+
+/* Button Styles */
+.btn {
+    background-color: #DA00FE; /* Custom button color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px 20px; /* Padding for button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.btn:hover {
+    background-color: #A100ED; /* Darker purple on hover */
+}
+
+/* Adjusting grid layout for game cards */
+.row {
+    display: flex; /* Flexbox layout for the row */
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+.col-md-3 {
+    width: 25%; /* Each card takes up 25% of the row */
+    padding: 10px; /* Padding around cards */
+}
+
+.mb-4 {
+    margin-bottom: 16px; /* Space below elements */
+}
+
+/* Adjust rounded circle profile image */
+.rounded-circle {
+    border-radius: 50%; /* Ensure the image is circular */
+}
+/* Styles for rounded buttons */
+.btn.rounded {
+    border-radius: 40px; /* Make the button rounded */
+}
+
+/* Styles for the filter button */
+.filter-btn {
+    border-radius: 0; /* Keep the filter button with square corners */
+    background-color: #474747; /* Darker color for filter button */
+    color: white; /* Ensure text is white */
+}
+
+/* Filter button hover effect */
+.filter-btn:hover {
+    background-color: #5c5c5c; /* Darker shade on hover */
+}
+
+
+
+
+
+/* Custom Row Styling */
+.custom-row {
+    display: flex; /* Use flexbox for the row */
+    flex-wrap: wrap; /* Allow items to wrap onto the next line */
+    margin: -15px; /* Negative margin to offset padding */
+}
+
+/* Custom Column Styling */
+.custom-col {
+    flex: 0 0 25%; /* Set width to 25% */
+    max-width: 25%; /* Ensure max width is 25% */
+    padding: 15px; /* Padding around columns */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Custom Card Styling */
+.custom-card {
+    background-color: #2D2D2D; /* Card background color */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+    overflow: hidden; /* Ensure contents do not overflow */
+    height: 350px; /* Set a fixed height for the card */
+    display: flex; /* Use flexbox to align items */
+    flex-direction: column; /* Stack items vertically */
+}
+
+/* Custom Card Image */
+.custom-card-img {
+    width: 100%; /* Ensure image takes full width of card */
+    height: 200px; /* Set fixed height for the image */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+/* Custom Card Body */
+.custom-card-body {
+    padding: 16px; /* Padding inside the card body */
+    flex-grow: 1; /* Allow the body to grow and take available space */
+    display: flex; /* Use flexbox to align text */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center content vertically */
+    text-align: center; /* Center text */
+}
+
+/* Custom Card Title and Text */
+.custom-card-title {
+    font-size: 1.25rem; /* Adjust font size for title */
+    margin-bottom: 0.5rem; /* Space below title */
+}
+
+.custom-card-text {
+    margin-bottom: 1rem; /* Space below text */
+}
+
+/* Custom Button Styling */
+.custom-btn {
+    background-color: #DA00FE; /* Custom button color */
+    color: white; /* Button text color */
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners for button */
+    padding: 10px 20px; /* Padding for button */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.custom-btn:hover {
+    background-color: #A100ED; /* Darker purple on hover */
+}
+
+/* Custom Banner Card Styling */
+.custom-banner {
+    width: 100%; /* Full width of the container */
+    height: 300px; /* Set fixed height for the banner */
+    overflow: hidden; /* Ensure contents do not overflow */
+    position: relative; /* Position relative for absolute positioning of elements */
+    border-radius: 5%;
+}
+
+/* Custom Banner Image */
+.custom-banner-img {
+    width: 100%; /* Ensure image takes full width of the card */
+    height: 100%; /* Fill the height of the card */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+/* Custom Banner Body */
+.custom-banner-body {
+    position: absolute; /* Position the body on top of the image */
+    bottom: 10px; /* Position near the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust to center */
+    text-align: center; /* Center text */
+    width: 100%; /* Full width for button */
+    padding: 0 10px; /* Add padding */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better text visibility */
+    border-radius: 8px; /* Rounded corners */
+}
+/* Restrict table cell height and manage overflow */
+table td:nth-child(3) { /* Assuming the description column is the third column */
+    max-width: 200px; /* Adjust as necessary */
+    max-height: 80px; /* Adjust height as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+/* Event Description Styling */
+.event-description {
+    max-width: 200px; /* Adjust as necessary */
+    max-height: 80px; /* Adjust as necessary */
+    overflow: hidden;
+    font-size: calc(1rem - 0.1vw); /* Dynamically adjust font size */
+    line-height: 1.2; /* Ensure consistent text spacing */
+    display: -webkit-box; /* Enables text overflow clipping */
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; /* Limits to 3 lines */
+    white-space: normal; /* Allows wrapping */
+}.custom-card-footer {
+    margin-top: 10px; /* Add space between the card and footer */
+    text-align: center; /* Center-align the button if needed */
+}
