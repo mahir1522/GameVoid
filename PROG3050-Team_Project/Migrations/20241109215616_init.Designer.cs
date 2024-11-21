@@ -12,7 +12,7 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    [Migration("20241107045907_init")]
+    [Migration("20241109215616_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -38,6 +38,21 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasIndex("GamesGameID");
 
                     b.ToTable("CartGame");
+                });
+
+            modelBuilder.Entity("GameOrder", b =>
+                {
+                    b.Property<int>("GamesGameID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrdersOrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GamesGameID", "OrdersOrderId");
+
+                    b.HasIndex("OrdersOrderId");
+
+                    b.ToTable("GameOrder");
                 });
 
             modelBuilder.Entity("GameWishList", b =>
@@ -285,9 +300,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.Property<bool>("IsDownloadable")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Platform")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -306,8 +318,6 @@ namespace PROG3050_Team_Project.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GameID");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Games");
 
@@ -765,6 +775,21 @@ namespace PROG3050_Team_Project.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("GameOrder", b =>
+                {
+                    b.HasOne("PROG3050_Team_Project.Models.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GamesGameID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PROG3050_Team_Project.Models.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("GameWishList", b =>
                 {
                     b.HasOne("PROG3050_Team_Project.Models.Game", null)
@@ -807,13 +832,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasOne("PROG3050_Team_Project.Models.Member", null)
                         .WithMany("RegisteredEvents")
                         .HasForeignKey("MemberID");
-                });
-
-            modelBuilder.Entity("PROG3050_Team_Project.Models.Game", b =>
-                {
-                    b.HasOne("PROG3050_Team_Project.Models.Order", null)
-                        .WithMany("Games")
-                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Member", b =>
@@ -903,11 +921,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("RegisteredEvents");
 
                     b.Navigation("WishList");
-                });
-
-            modelBuilder.Entity("PROG3050_Team_Project.Models.Order", b =>
-                {
-                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }
