@@ -26,7 +26,9 @@
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
    
     <h2>User Profile</h2> 
-    <div class="profile-box"> <form asp-action="Profile" enctype="multipart/form-data" method="post">
+    <div class="profile-box"> 
+        
+        <form asp-action="Profile" enctype="multipart/form-data" method="post">
 
         <input type="hidden" name="MemberID" value="@Model.MemberID" />
         <div class="mb-3">
@@ -60,8 +62,8 @@
             <label for="Gender" class="form-label">Gender</label>
             <select class="form-select" id="Gender" name="Gender">
                 <option value="Male" selected="@(Model.Gender == "Male")">Male</option>
-                <option value="Male" selected="@(Model.Gender == "Female")">Female</option>
-                <option value="Male" selected="@(Model.Gender == "Other")">Other</option>
+                <option value="Female" selected="@(Model.Gender == "Female")">Female</option>
+                <option value="Other" selected="@(Model.Gender == "Other")">Other</option>
             </select>
         </div>
 
@@ -87,6 +89,56 @@
                 <img src="@Model.profileImage" alt="Profile Image" class="rounded-circle" width="50" height="50" />
             }
         </div>
+
+
+
+        <hr />
+        
+        <h2>Preferences</h2>
+
+
+
+        <div class="mb-3">
+            <label for="platforms" class="form-label">Favorite Platforms:</label>
+            <select id="platforms" name="FavoritePlatforms" class="form-select">
+                    <option value="PC" selected="@(Model.FavoritePlatforms.Contains("PC"))">PC</option>
+                    <option value="PlayStation" selected="@(Model.FavoritePlatforms.Contains("PlayStation"))">PlayStation</option>
+                    <option value="Xbox" selected="@(Model.FavoritePlatforms.Contains("Xbox"))">Xbox</option>
+                    <option value="Nintendo Switch" selected="@(Model.FavoritePlatforms.Contains("Nintendo Switch"))">Nintendo Switch</option>
+                    <option value="Mobile" selected="@(Model.FavoritePlatforms.Contains("Mobile"))">Mobile</option>
+
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="categories" class="form-label">Favorite Game Categories:</label>
+            <select id="categories" name="FavoriteGameCategories" class="form-select">
+                    <option value="RPG" selected="@(Model.FavoriteGameCategories.Contains("RPG"))">RPG</option>
+                    <option value="Action-Adventure" selected="@(Model.FavoriteGameCategories.Contains("Action-Adventure"))">Action-Adventure</option>
+                    <option value="Shooter" selected="@(Model.FavoriteGameCategories.Contains("Shooter"))">Shooter</option>
+                    <option value="Sandbox" selected="@(Model.FavoriteGameCategories.Contains("Sandbox"))">Sandbox</option>
+                    <option value="Party" selected="@(Model.FavoriteGameCategories.Contains("Party"))">Party</option>
+                    <option value="Adventure" selected="@(Model.FavoriteGameCategories.Contains("Adventure"))">Adventure</option>
+                    <option value="Battle Royale" selected="@(Model.FavoriteGameCategories.Contains("Battle Royale"))">Battle Royale</option>
+               
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="languages" class="form-label">Language Preferences:</label>
+            <select id="languages" name="LanguagePreferences" class="form-select">
+                    <option value="English" selected="@(Model.PreferLanguage.Contains("English"))">English</option>
+                    <option value="French" selected="@(Model.PreferLanguage.Contains("French"))">French</option>
+                    <option value="Spanish" selected="@(Model.PreferLanguage.Contains("Spanish"))">Spanish</option>
+               
+            </select>
+        </div>
+
+            <hr />
+
+
+
+
 
         <button type="submit" class="btn btn-primary">Save</button>
     </form>

@@ -69,17 +69,33 @@
         </div>
         <br />
 
-        <div class="form-group">
-            <label asp-for="Platform" class="form-label">Platform</label>
-            <input asp-for="Platform" class="form-control" placeholder="Enter Platform" required />
-        </div>
-        <br />
+            <div class="form-group">
+                <label asp-for="Platform" class="form-label">Platform</label>
+                <select asp-for="Platform" class="form-control" required>
+                    <option value="" disabled selected>Select a Platform</option>
+                    <option value="PC">PC</option>
+                    <option value="PlayStation">PlayStation</option>
+                    <option value="Xbox">Xbox</option>
+                    <option value="Nintendo Switch">Nintendo Switch</option>
+                    <option value="Mobile">Mobile</option>
+                </select>
+            </div>
+            <br />
 
-        <div class="form-group">
-            <label asp-for="Category" class="form-label">Category</label>
-            <input asp-for="Category" class="form-control" placeholder="Enter Category" required />
-        </div>
-        <br />
+            <div class="form-group">
+                <label asp-for="Category" class="form-label">Category</label>
+                <select asp-for="Category" class="form-control" required>
+                    <option value="" disabled selected>Select a Category</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Action-Adventure">Action-Adventure</option>
+                    <option value="Shooter">Shooter</option>
+                    <option value="Sandbox">Sandbox</option>
+                    <option value="Party">Party</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Battle Royale">Battle Royale</option>
+                </select>
+            </div>
+            <br />
 
         <div class="form-group">
             <label asp-for="ReleaseDate" class="form-label">Release Date</label>
