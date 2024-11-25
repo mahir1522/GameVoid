@@ -12,8 +12,8 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    [Migration("20241107045907_init")]
-    partial class init
+    [Migration("20241125193431_reviewsystem")]
+    partial class reviewsystem
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,21 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasIndex("GamesGameID");
 
                     b.ToTable("CartGame");
+                });
+
+            modelBuilder.Entity("GameOrder", b =>
+                {
+                    b.Property<int>("GamesGameID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrdersOrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GamesGameID", "OrdersOrderId");
+
+                    b.HasIndex("OrdersOrderId");
+
+                    b.ToTable("GameOrder");
                 });
 
             modelBuilder.Entity("GameWishList", b =>
@@ -129,18 +144,6 @@ namespace PROG3050_Team_Project.Migrations
                         .IsUnique();
 
                     b.ToTable("Carts");
-
-                    b.HasData(
-                        new
-                        {
-                            CartId = 1,
-                            MemberID = 1
-                        },
-                        new
-                        {
-                            CartId = 2,
-                            MemberID = 2
-                        });
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Event", b =>
@@ -285,9 +288,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.Property<bool>("IsDownloadable")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Platform")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -306,8 +306,6 @@ namespace PROG3050_Team_Project.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GameID");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Games");
 
@@ -719,6 +717,167 @@ namespace PROG3050_Team_Project.Migrations
                     b.ToTable("Registration");
                 });
 
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Review", b =>
+                {
+                    b.Property<int?>("ReviewID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("ReviewID"));
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReviewStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("Not Submitted");
+
+                    b.Property<string>("ReviewText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReviewID");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("MemberId");
+
+                    b.ToTable("Review");
+
+                    b.HasData(
+                        new
+                        {
+                            ReviewID = 1,
+                            GameId = 1,
+                            MemberId = 1,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2021, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Approved",
+                            ReviewText = "An incredible adventure that defines the genre."
+                        },
+                        new
+                        {
+                            ReviewID = 2,
+                            GameId = 1,
+                            MemberId = 2,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Approved",
+                            ReviewText = "A bit outdated, but still a classic."
+                        },
+                        new
+                        {
+                            ReviewID = 3,
+                            GameId = 1,
+                            MemberId = 3,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2023, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewText = "Challenging gameplay but rewarding!"
+                        },
+                        new
+                        {
+                            ReviewID = 4,
+                            GameId = 2,
+                            MemberId = 1,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Approved",
+                            ReviewText = "Timeless fun! The levels are brilliantly designed."
+                        },
+                        new
+                        {
+                            ReviewID = 5,
+                            GameId = 2,
+                            MemberId = 2,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2023, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Approved",
+                            ReviewText = "Could use better graphics, but the gameplay is top-notch."
+                        },
+                        new
+                        {
+                            ReviewID = 6,
+                            GameId = 2,
+                            MemberId = 4,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewText = "Enjoyable multiplayer mode, but the campaign is too short."
+                        },
+                        new
+                        {
+                            ReviewID = 7,
+                            GameId = 3,
+                            MemberId = 2,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Approved",
+                            ReviewText = "Creative and endlessly entertaining. Highly recommended!"
+                        },
+                        new
+                        {
+                            ReviewID = 8,
+                            GameId = 3,
+                            MemberId = 3,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2023, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Rejected",
+                            ReviewText = "I had high expectations, but the story was lackluster."
+                        },
+                        new
+                        {
+                            ReviewID = 9,
+                            GameId = 3,
+                            MemberId = 4,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Approved",
+                            ReviewText = "Visually stunning with a memorable soundtrack."
+                        },
+                        new
+                        {
+                            ReviewID = 10,
+                            GameId = 4,
+                            MemberId = 1,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Approved",
+                            ReviewText = "A refreshing take on the genre with innovative mechanics."
+                        },
+                        new
+                        {
+                            ReviewID = 11,
+                            GameId = 4,
+                            MemberId = 5,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Approved",
+                            ReviewText = "Repetitive gameplay but overall enjoyable."
+                        },
+                        new
+                        {
+                            ReviewID = 12,
+                            GameId = 4,
+                            MemberId = 6,
+                            Rating = 0,
+                            ReviewDate = new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReviewStatus = "Pending",
+                            ReviewText = "Takes too long to get interesting, but worth the patience."
+                        });
+                });
+
             modelBuilder.Entity("PROG3050_Team_Project.Models.WishList", b =>
                 {
                     b.Property<int>("WishListId")
@@ -747,6 +906,46 @@ namespace PROG3050_Team_Project.Migrations
                         {
                             WishListId = 2,
                             MemberID = 2
+                        },
+                        new
+                        {
+                            WishListId = 3,
+                            MemberID = 3
+                        },
+                        new
+                        {
+                            WishListId = 4,
+                            MemberID = 4
+                        },
+                        new
+                        {
+                            WishListId = 5,
+                            MemberID = 5
+                        },
+                        new
+                        {
+                            WishListId = 6,
+                            MemberID = 6
+                        },
+                        new
+                        {
+                            WishListId = 7,
+                            MemberID = 7
+                        },
+                        new
+                        {
+                            WishListId = 8,
+                            MemberID = 8
+                        },
+                        new
+                        {
+                            WishListId = 9,
+                            MemberID = 9
+                        },
+                        new
+                        {
+                            WishListId = 10,
+                            MemberID = 10
                         });
                 });
 
@@ -761,6 +960,21 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasOne("PROG3050_Team_Project.Models.Game", null)
                         .WithMany()
                         .HasForeignKey("GamesGameID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GameOrder", b =>
+                {
+                    b.HasOne("PROG3050_Team_Project.Models.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GamesGameID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PROG3050_Team_Project.Models.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -807,13 +1021,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasOne("PROG3050_Team_Project.Models.Member", null)
                         .WithMany("RegisteredEvents")
                         .HasForeignKey("MemberID");
-                });
-
-            modelBuilder.Entity("PROG3050_Team_Project.Models.Game", b =>
-                {
-                    b.HasOne("PROG3050_Team_Project.Models.Order", null)
-                        .WithMany("Games")
-                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Member", b =>
@@ -872,6 +1079,25 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("Member");
                 });
 
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Review", b =>
+                {
+                    b.HasOne("PROG3050_Team_Project.Models.Game", "Game")
+                        .WithMany("Reviews")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PROG3050_Team_Project.Models.Member", "Member")
+                        .WithMany("Reviews")
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("Member");
+                });
+
             modelBuilder.Entity("PROG3050_Team_Project.Models.WishList", b =>
                 {
                     b.HasOne("PROG3050_Team_Project.Models.Member", "Member")
@@ -888,6 +1114,11 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("MemberEvents");
                 });
 
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Game", b =>
+                {
+                    b.Navigation("Reviews");
+                });
+
             modelBuilder.Entity("PROG3050_Team_Project.Models.Member", b =>
                 {
                     b.Navigation("Addresses");
@@ -902,12 +1133,9 @@ namespace PROG3050_Team_Project.Migrations
 
                     b.Navigation("RegisteredEvents");
 
-                    b.Navigation("WishList");
-                });
+                    b.Navigation("Reviews");
 
-            modelBuilder.Entity("PROG3050_Team_Project.Models.Order", b =>
-                {
-                    b.Navigation("Games");
+                    b.Navigation("WishList");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,11 +8,32 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROG3050_Team_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class reviewsystem : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Games",
+                columns: table => new
+                {
+                    GameID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Platform = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IsDownloadable = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Games", x => x.GameID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Members",
                 columns: table => new
@@ -136,6 +157,36 @@ namespace PROG3050_Team_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Review",
+                columns: table => new
+                {
+                    ReviewID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GameId = table.Column<int>(type: "int", nullable: false),
+                    MemberId = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    ReviewText = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReviewStatus = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "Not Submitted"),
+                    ReviewDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Review", x => x.ReviewID);
+                    table.ForeignKey(
+                        name: "FK_Review_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "GameID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Review_Members_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "Members",
+                        principalColumn: "MemberID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "WishLists",
                 columns: table => new
                 {
@@ -151,6 +202,30 @@ namespace PROG3050_Team_Project.Migrations
                         column: x => x.MemberID,
                         principalTable: "Members",
                         principalColumn: "MemberID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartGame",
+                columns: table => new
+                {
+                    CartsCartId = table.Column<int>(type: "int", nullable: false),
+                    GamesGameID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartGame", x => new { x.CartsCartId, x.GamesGameID });
+                    table.ForeignKey(
+                        name: "FK_CartGame_Carts_CartsCartId",
+                        column: x => x.CartsCartId,
+                        principalTable: "Carts",
+                        principalColumn: "CartId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartGame_Games_GamesGameID",
+                        column: x => x.GamesGameID,
+                        principalTable: "Games",
+                        principalColumn: "GameID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -206,53 +281,26 @@ namespace PROG3050_Team_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Games",
+                name: "GameOrder",
                 columns: table => new
                 {
-                    GameID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Platform = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rating = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    IsDownloadable = table.Column<bool>(type: "bit", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: true)
+                    GamesGameID = table.Column<int>(type: "int", nullable: false),
+                    OrdersOrderId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Games", x => x.GameID);
+                    table.PrimaryKey("PK_GameOrder", x => new { x.GamesGameID, x.OrdersOrderId });
                     table.ForeignKey(
-                        name: "FK_Games_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "OrderId");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CartGame",
-                columns: table => new
-                {
-                    CartsCartId = table.Column<int>(type: "int", nullable: false),
-                    GamesGameID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartGame", x => new { x.CartsCartId, x.GamesGameID });
-                    table.ForeignKey(
-                        name: "FK_CartGame_Carts_CartsCartId",
-                        column: x => x.CartsCartId,
-                        principalTable: "Carts",
-                        principalColumn: "CartId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CartGame_Games_GamesGameID",
+                        name: "FK_GameOrder_Games_GamesGameID",
                         column: x => x.GamesGameID,
                         principalTable: "Games",
                         principalColumn: "GameID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GameOrder_Orders_OrdersOrderId",
+                        column: x => x.OrdersOrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -298,19 +346,19 @@ namespace PROG3050_Team_Project.Migrations
 
             migrationBuilder.InsertData(
                 table: "Games",
-                columns: new[] { "GameID", "Category", "Description", "ImageUrl", "IsDownloadable", "OrderId", "Platform", "Price", "Rating", "ReleaseDate", "Title" },
+                columns: new[] { "GameID", "Category", "Description", "ImageUrl", "IsDownloadable", "Platform", "Price", "Rating", "ReleaseDate", "Title" },
                 values: new object[,]
                 {
-                    { 1, "RPG", "An open-world, action-adventure story set in Night City.", "/img/default.jpg", true, null, "PC", 59.99m, 4.2m, new DateTime(2020, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cyberpunk 2077" },
-                    { 2, "RPG", "A story-driven, open-world RPG set in a visually stunning fantasy universe.", "/img/default.jpg", true, null, "Xbox", 39.99m, 4.9m, new DateTime(2015, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Witcher 3: Wild Hunt" },
-                    { 3, "Action-Adventure", "An epic tale of life in America’s unforgiving heartland.", "/img/default.jpg", true, null, "PlayStation", 49.99m, 4.8m, new DateTime(2018, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "Red Dead Redemption 2" },
-                    { 4, "Shooter", "Master Chief returns to confront the most ruthless foe he’s ever faced.", "/img/default.jpg", true, null, "Xbox", 59.99m, 4.4m, new DateTime(2021, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Halo Infinite" },
-                    { 5, "Sandbox", "A game about placing blocks and going on adventures.", "/img/default.jpg", true, null, "PC", 26.95m, 4.7m, new DateTime(2011, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Minecraft" },
-                    { 6, "Party", "A multiplayer game where Crewmates work together to complete tasks while avoiding the Impostor.", "/img/default.jpg", true, null, "Mobile", 4.99m, 4.3m, new DateTime(2018, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Among Us" },
-                    { 7, "Adventure", "A game that reinvents the boundaries of an open-world adventure.", "/img/default.jpg", false, null, "Nintendo Switch", 59.99m, 4.9m, new DateTime(2017, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Legend of Zelda: Breath of the Wild" },
-                    { 8, "Battle Royale", "A battle royale game where players fight to be the last one standing.", "/img/default.jpg", true, null, "PC", 0.00m, 4.5m, new DateTime(2017, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fortnite" },
-                    { 9, "Action-Adventure", "An open-world game that allows players to explore Los Santos and complete missions.", "/img/default.jpg", true, null, "PC", 29.99m, 4.6m, new DateTime(2013, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Grand Theft Auto V" },
-                    { 10, "Shooter", "A team-based shooter set on a near-future Earth.", "/img/default.jpg", true, null, "PlayStation", 39.99m, 4.4m, new DateTime(2016, 5, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Overwatch" }
+                    { 1, "RPG", "An open-world, action-adventure story set in Night City.", "/img/default.jpg", true, "PC", 59.99m, 4.2m, new DateTime(2020, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cyberpunk 2077" },
+                    { 2, "RPG", "A story-driven, open-world RPG set in a visually stunning fantasy universe.", "/img/default.jpg", true, "Xbox", 39.99m, 4.9m, new DateTime(2015, 5, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Witcher 3: Wild Hunt" },
+                    { 3, "Action-Adventure", "An epic tale of life in America’s unforgiving heartland.", "/img/default.jpg", true, "PlayStation", 49.99m, 4.8m, new DateTime(2018, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "Red Dead Redemption 2" },
+                    { 4, "Shooter", "Master Chief returns to confront the most ruthless foe he’s ever faced.", "/img/default.jpg", true, "Xbox", 59.99m, 4.4m, new DateTime(2021, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Halo Infinite" },
+                    { 5, "Sandbox", "A game about placing blocks and going on adventures.", "/img/default.jpg", true, "PC", 26.95m, 4.7m, new DateTime(2011, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Minecraft" },
+                    { 6, "Party", "A multiplayer game where Crewmates work together to complete tasks while avoiding the Impostor.", "/img/default.jpg", true, "Mobile", 4.99m, 4.3m, new DateTime(2018, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Among Us" },
+                    { 7, "Adventure", "A game that reinvents the boundaries of an open-world adventure.", "/img/default.jpg", false, "Nintendo Switch", 59.99m, 4.9m, new DateTime(2017, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Legend of Zelda: Breath of the Wild" },
+                    { 8, "Battle Royale", "A battle royale game where players fight to be the last one standing.", "/img/default.jpg", true, "PC", 0.00m, 4.5m, new DateTime(2017, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fortnite" },
+                    { 9, "Action-Adventure", "An open-world game that allows players to explore Los Santos and complete missions.", "/img/default.jpg", true, "PC", 29.99m, 4.6m, new DateTime(2013, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "Grand Theft Auto V" },
+                    { 10, "Shooter", "A team-based shooter set on a near-future Earth.", "/img/default.jpg", true, "PlayStation", 39.99m, 4.4m, new DateTime(2016, 5, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "Overwatch" }
                 });
 
             migrationBuilder.InsertData(
@@ -331,12 +379,22 @@ namespace PROG3050_Team_Project.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Carts",
-                columns: new[] { "CartId", "MemberID" },
+                table: "Review",
+                columns: new[] { "ReviewID", "GameId", "MemberId", "Rating", "ReviewDate", "ReviewStatus", "ReviewText" },
                 values: new object[,]
                 {
-                    { 1, 1 },
-                    { 2, 2 }
+                    { 1, 1, 1, 0, new DateTime(2021, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Approved", "An incredible adventure that defines the genre." },
+                    { 2, 1, 2, 0, new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Approved", "A bit outdated, but still a classic." },
+                    { 3, 1, 3, 0, new DateTime(2023, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "Challenging gameplay but rewarding!" },
+                    { 4, 2, 1, 0, new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Approved", "Timeless fun! The levels are brilliantly designed." },
+                    { 5, 2, 2, 0, new DateTime(2023, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Approved", "Could use better graphics, but the gameplay is top-notch." },
+                    { 6, 2, 4, 0, new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "Enjoyable multiplayer mode, but the campaign is too short." },
+                    { 7, 3, 2, 0, new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Approved", "Creative and endlessly entertaining. Highly recommended!" },
+                    { 8, 3, 3, 0, new DateTime(2023, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rejected", "I had high expectations, but the story was lackluster." },
+                    { 9, 3, 4, 0, new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Approved", "Visually stunning with a memorable soundtrack." },
+                    { 10, 4, 1, 0, new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Approved", "A refreshing take on the genre with innovative mechanics." },
+                    { 11, 4, 5, 0, new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Approved", "Repetitive gameplay but overall enjoyable." },
+                    { 12, 4, 6, 0, new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pending", "Takes too long to get interesting, but worth the patience." }
                 });
 
             migrationBuilder.InsertData(
@@ -345,7 +403,15 @@ namespace PROG3050_Team_Project.Migrations
                 values: new object[,]
                 {
                     { 1, 1 },
-                    { 2, 2 }
+                    { 2, 2 },
+                    { 3, 3 },
+                    { 4, 4 },
+                    { 5, 5 },
+                    { 6, 6 },
+                    { 7, 7 },
+                    { 8, 8 },
+                    { 9, 9 },
+                    { 10, 10 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -370,9 +436,9 @@ namespace PROG3050_Team_Project.Migrations
                 column: "MemberID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Games_OrderId",
-                table: "Games",
-                column: "OrderId");
+                name: "IX_GameOrder_OrdersOrderId",
+                table: "GameOrder",
+                column: "OrdersOrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameWishList_WishListsWishListId",
@@ -405,6 +471,16 @@ namespace PROG3050_Team_Project.Migrations
                 column: "MemberId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Review_GameId",
+                table: "Review",
+                column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Review_MemberId",
+                table: "Review",
+                column: "MemberId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_WishLists_MemberID",
                 table: "WishLists",
                 column: "MemberID",
@@ -421,6 +497,9 @@ namespace PROG3050_Team_Project.Migrations
                 name: "CartGame");
 
             migrationBuilder.DropTable(
+                name: "GameOrder");
+
+            migrationBuilder.DropTable(
                 name: "GameWishList");
 
             migrationBuilder.DropTable(
@@ -430,10 +509,13 @@ namespace PROG3050_Team_Project.Migrations
                 name: "Registration");
 
             migrationBuilder.DropTable(
+                name: "Review");
+
+            migrationBuilder.DropTable(
                 name: "Carts");
 
             migrationBuilder.DropTable(
-                name: "Games");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "WishLists");
@@ -442,7 +524,7 @@ namespace PROG3050_Team_Project.Migrations
                 name: "Events");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Games");
 
             migrationBuilder.DropTable(
                 name: "Members");

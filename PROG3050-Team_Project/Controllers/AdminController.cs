@@ -226,5 +226,43 @@ namespace PROG3050_Team_Project.Controllers
 
             return RedirectToAction("Order", "Admin");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Review(int gameId)
+        {
+            var game = await _context.Games
+            .Include(g => g.Reviews)
+            .FirstOrDefaultAsync(g => g.GameID == gameId);
+
+            if (game == null) return NotFound();
+
+
+            var viewModel = new GameReviewViewModel
+            {
+                game = game,
+                reviews = game.Reviews.ToList(),
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ApproveReview(int reviewId)
+        {
+            var review = await _context.Review.FindAsync(reviewId);
+
+            if (review == null)
+            {
+                return NotFound();
+            }
+
+            // Update the review status to Approved
+            review.ReviewStatus = "Approved";
+
+            _context.Review.Update(review);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Review", new{ gameId = review.GameId });
+        }
+
+
     }
 }

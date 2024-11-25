@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model IEnumerable<PROG3050_Team_Project.Models.Order>
+@model PROG3050_Team_Project.Models.GameReviewViewModel
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -60,56 +60,43 @@
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <h1 class="display-4">Events</h1>
 
- @* Checking if model is null or if database is empty *@
-        @if (Model == null || !Model.Any())
-        {
-            <p>No events available.</p>
-        }
-        else
-        {
+    @* Checking if model is null or if database is empty *@
+    @if (Model.reviews == null || !Model.reviews.Any())
+    {
+        <p>No events available.</p>
+    }
+    else
+    {
 
-            <table class="table">
-                <thead>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Reviews</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var review in Model.reviews)
+                {
                     <tr>
-                        <th>OrderDate</th>
-                        <th>Total Amount</th>
-                        <th>Games</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var order in Model)
-                    {
-                        <tr>
-                        <td>@order.OrderDate</td>
-                        <td>@order.TotalAmount</td>
+                        <td>@review.ReviewText</td>
                         <td>
-                            <ul>
-                                @foreach (var item in order.Games)
-                                {
-                                    <li>
-                                        @item.Title - @item.Price.ToString("C")
-                                    </li>
-                                }
-                            </ul>
-                        </td>
-                        <td>
-                            @if (order.OrderStatus == "Pending")
+                            @if (review.ReviewStatus == "Pending")
                             {
-                                <p>Pending</p>
-                                <form asp-action="ProcessedOrder" asp-controller="Admin" asp-route-orderId="@order.OrderId" method="post">
-                                    <button class="btn btn-primary btn-sm" type="submit">Processed</button>
+                                <form asp-action="ApproveReview" asp-controller="Admin" asp-route-reviewId=@review.ReviewID method="post">
+                                    <p>Pending</p>
+                                    <button class="btn btn-primary btn-sm" asp-action="ApproveReview" asp-controller="Admin" asp-route-reviewId=@review.ReviewID type="submit">Processed</button>
                                 </form>
                             }
                             else
                             {
-                                <button disabled>Processed</button>
+                                <button disabled>Approved</button>
                             }
                         </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
+                    </tr>                                
+                }
+            </tbody>
+        </table>
+    }
 </div>
 
