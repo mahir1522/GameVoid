@@ -23,6 +23,13 @@ namespace PROG3050_Team_Project.Controllers
             var eve = _context.Events.ToList();
             return View(games);
         }
+
+
+
+        public IActionResult Reports()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult Event()
         {
@@ -187,6 +194,8 @@ namespace PROG3050_Team_Project.Controllers
 
             return RedirectToAction("Index", "Admin");
         }
+
+
         
         public async Task<IActionResult> Order()
         {

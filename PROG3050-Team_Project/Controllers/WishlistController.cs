@@ -94,57 +94,9 @@ namespace PROG3050_Team_Project.Controllers
             TempData["SuccessMessage"] = "Game added to Wishlist successfully.";
             return RedirectToAction("List", new { memberId });
 
-            //var wishlist = await _context.WishLists
-            //    .Include(w => w.Games)
-            //    .FirstOrDefaultAsync(w => w.MemberID == memberId);
-
-            //if (wishlist == null)
-            //{
-            //    wishlist = new WishList { MemberID = memberId };
-            //    _context.WishLists.Add(wishlist);
-            //}
-
-            //var game = await _context.Games.FindAsync(gameId);
-            //if (game != null && !wishlist.Games.Contains(game))
-            //{
-            //    wishlist.AddToWishList(game);
-            //    await _context.SaveChangesAsync();
-            //    TempData["SuccessMessage"] = "Game has been successfully added to your wishlist.";
-            //}
-            //else
-            //{
-            //    TempData["ErrorMessage"] = "Game could not be added to the wishlist.";
-            //}
-
-            //return RedirectToAction("List", "Wishlist");
         }
 
-        //public async Task<IActionResult> AddToWishlist(int memberId, int gameId)
-        //{
-        //    var wishlist = await _context.WishLists
-        //        .Include(w => w.Games)
-        //        .FirstOrDefaultAsync(w => w.MemberID == memberId);
-
-        //    if (wishlist == null)
-        //    {
-        //        wishlist = new WishList { MemberID = memberId };
-        //        _context.WishLists.Add(wishlist);
-        //    }
-
-        //    var game = await _context.Games.FindAsync(gameId);
-        //    if (game != null && !wishlist.Games.Contains(game))
-        //    {
-        //        wishlist.AddToWishList(game);
-        //        await _context.SaveChangesAsync();
-        //        TempData["SuccessMessage"] = "Game added to wishlist successfully.";
-        //    }
-        //    else
-        //    {
-        //        TempData["ErrorMessage"] = "Game could not be added to wishlist.";
-        //    }
-
-        //    return RedirectToAction("Index", new { memberId });
-        //}
+       
 
         // Remove a game from the wishlist
         public async Task<IActionResult> RemoveFromWishlist(int memberId, int gameId)
@@ -390,7 +342,7 @@ namespace PROG3050_Team_Project.Controllers
                 Games = cart.Games.ToList(),
                 TotalAmount = cart.Games.Sum(g => g.Price),
                 OrderDate = DateTime.Now,
-                OrderStatus = "Pending"
+                OrderStatus = "Processed"
             };
 
             // Save the order to the database
@@ -437,25 +389,6 @@ namespace PROG3050_Team_Project.Controllers
 
             return View(orders);
         }
-        public IActionResult DownloadGameFile()
-        {
-            // Define the path of the file to download (replace with your actual file logic if per game)
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "GameInfo.txt");
-
-            if (!System.IO.File.Exists(filePath))
-            {
-                TempData["ErrorMessage"] = "File not found.";
-                return RedirectToAction("UserPurchases");  // Replace with the page you want to redirect to if the file is missing
-            }
-
-            // Set file name for download
-            var fileName = "GameInfo.txt";  // Customize based on the game, if needed
-
-            // Return the file as a download
-            return PhysicalFile(filePath, "application/octet-stream", fileName);
-        }
-
-        
     }
 }
 
