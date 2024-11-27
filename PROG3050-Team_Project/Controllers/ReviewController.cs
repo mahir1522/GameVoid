@@ -153,7 +153,6 @@ namespace PROG3050_Team_Project.Controllers
             _context.Ratings.Update(existingsrating);
             await _context.SaveChangesAsync();
 
-            TempData["Message"] = "Your rating has been submitted.";
             return RedirectToAction("Ratings", "Review", new { gameId = gameId, memberId = memberId });
         }
 
