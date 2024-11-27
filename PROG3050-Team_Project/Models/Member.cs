@@ -26,6 +26,9 @@ namespace PROG3050_Team_Project.Models
 
         public string? Gender { get; set; } = String.Empty;
 
+        [Required]
+        [DataType(DataType.Date)]
+        [FutureDateValidation(ErrorMessage = "Birthdate cannot be in the future.")]
         public DateTime? BirthDate { get; set; } = DateTime.Now;
 
         public bool? WantsPromotions { get; set; } = false;

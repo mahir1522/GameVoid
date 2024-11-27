@@ -17,7 +17,7 @@ namespace PROG3050_Team_Project.Models
         public DbSet<Cart> Carts { get; set; }
         public DbSet<MemberEvent> MemberEvents { get; set; }
         public DbSet<Review> Review { get; set; }
-
+        public DbSet<Ratings> Ratings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -532,6 +532,79 @@ namespace PROG3050_Team_Project.Models
                     MemberID = 10 // Foreign key linking to the seeded Member
                 }
 
+            );
+            modelBuilder.Entity<Ratings>().HasData(
+                new Ratings
+                {
+                    RatingId = 1,
+                    GameId = 1,
+                    Rating = 4,
+                    MemberId = 1
+
+                },
+                new Ratings
+                {
+                    RatingId = 2,
+                    GameId = 1,
+                    Rating = 5,
+                    MemberId = 2
+                },
+                new Ratings
+                {
+                    RatingId = 3,
+                    GameId = 2,
+                    Rating = 3,
+                    MemberId = 1
+                },
+                new Ratings
+                {
+                    RatingId = 4,
+                    GameId = 3,
+                    Rating = 2,
+                    MemberId = 3
+                },
+                new Ratings
+                {
+                    RatingId = 5,
+                    GameId = 2,
+                    Rating = 4,
+                    MemberId = 4
+                },
+                new Ratings
+                {
+                    RatingId = 6,
+                    GameId = 3,
+                    Rating = 5,
+                    MemberId = 5
+                },
+                new Ratings
+                {
+                    RatingId = 7,
+                    GameId = 1,
+                    Rating = 3,
+                    MemberId = 3
+                },
+                new Ratings
+                {
+                    RatingId = 8,
+                    GameId = 4,
+                    Rating = 4,
+                    MemberId = 2
+                },
+                new Ratings
+                {
+                    RatingId = 9,
+                    GameId = 4,
+                    Rating = 5,
+                    MemberId = 1
+                },
+                new Ratings
+                {
+                    RatingId = 10,
+                    GameId = 5,
+                    Rating = 2,
+                    MemberId = 4
+                }
             );
 
             // Define relationships between WishList and Member(Many to one)

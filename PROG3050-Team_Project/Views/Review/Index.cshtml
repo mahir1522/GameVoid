@@ -12,6 +12,30 @@
         @TempData["ErrorMessage"]
     </div>
 }
+
+<style>
+    .rating {
+        direction: rtl; /* Right-to-left to ensure proper hover effect */
+        font-size: 2rem;
+        unicode-bidi: bidi-override; /* Ensures stars behave correctly */
+    }
+
+        .rating input {
+            display: none; /* Hide the radio buttons */
+        }
+
+        .rating label {
+            color: #ddd; /* Unselected stars */
+            cursor: pointer;
+        }
+
+            .rating input:checked ~ label,
+            .rating label:hover,
+            .rating label:hover ~ label {
+                color: #f5c518; /* Selected stars */
+            }
+
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <!-- Logo and brand name -->

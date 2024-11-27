@@ -30,19 +30,21 @@
     {
         @foreach (var order in Model)
         {
-            <ul>
-                @foreach (var item in order.Games)
-                {
-                    <li>
-                        @item.Title - @item.Price.ToString("C")
-                        @if (order.OrderStatus == "Processed")
-                        {
-                            <a asp-controller="Wishlist" asp-action="DownloadGameFile" class="btn btn-primary btn-sm">Download</a>
-                        }
-                    </li>
-
-                }
-            </ul>
+            if(order.OrderStatus=="Processed")
+            {
+                <ul>
+                    @foreach (var item in order.Games)
+                    {
+                        <li>
+                            @item.Title - @item.Price.ToString("C")
+                            @if (order.OrderStatus == "Processed")
+                            {
+                                <a asp-controller="Wishlist" asp-action="DownloadGameFile" class="btn btn-primary btn-sm">Download</a>
+                            }
+                        </li>
+                    }
+                </ul>
+            }
         }
     }
 </div>
