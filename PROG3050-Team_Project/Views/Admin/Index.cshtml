@@ -18,48 +18,43 @@
 }
 
 <link rel="stylesheet" href="~/css/admin.css">
+<link rel="stylesheet" href="~/css/navbar.css">
 
 
 
-<a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <!-- Logo and brand name -->
-        <a class="navbar-brand" href="@Url.Action("Index", "Admin")">
+<div class="sidebar">
+    <div class="mb-5">
+        <a href="@Url.Action("Index", "Admin")">
             <div class="brand-logo">
-                <span class="game">GAME</span>
-                <span class="void">VOID</span>
+                <div class="game">GAME</div>
+                <div class="void">VOID</div>
             </div>
         </a>
-
-        <!-- Toggler button for smaller screens -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Navbar links -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index", "Admin")">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Event", "Admin")">Events</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Order", "Admin")">Order</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Reports", "Admin")">Reports</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action()">Game Reviews</a>
-                </li>
-            </ul>
-        </div>
     </div>
-</nav>
+    <br /><br />
+    <ul class="nav flex-column">
+        <li class="nav-item mb-3">
+            <a class="nav-link text-light" href="@Url.Action("Index", "Admin")">Dashboard</a>
+        </li>
+        <li class="nav-item mb-3">
+            <a class="nav-link text-light" href="@Url.Action("Event", "Admin")">Events</a>
+        </li>
+        <li class="nav-item mb-3">
+            <a class="nav-link text-light" href="@Url.Action("Order", "Admin")">Orders</a>
+        </li>
+        <li class="nav-item mb-3">
+            <a class="nav-link text-light" href="@Url.Action("Reports", "Admin")">Reports</a>
+        </li>
+        <li class="nav-item mb-3">
+            <a class="nav-link text-light">Game Reviews</a>
+        </li>
+         <li class="nav-item mb-3">
+            <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+        </li>
+    </ul>
+</div>
+</div>
 
 <div class="text-center">
     <h1 class="display-4">Games</h1>
