@@ -16,12 +16,46 @@
 
 
 <link rel="stylesheet" href="~/css/profile.css">
-    <a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.MemberID"> 
+<link rel="stylesheet" href="~/css/navbar.css">
+<div class="sidebar">
+            <div class="mb-5">
+                <a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.MemberID"> 
                     <div class="brand-logo">
                         <div class="game">GAME</div>
                         <div class="void">VOID</div>
                     </div>
                 </a>
+
+            
+
+
+            </div>
+            <br /><br />
+            <ul class="nav flex-column">
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.MemberID">Profile</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class ="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.MemberID">Friends & Family</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.MemberID">Events</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.MemberID">WishList</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.MemberID">Cart</a>
+                </li>
+                <li>
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="UserPurchases" asp-route-memberId="@Model.MemberID">My Purchases</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+                </li>
+                    
+            </ul>
+        </div>
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
    
     <h2>User Profile</h2> 

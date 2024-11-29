@@ -1,0 +1,90 @@
+body {
+    background-color: #242424; /* Main background color */
+    font-family: 'Quicksand', sans-serif;
+    color: white; /* Set default text color to white */
+    margin: 0;
+    padding: 0;
+}
+/* Sidebar Styles */
+.sidebar {
+    background-color: #2D2D2D; /* Custom background color */
+    height: 100vh; /* Full height of the viewport */
+    position: fixed; /* Fixed position */
+    left: 0; /* Align to the left */
+    top: 0; /* Align to the top */
+    width: 250px; /* Width of the sidebar */
+    padding: 20px; /* Padding inside the sidebar */
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
+}/* Brand Logo Positioning */
+.brand-logo {
+    position: absolute; /* Keep it absolute */
+    top: 20px; /* Distance from the top */
+    left: 20px; /* Distance from the left */
+    font-family: 'Quicksand', sans-serif; /* Font as specified */
+    font-weight: 700; /* Bold text */
+    display: flex; /* Use flexbox to align the items */
+    flex-direction: column; /* Stack the items vertically */
+    align-items: flex-start; /* Align items to the start */
+}
+
+/* Style for GAME text */
+.brand-logo .game {
+    color: #DA00FE; /* Purple color from Figma */
+    font-size: 24px; /* Increased font size to match title */
+    font-weight: 700; /* Bold text */
+  
+    margin-bottom: -8px; /* Negative margin to bring VOID closer */
+}
+
+/* Style for VOID text */
+.brand-logo .void {
+    color: #A100ED; /* Different shade of purple */
+    font-size: 24px; /* Increased font size to match title */
+    font-weight: 700; /* Bold text */
+  
+    padding-left: 19px; /* Shift VOID slightly to the right */
+    transform: translateY(-8px); /* Fine-tune the vertical position */
+}/* Main Content Container */
+.main-content-container {
+    margin-left: 250px; /* Space for the sidebar */
+    padding: 20px; /* Equivalent to Bootstrap's p-4 */
+    width: calc(100% - 250px); /* Ensure the content takes the full width minus the sidebar */
+}
+
+
+/* Card Styles */
+.card {
+    background-color: #2D2D2D; /* Background color for the card */
+    border: none; /* Remove border */
+}
+
+/* Adjusting grid layout for game cards */
+.row {
+    display: flex; /* Flexbox layout for the row */
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+.col-md-3 {
+    width: 25%; /* Each card takes up 25% of the row */
+    padding: 10px; /* Padding around cards */
+}
+
+.mb-4 {
+    margin-bottom: 16px; /* Space below elements */
+}
+
+
+/* Custom Row Styling */
+.custom-row {
+    display: flex; /* Use flexbox for the row */
+    flex-wrap: wrap; /* Allow items to wrap onto the next line */
+    margin: -15px; /* Negative margin to offset padding */
+}
+
+/* Custom Column Styling */
+.custom-col {
+    flex: 0 0 25%; /* Set width to 25% */
+    max-width: 25%; /* Ensure max width is 25% */
+    padding: 15px; /* Padding around columns */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
