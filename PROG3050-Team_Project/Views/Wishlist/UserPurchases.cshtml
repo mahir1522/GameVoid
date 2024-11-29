@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<PROG3050_Team_Project.Models.Order>
 
-<link rel="stylesheet" href="~/css/user.css">
+<link rel="stylesheet" href="~/css/friendslist.css">
+<link rel="stylesheet" href="~/css/navbar.css">
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -71,7 +72,7 @@
         {
             <ul>
                 @foreach (var item in order.Games)
-                {
+                {<div class="member-item">
                     <li>
                         @item.Title - @item.Price.ToString("C") - @order.OrderStatus
                         @if (order.OrderStatus == "Processed")
@@ -80,6 +81,7 @@
                             <button class="btn btn-primary btn-sm downloadBtn" data-game-id="@item.GameID">Download</button>
                         }
                     </li>
+                    </div>
                 }
             </ul>
         }
