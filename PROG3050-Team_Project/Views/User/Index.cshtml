@@ -37,7 +37,7 @@
                     <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.member.MemberID">Profile</a>
                 </li>
                 <li class="nav-item mb-3">
-                    <a class ="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Friends & Family</a>
+                    <a class ="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.member.MemberID">Friends & Family</a>
                 </li>
                 <li class="nav-item mb-3">
                     <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.member.MemberID">Events</a>
@@ -85,10 +85,14 @@
             <div>
                 <h2 class="mb-3">Product</h2>
                 <div class="mb-4">
-                    <button class="btn rounded">Top</button>
-                    <button class="btn rounded">Popular</button>
-                    <button class="btn rounded">Recommended</button>
-                    <button class="btn filter-btn">Filter</button>
+                        <form method="get" asp-action="Index">
+                            <input type="hidden" name="memberId" value="@Model.member.MemberID" />
+
+                        <button type="submit" name="filter" value="Top" class="btn rounded">Top</button>
+                        <button type="submit" name="filter" value="Popular" class="btn rounded">Popular</button>
+                        <button type="submit" name="filter" value="Recommended" class="btn rounded">Recommended</button>
+
+                        </form>
                 </div>
                 <!-- Game Cards Grid -->
                 <div class="custom-row">
@@ -162,6 +166,8 @@
 </div>
 
 <script>
+
+
     function openGameModal(element) {
         // Retrieve data attributes
         const title = element.getAttribute("data-title");

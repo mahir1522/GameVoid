@@ -33,9 +33,10 @@ namespace PROG3050_Team_Project.Models
 
         public bool? WantsPromotions { get; set; } = false;
 
-        public List<string>? FavoritePlatforms { get; set; } = new List<string>();
+        public string? FavoritePlatforms { get; set; } = String.Empty;
 
-        public List<string>? FavoriteGameCategories { get; set; } = new List<string>();
+        public string? FavoriteGameCategories { get; set; } = String.Empty;
+        public string? PreferLanguage { get; set; } = String.Empty;
 
         public virtual ICollection<Address>? Addresses { get; set; }
 
@@ -43,8 +44,6 @@ namespace PROG3050_Team_Project.Models
 
         public Member()
         {
-            FavoritePlatforms = new List<string>();
-            FavoriteGameCategories = new List<string>();
             FriendsAndFamily = new List<Member>();
         }
 

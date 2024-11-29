@@ -14,21 +14,31 @@ namespace PROG3050_Team_Project.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index(int memberId)
+        public async Task<IActionResult> Index(int memberId, string filter)
         {
             var user = await _context.Members.FindAsync(memberId);
             if (user == null)
             {
                 return NotFound();
             }
-            var games = _context.Games.ToList();
+
+            // Fetch games based on the filter
+            var games = filter switch
+            {
+                "Top" => _context.Games.OrderByDescending(g => g.Rating).ToList(),
+                "Popular" => _context.Games.OrderByDescending(g => g.ReleaseDate).ToList(),
+                "Recommended" => _context.Games
+                                .Where(g => g.Category == user.FavoriteGameCategories)
+                                .ToList(),
+                _ => _context.Games.ToList() // Default: return all games
+            };
 
             var userGamesViewModel = new MemberGamesViewModel
             {
                 member = user,
                 games = games,
-
             };
+
             return View(userGamesViewModel);
         }
 
@@ -62,6 +72,9 @@ namespace PROG3050_Team_Project.Controllers
                 existingMember.FullName = member.FullName;
                 existingMember.Gender = member.Gender;
                 existingMember.BirthDate = member.BirthDate;
+                existingMember.FavoriteGameCategories = member.FavoriteGameCategories;
+                existingMember.FavoritePlatforms = member.FavoritePlatforms;
+                existingMember.PreferLanguage = member.PreferLanguage;
                 existingMember.WantsPromotions = member.WantsPromotions;
 
                 // Handle the profile image upload

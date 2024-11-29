@@ -17,33 +17,26 @@
     @if (Model.WishList == null)
     {
         <p>Your wishlist is empty.</p>
+
     }
     else
     {
-        @if (Model.WishList.Games != null && Model.WishList.Games.Any())
-        {
-            <table>
-                <thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>Game Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var game in Model.WishList.Games)
+                {
                     <tr>
-                        <th>Game Name</th>
-                        <th>Price</th>
-                        <th>Actions</th>
+                        <td>@game.Title</td>
+                        <td>@game.Price.ToString("C")</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var game in Model.WishList.Games)
-                    {
-                        <tr>
-                            <td>@game.Title</td>
-                            <td>@game.Price.ToString("C")</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <p>Your wishlist is empty.</p>
-        }
+                }
+            </tbody>
+        </table>
     }
 </div>

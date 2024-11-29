@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PROG3050_Team_Project.Models;
 
@@ -11,9 +12,11 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    partial class GameVoidContextModelSnapshot : ModelSnapshot
+    [Migration("20241109215616_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,6 +144,18 @@ namespace PROG3050_Team_Project.Migrations
                         .IsUnique();
 
                     b.ToTable("Carts");
+
+                    b.HasData(
+                        new
+                        {
+                            CartId = 1,
+                            MemberID = 1
+                        },
+                        new
+                        {
+                            CartId = 2,
+                            MemberID = 2
+                        });
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Event", b =>
@@ -476,9 +491,6 @@ namespace PROG3050_Team_Project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PreferLanguage")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -501,13 +513,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 1,
                             BirthDate = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "gamerone@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "John Doe",
                             Gender = "Male",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "GamerOne",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -517,13 +528,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 2,
                             BirthDate = new DateTime(1988, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "gamertwo@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Jane Smith",
                             Gender = "Female",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "GamerTwo",
                             WantsPromotions = false,
                             profileImage = "/img/profile.png"
@@ -533,13 +543,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 3,
                             BirthDate = new DateTime(1995, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "progamer@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Alex Johnson",
                             Gender = "Non-binary",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "ProGamer",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -549,13 +558,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 4,
                             BirthDate = new DateTime(1992, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "eliteplayer@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Emily Davis",
                             Gender = "Female",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "ElitePlayer",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -565,13 +573,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 5,
                             BirthDate = new DateTime(1985, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "gamemaster@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Michael Brown",
                             Gender = "Male",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "GameMaster",
                             WantsPromotions = false,
                             profileImage = "/img/profile.png"
@@ -581,13 +588,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 6,
                             BirthDate = new DateTime(1993, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "speedygamer@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Sarah Wilson",
                             Gender = "Female",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "SpeedyGamer",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -597,13 +603,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 7,
                             BirthDate = new DateTime(1987, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "retrogamer@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Chris Miller",
                             Gender = "Male",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "RetroGamer",
                             WantsPromotions = false,
                             profileImage = "/img/profile.png"
@@ -613,13 +618,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 8,
                             BirthDate = new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "arcadequeen@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Megan Taylor",
                             Gender = "Female",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "ArcadeQueen",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -629,13 +633,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 9,
                             BirthDate = new DateTime(1991, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "fpsking@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Luke Anderson",
                             Gender = "Male",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "FPSKing",
                             WantsPromotions = false,
                             profileImage = "/img/profile.png"
@@ -645,13 +648,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 10,
                             BirthDate = new DateTime(1996, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "puzzlemaster@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Lisa Thomas",
                             Gender = "Female",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "PuzzleMaster",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -727,167 +729,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.ToTable("Registration");
                 });
 
-            modelBuilder.Entity("PROG3050_Team_Project.Models.Review", b =>
-                {
-                    b.Property<int?>("ReviewID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("ReviewID"));
-
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MemberId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReviewDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ReviewStatus")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("Not Submitted");
-
-                    b.Property<string>("ReviewText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ReviewID");
-
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("MemberId");
-
-                    b.ToTable("Review");
-
-                    b.HasData(
-                        new
-                        {
-                            ReviewID = 1,
-                            GameId = 1,
-                            MemberId = 1,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2021, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Approved",
-                            ReviewText = "An incredible adventure that defines the genre."
-                        },
-                        new
-                        {
-                            ReviewID = 2,
-                            GameId = 1,
-                            MemberId = 2,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Approved",
-                            ReviewText = "A bit outdated, but still a classic."
-                        },
-                        new
-                        {
-                            ReviewID = 3,
-                            GameId = 1,
-                            MemberId = 3,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2023, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Pending",
-                            ReviewText = "Challenging gameplay but rewarding!"
-                        },
-                        new
-                        {
-                            ReviewID = 4,
-                            GameId = 2,
-                            MemberId = 1,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Approved",
-                            ReviewText = "Timeless fun! The levels are brilliantly designed."
-                        },
-                        new
-                        {
-                            ReviewID = 5,
-                            GameId = 2,
-                            MemberId = 2,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2023, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Approved",
-                            ReviewText = "Could use better graphics, but the gameplay is top-notch."
-                        },
-                        new
-                        {
-                            ReviewID = 6,
-                            GameId = 2,
-                            MemberId = 4,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2023, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Pending",
-                            ReviewText = "Enjoyable multiplayer mode, but the campaign is too short."
-                        },
-                        new
-                        {
-                            ReviewID = 7,
-                            GameId = 3,
-                            MemberId = 2,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2023, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Approved",
-                            ReviewText = "Creative and endlessly entertaining. Highly recommended!"
-                        },
-                        new
-                        {
-                            ReviewID = 8,
-                            GameId = 3,
-                            MemberId = 3,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2023, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Rejected",
-                            ReviewText = "I had high expectations, but the story was lackluster."
-                        },
-                        new
-                        {
-                            ReviewID = 9,
-                            GameId = 3,
-                            MemberId = 4,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2023, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Approved",
-                            ReviewText = "Visually stunning with a memorable soundtrack."
-                        },
-                        new
-                        {
-                            ReviewID = 10,
-                            GameId = 4,
-                            MemberId = 1,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2023, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Approved",
-                            ReviewText = "A refreshing take on the genre with innovative mechanics."
-                        },
-                        new
-                        {
-                            ReviewID = 11,
-                            GameId = 4,
-                            MemberId = 5,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Approved",
-                            ReviewText = "Repetitive gameplay but overall enjoyable."
-                        },
-                        new
-                        {
-                            ReviewID = 12,
-                            GameId = 4,
-                            MemberId = 6,
-                            Rating = 0,
-                            ReviewDate = new DateTime(2023, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReviewStatus = "Pending",
-                            ReviewText = "Takes too long to get interesting, but worth the patience."
-                        });
-                });
-
             modelBuilder.Entity("PROG3050_Team_Project.Models.WishList", b =>
                 {
                     b.Property<int>("WishListId")
@@ -916,46 +757,6 @@ namespace PROG3050_Team_Project.Migrations
                         {
                             WishListId = 2,
                             MemberID = 2
-                        },
-                        new
-                        {
-                            WishListId = 3,
-                            MemberID = 3
-                        },
-                        new
-                        {
-                            WishListId = 4,
-                            MemberID = 4
-                        },
-                        new
-                        {
-                            WishListId = 5,
-                            MemberID = 5
-                        },
-                        new
-                        {
-                            WishListId = 6,
-                            MemberID = 6
-                        },
-                        new
-                        {
-                            WishListId = 7,
-                            MemberID = 7
-                        },
-                        new
-                        {
-                            WishListId = 8,
-                            MemberID = 8
-                        },
-                        new
-                        {
-                            WishListId = 9,
-                            MemberID = 9
-                        },
-                        new
-                        {
-                            WishListId = 10,
-                            MemberID = 10
                         });
                 });
 
@@ -1089,25 +890,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("Member");
                 });
 
-            modelBuilder.Entity("PROG3050_Team_Project.Models.Review", b =>
-                {
-                    b.HasOne("PROG3050_Team_Project.Models.Game", "Game")
-                        .WithMany("Reviews")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PROG3050_Team_Project.Models.Member", "Member")
-                        .WithMany("Reviews")
-                        .HasForeignKey("MemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Game");
-
-                    b.Navigation("Member");
-                });
-
             modelBuilder.Entity("PROG3050_Team_Project.Models.WishList", b =>
                 {
                     b.HasOne("PROG3050_Team_Project.Models.Member", "Member")
@@ -1124,11 +906,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("MemberEvents");
                 });
 
-            modelBuilder.Entity("PROG3050_Team_Project.Models.Game", b =>
-                {
-                    b.Navigation("Reviews");
-                });
-
             modelBuilder.Entity("PROG3050_Team_Project.Models.Member", b =>
                 {
                     b.Navigation("Addresses");
@@ -1142,8 +919,6 @@ namespace PROG3050_Team_Project.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("RegisteredEvents");
-
-                    b.Navigation("Reviews");
 
                     b.Navigation("WishList");
                 });

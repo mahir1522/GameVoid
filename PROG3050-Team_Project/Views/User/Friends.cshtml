@@ -43,21 +43,21 @@
     }
     else
     { 
-    @foreach (var member in Model.AllMembers)
-    {
-        <div class="member-item">
-            <strong>@member.UserName</strong> - @member.FullName
-            @if (!Model.CurrentMember.FriendsAndFamily.Any(f => f.MemberID == member.MemberID))
-            {
-                <form asp-action="AddFriend" method="post" asp-route-memberId="@Model.CurrentMember.MemberID" asp-route-friendId="@member.MemberID" style="display:inline;">
-                    <button type="submit" class="btn btn-success btn-sm">Add Friend</button>
-                </form>
-            }
-            else
-            {
-                <span class="text-muted">(Already Friends)</span>
-            }
-        </div>
+        @foreach (var member in Model.AllMembers)
+        {
+            <div class="member-item">
+                <strong>@member.UserName</strong> - @member.FullName
+                @if (!Model.CurrentMember.FriendsAndFamily.Any(f => f.MemberID == member.MemberID))
+                {
+                    <form asp-action="AddFriend" method="post" asp-route-memberId="@Model.CurrentMember.MemberID" asp-route-friendId="@member.MemberID" style="display:inline;">
+                        <button type="submit" class="btn btn-success btn-sm">Add Friend</button>
+                    </form>
+                }
+                else
+                {
+                    <span class="text-muted">(Already Friends)</span>
+                }
+            </div>
+        }
     }
-    }
-</div>
+</div>  

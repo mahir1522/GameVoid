@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<PROG3050_Team_Project.Models.Order>
 
 <link rel="stylesheet" href="~/css/admin.css">
+
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success">
         @TempData["SuccessMessage"]
     </div>
 }
+
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
@@ -14,12 +16,12 @@
     </div>
 }
 
-
 <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
-
+<a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.FirstOrDefault()?.MemberID" class="btn btn-secondary">Back to User Panel</a>
 
 <div class="text-center">
     <h1 class="display-4">My Purchased Games</h1>
+
     @if (TempData["InfoMessage"] != null)
     {
         <div class="alert alert-info">
@@ -30,22 +32,35 @@
     {
         @foreach (var order in Model)
         {
-            if(order.OrderStatus=="Processed")
-            {
-                <ul>
-                    @foreach (var item in order.Games)
-                    {
-                        <li>
-                            @item.Title - @item.Price.ToString("C")
-                            @if (order.OrderStatus == "Processed")
-                            {
-                                <a asp-controller="Wishlist" asp-action="DownloadGameFile" class="btn btn-primary btn-sm">Download</a>
-                            }
-                        </li>
-                    }
-                </ul>
-            }
+            <ul>
+                @foreach (var item in order.Games)
+                {
+                    <li>
+                        @item.Title - @item.Price.ToString("C") - @order.OrderStatus
+                        @if (order.OrderStatus == "Processed")
+                        {
+                            <!-- Add data-game-id to link to capture gameId for the download -->
+                            <button class="btn btn-primary btn-sm downloadBtn" data-game-id="@item.GameID">Download</button>
+                        }
+                    </li>
+                }
+            </ul>
         }
     }
 </div>
 
+<script>
+    document.querySelectorAll('.downloadBtn').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var gameId = this.getAttribute('data-game-id'); // Retrieve the gameId from data attribute
+
+            // Create a temporary link to trigger the download
+            var link = document.createElement('a');
+            link.href = '/Downloader/DownloadGameFile?gameId=' + gameId; // Construct URL for the download action
+            link.download = 'GameInfo.txt'; // Set default filename for the download
+            document.body.appendChild(link);
+            link.click(); // Trigger the download
+            document.body.removeChild(link); // Clean up by removing the temporary link
+        });
+    });
+</script>
