@@ -14,12 +14,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <!-- Logo and brand name -->
-        <a class="navbar-brand" href="@Url.Action("Index", "User")">
-            <div class="brand-logo">
-                <span class="game">GAME</span>
-                <span class="void">VOID</span>
-            </div>
-        </a>
+     <a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.MemberID"> 
+                    <div class="brand-logo">
+                        <div class="game">GAME</div>
+                        <div class="void">VOID</div>
+                    </div>
+                </a>
 
         <!-- Toggler button for smaller screens -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

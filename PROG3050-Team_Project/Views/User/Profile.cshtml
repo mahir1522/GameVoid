@@ -16,13 +16,12 @@
 
 
 <link rel="stylesheet" href="~/css/profile.css">
-<div class="brand-logo">
-    <div class="game">GAME</div>
-    <div class="void">VOID</div>
-</div>
-
-<a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.MemberID" class="btn btn-secondary">Back to User Panel</a>
-
+    <a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.MemberID"> 
+                    <div class="brand-logo">
+                        <div class="game">GAME</div>
+                        <div class="void">VOID</div>
+                    </div>
+                </a>
 <div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
    
     <h2>User Profile</h2> 

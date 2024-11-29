@@ -1,14 +1,12 @@
 ﻿@model PROG3050_Team_Project.Models.FriendsViewModel // Adjust to your namespace
 
-<a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.CurrentMember.MemberID" class="btn btn-secondary mb-3">
-    Back to User Panel
-</a>
-
 <link rel="stylesheet" href="~/css/friendslist.css">
-<div class="brand-logo">
-    <div class="game">GAME</div>
-    <div class="void">VOID</div>
-</div>
+  <a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.CurrentMember.MemberID"> 
+                    <div class="brand-logo">
+                        <div class="game">GAME</div>
+                        <div class="void">VOID</div>
+                    </div>
+                </a>
 
 <div class="search-bar mb-4">
     <form asp-action="SearchFriends" method="get">

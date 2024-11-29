@@ -256,3 +256,13 @@ input[type="text"], input[type="password"] {
 .btn-delete:hover {
     background-color: #D32F2F; /* Darker red on hover */
 }
+/* Sidebar Styles */
+.sidebar {
+    background-color: #2D2D2D; /* Custom background color */
+    height: 100vh; /* Full height of the viewport */
+    position: fixed; /* Fixed position */
+    left: 0; /* Align to the left */
+    top: 0; /* Align to the top */
+    width: 250px; /* Width of the sidebar */
+    padding: 20px; /* Padding inside the sidebar */
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */}
