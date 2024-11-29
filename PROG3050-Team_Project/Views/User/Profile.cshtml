@@ -34,6 +34,7 @@
         <div class="mb-3">
             <label for="Username" class="form-label">Username</label>
             <input type="text" class="form-control" id="Username" name="Username" value="@Model.UserName" readonly />
+                @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-danger" })
         </div>
 
 
@@ -41,18 +42,21 @@
         <div class="mb-3">
             <label for="Email" class="form-label">Email</label>
             <input type="text" class="form-control" id="Email" name="Email" value="@Model.Email" readonly />
+                @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
         </div>
 
 
         <div class="mb-3">
             <label for="Password" class="form-label">Password</label>
             <input type="text" class="form-control" id="Password" name="Password" value="@Model.Password" readonly />
+                @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
         </div>
 
 
         <div class="mb-3">
             <label for="FullName" class="form-label">Full Name</label>
             <input type="text" class="form-control" id="FullName" name="FullName" value="@Model.FullName" required />
+                @Html.ValidationMessageFor(m => m.FullName, null, new { @class = "text-danger" })
         </div>
 
 
@@ -65,11 +69,13 @@
                 <option value="Female" selected="@(Model.Gender == "Female")">Female</option>
                 <option value="Other" selected="@(Model.Gender == "Other")">Other</option>
             </select>
+                @Html.ValidationMessageFor(m => m.Gender, null, new { @class = "text-danger" })
         </div>
 
         <div class="mb-3">
             <label for="Birthday" class="form-label">Birthday</label>
             <input asp-for="@Model.BirthDate" type="date" value="@Model.BirthDate?.ToString("yyyy-MM-dd")" class="form-control" />
+             @Html.ValidationMessageFor(m => m.BirthDate, null, new { @class = "text-danger" })
         </div>
         <div class="mb-3 form-check">
             <input type="hidden" name="WantsPromotions" value="false" />

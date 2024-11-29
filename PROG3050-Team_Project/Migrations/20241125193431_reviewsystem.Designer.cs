@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PROG3050_Team_Project.Models;
 
@@ -11,9 +12,11 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    partial class GameVoidContextModelSnapshot : ModelSnapshot
+    [Migration("20241125193431_reviewsystem")]
+    partial class reviewsystem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -476,9 +479,6 @@ namespace PROG3050_Team_Project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PreferLanguage")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -501,13 +501,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 1,
                             BirthDate = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "gamerone@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "John Doe",
                             Gender = "Male",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "GamerOne",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -517,13 +516,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 2,
                             BirthDate = new DateTime(1988, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "gamertwo@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Jane Smith",
                             Gender = "Female",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "GamerTwo",
                             WantsPromotions = false,
                             profileImage = "/img/profile.png"
@@ -533,13 +531,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 3,
                             BirthDate = new DateTime(1995, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "progamer@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Alex Johnson",
                             Gender = "Non-binary",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "ProGamer",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -549,13 +546,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 4,
                             BirthDate = new DateTime(1992, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "eliteplayer@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Emily Davis",
                             Gender = "Female",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "ElitePlayer",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -565,13 +561,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 5,
                             BirthDate = new DateTime(1985, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "gamemaster@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Michael Brown",
                             Gender = "Male",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "GameMaster",
                             WantsPromotions = false,
                             profileImage = "/img/profile.png"
@@ -581,13 +576,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 6,
                             BirthDate = new DateTime(1993, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "speedygamer@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Sarah Wilson",
                             Gender = "Female",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "SpeedyGamer",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -597,13 +591,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 7,
                             BirthDate = new DateTime(1987, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "retrogamer@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Chris Miller",
                             Gender = "Male",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "RetroGamer",
                             WantsPromotions = false,
                             profileImage = "/img/profile.png"
@@ -613,13 +606,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 8,
                             BirthDate = new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "arcadequeen@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Megan Taylor",
                             Gender = "Female",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "ArcadeQueen",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"
@@ -629,13 +621,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 9,
                             BirthDate = new DateTime(1991, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "fpsking@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Luke Anderson",
                             Gender = "Male",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "FPSKing",
                             WantsPromotions = false,
                             profileImage = "/img/profile.png"
@@ -645,13 +636,12 @@ namespace PROG3050_Team_Project.Migrations
                             MemberID = 10,
                             BirthDate = new DateTime(1996, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "puzzlemaster@example.com",
-                            FavoriteGameCategories = "",
-                            FavoritePlatforms = "",
+                            FavoriteGameCategories = "[]",
+                            FavoritePlatforms = "[]",
                             FullName = "Lisa Thomas",
                             Gender = "Female",
                             IsEmailVerified = true,
                             Password = "hello@1234",
-                            PreferLanguage = "",
                             UserName = "PuzzleMaster",
                             WantsPromotions = true,
                             profileImage = "/img/profile.png"

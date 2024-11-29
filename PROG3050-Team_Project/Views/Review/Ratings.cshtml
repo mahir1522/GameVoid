@@ -1,0 +1,174 @@
+﻿@model PROG3050_Team_Project.Models.GameRatingViewModel
+<link rel="stylesheet" href="~/css/admin.css">
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Message"]
+    </div>
+}
+
+<style>
+    .form-group{
+        align-content: flex-start;
+    }
+    .rating {
+        text-align: left;
+        direction: rtl; /* Right-to-left to ensure proper hover effect */
+        font-size: 2rem;
+        unicode-bidi: bidi-override; /* Ensures stars behave correctly */
+    }
+
+        .rating input {
+            text-align: left;
+            display: none; /* Hide the radio buttons */
+        }
+
+        .rating label {
+            text-align: left;
+            color: #ddd; /* Unselected stars */
+            cursor: pointer;
+        }
+
+            .rating input:checked ~ label,
+            .rating label:hover,
+            .rating label:hover ~ label {
+                color: #f5c518; /* Selected stars */
+            }
+
+    .star {
+        font-size: 1.5rem;
+        color: #ddd;
+    }
+
+        .star.filled {
+            color: #f5c518;
+        }
+
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- Logo and brand name -->
+        <a class="navbar-brand" asp-controller="User" asp-action="Index" asp-route-memberId="@Model.Member.MemberID">
+            <div class="brand-logo">
+                <span class="game">GAME</span>
+                <span class="void">VOID</span>
+            </div>
+        </a>
+
+        <!-- Toggler button for smaller screens -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.Member.MemberID">Profile</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.Member.MemberID" class="btn btn-primary">Friends & Family</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.Member.MemberID">Events</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.Member.MemberID">WishList</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.Member.MemberID">Cart</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h1>Rating for @Model.game.Title</h1>
+<br/>
+<h3>Overall Rating:</h3>
+@if(Model.AverageRatings > 0)
+{
+    <div class="rating-display">
+        @for (int i = 1; i <= 5; i++)
+        {
+            if (@Model.AverageRatings >= i)
+            {
+                <span class="star filled">★</span>
+            }
+            else
+            {
+                <span class="star">★</span>
+            }
+
+        }
+    </div>
+}
+else
+{
+    <div class="rating-display">
+        <h6>No one rated this game yet !</h6>
+    </div>
+    
+}
+<br />
+@if(Model.UserRating == 0)
+{
+    <form asp-action="AddRating" asp-controller="Review" method="post" >
+        
+        <div class="form-group" style="align-content:center">
+            <input type="hidden" name="GameId" value="@Model.game.GameID" />
+            <input type="hidden" name="MemberId" value="@Model.Member.MemberID" />
+            <h3>Rate this game:</h3>
+            <div class="rating">
+                <input type="submit" id="UserRating5" name="UserRating" value="5" asp-for="UserRating" />
+                <label for="UserRating5" title="5 stars">★</label>
+
+                <input type="submit" id="UserRating4" name="UserRating" value="4" asp-for="UserRating" />
+                <label for="UserRating4" title="4 stars" asp-for="UserRating">★</label>
+
+                <input type="submit" id="UserRating3" name="UserRating" value="3" asp-for="UserRating" />
+                <label for="UserRating3" title="3 stars" asp-for="UserRating">★</label>
+
+                <input type="submit" id="UserRating2" name="UserRating" value="2" asp-for="UserRating" />
+                <label for="UserRating2" title="2 stars" asp-for="UserRating">★</label>
+
+                <input type="submit" id="UserRating1" name="UserRating" value="1" asp-for="UserRating" />
+                <label for="UserRating1" title="1 star" asp-for="UserRating">★</label>
+            </div>
+        </div>
+    </form>
+}
+else
+{
+    <h3>Your Rating:</h3>
+    <div class="rating-display">
+        @for (int i = 1; i <= 5; i++)
+        {
+            if (@Model.UserRating >= i)
+            {
+                <span class="star filled">★</span>
+            }
+            else
+            {
+                <span class="star">★</span>
+            }
+            
+        }
+    </div>
+    <a class="btn btn-primary" asp-action="EditRating" asp-controller="Review" asp-route-gameId="@Model.game.GameID" asp-route-memberId="@Model.Member.MemberID">Edit Rating</a>
+}

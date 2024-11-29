@@ -122,6 +122,8 @@
                                         <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
                                             <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Wishlist</button>
                                         </form>
+                                        <a class="custom-btn" class="custom-btn" asp-controller="Review" asp-action="Index" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Reviews</a>
+                                        <a class="custom-btn" class="custom-btn" asp-controller="Review" asp-action="Ratings" asp-route-gameId="@game.GameID" asp-route-memberId="@Model.member.MemberID">Ratings</a>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +193,6 @@
         var modal = new bootstrap.Modal(document.getElementById('gameDetailModal'));
         modal.show();
     }
-
 </script>
 
 
