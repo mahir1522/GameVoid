@@ -78,6 +78,7 @@
                 <tbody>
                     @foreach (var order in Model)
                     {
+                        <tr>
                         <td>@order.OrderDate</td>
                         <td>@order.TotalAmount</td>
                         <td>
@@ -85,7 +86,7 @@
                                 @foreach (var item in order.Games)
                                 {
                                     <li>
-                                            @item.Title - @item.Price.ToString("C")
+                                        @item.Title - @item.Price.ToString("C")
                                     </li>
                                 }
                             </ul>
@@ -103,6 +104,7 @@
                                 <button disabled>Processed</button>
                             }
                         </td>
+                        </tr>
                     }
                 </tbody>
             </table>

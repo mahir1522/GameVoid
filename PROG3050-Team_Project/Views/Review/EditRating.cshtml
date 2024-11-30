@@ -1,0 +1,68 @@
+﻿@model PROG3050_Team_Project.Models.GameRatingViewModel
+
+
+<style>
+    .form-group {
+        align-content: flex-start;
+    }
+
+    .rating {
+        text-align: left;
+        direction: rtl; /* Right-to-left to ensure proper hover effect */
+        font-size: 2rem;
+        unicode-bidi: bidi-override; /* Ensures stars behave correctly */
+    }
+
+        .rating input {
+            text-align: left;
+            display: none; /* Hide the radio buttons */
+        }
+
+        .rating label {
+            text-align: left;
+            color: #ddd; /* Unselected stars */
+            cursor: pointer;
+        }
+
+            .rating input:checked ~ label,
+            .rating label:hover,
+            .rating label:hover ~ label {
+                color: #f5c518; /* Selected stars */
+            }
+
+    .star {
+        font-size: 1.5rem;
+        color: #ddd;
+    }
+
+        .star.filled {
+            color: #f5c518;
+        }
+
+</style>
+
+<br />
+<form asp-action="UpdateRating" asp-controller="Review" method="post">
+
+    <div class="form-group" style="align-content:center">
+        <input type="hidden" name="GameId" value="@Model.game.GameID" />
+        <input type="hidden" name="MemberId" value="@Model.Member.MemberID" />
+        <h3>Rate this game:</h3>
+        <div class="rating">
+            <input type="submit" id="UserRating5" name="UserRating" value="5" asp-for="UserRating" />
+            <label for="UserRating5" title="5 stars">★</label>
+
+            <input type="submit" id="UserRating4" name="UserRating" value="4" asp-for="UserRating" />
+            <label for="UserRating4" title="4 stars" asp-for="UserRating">★</label>
+
+            <input type="submit" id="UserRating3" name="UserRating" value="3" asp-for="UserRating" />
+            <label for="UserRating3" title="3 stars" asp-for="UserRating">★</label>
+
+            <input type="submit" id="UserRating2" name="UserRating" value="2" asp-for="UserRating" />
+            <label for="UserRating2" title="2 stars" asp-for="UserRating">★</label>
+
+            <input type="submit" id="UserRating1" name="UserRating" value="1" asp-for="UserRating" />
+            <label for="UserRating1" title="1 star" asp-for="UserRating">★</label>
+        </div>
+    </div>
+</form>

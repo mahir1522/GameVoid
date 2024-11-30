@@ -1,0 +1,102 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model PROG3050_Team_Project.Models.GameReviewViewModel
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<link rel="stylesheet" href="~/css/admin.css">
+
+<a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- Logo and brand name -->
+        <a class="navbar-brand" href="@Url.Action("Index", "Admin")">
+            <div class="brand-logo">
+                <span class="game">GAME</span>
+                <span class="void">VOID</span>
+            </div>
+        </a>
+
+        <!-- Toggler button for smaller screens -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Admin")">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Event", "Admin")">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Order", "Admin")">Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action()">Reports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action()">Game Reviews</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <h1 class="display-4">Events</h1>
+
+    @* Checking if model is null or if database is empty *@
+    @if (Model.reviews == null || !Model.reviews.Any())
+    {
+        <p>No events available.</p>
+    }
+    else
+    {
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Reviews</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var review in Model.reviews)
+                {
+                    <tr>
+                        <td>@review.ReviewText</td>
+                        <td>
+                            @if (review.ReviewStatus == "Pending")
+                            {
+                                <form asp-action="ApproveReview" asp-controller="Admin" asp-route-reviewId=@review.ReviewID method="post">
+                                    <p>Pending</p>
+                                    <button class="btn btn-primary btn-sm" asp-action="ApproveReview" asp-controller="Admin" asp-route-reviewId=@review.ReviewID type="submit">Processed</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <button disabled>Approved</button>
+                            }
+                        </td>
+                    </tr>                                
+                }
+            </tbody>
+        </table>
+    }
+</div>
+

@@ -17,5 +17,6 @@
         public ICollection<WishList>? WishLists { get; set; } = null;
         public ICollection<Cart>? Carts { get; set; } = null;
         public ICollection<Order>? Orders { get; set; } = null;
+        public ICollection<Review> Reviews { get; set; }
     }
 }
