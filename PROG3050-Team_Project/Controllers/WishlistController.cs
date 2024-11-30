@@ -386,6 +386,7 @@ namespace PROG3050_Team_Project.Controllers
             {
                 TempData["InfoMessage"] = "No purchases found for this user.";
             }
+            ViewData["MemberID"] = memberId;
 
             return View(orders);
         }

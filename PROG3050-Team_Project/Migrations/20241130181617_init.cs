@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PROG3050_Team_Project.Migrations
 {
     /// <inheritdoc />
-    public partial class reviewsystem : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,10 +45,11 @@ namespace PROG3050_Team_Project.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     WantsPromotions = table.Column<bool>(type: "bit", nullable: true),
                     FavoritePlatforms = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FavoriteGameCategories = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PreferLanguage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsEmailVerified = table.Column<bool>(type: "bit", nullable: false),
                     profileImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MemberID1 = table.Column<int>(type: "int", nullable: true)
@@ -61,6 +62,21 @@ namespace PROG3050_Team_Project.Migrations
                         column: x => x.MemberID1,
                         principalTable: "Members",
                         principalColumn: "MemberID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    RatingId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    GameId = table.Column<int>(type: "int", nullable: false),
+                    MemberId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.RatingId);
                 });
 
             migrationBuilder.CreateTable(
@@ -363,19 +379,36 @@ namespace PROG3050_Team_Project.Migrations
 
             migrationBuilder.InsertData(
                 table: "Members",
-                columns: new[] { "MemberID", "BirthDate", "Email", "FavoriteGameCategories", "FavoritePlatforms", "FullName", "Gender", "IsEmailVerified", "MemberID1", "Password", "UserName", "WantsPromotions", "profileImage" },
+                columns: new[] { "MemberID", "BirthDate", "Email", "FavoriteGameCategories", "FavoritePlatforms", "FullName", "Gender", "IsEmailVerified", "MemberID1", "Password", "PreferLanguage", "UserName", "WantsPromotions", "profileImage" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamerone@example.com", "[]", "[]", "John Doe", "Male", true, null, "hello@1234", "GamerOne", true, "/img/profile.png" },
-                    { 2, new DateTime(1988, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamertwo@example.com", "[]", "[]", "Jane Smith", "Female", true, null, "hello@1234", "GamerTwo", false, "/img/profile.png" },
-                    { 3, new DateTime(1995, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "progamer@example.com", "[]", "[]", "Alex Johnson", "Non-binary", true, null, "hello@1234", "ProGamer", true, "/img/profile.png" },
-                    { 4, new DateTime(1992, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "eliteplayer@example.com", "[]", "[]", "Emily Davis", "Female", true, null, "hello@1234", "ElitePlayer", true, "/img/profile.png" },
-                    { 5, new DateTime(1985, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamemaster@example.com", "[]", "[]", "Michael Brown", "Male", true, null, "hello@1234", "GameMaster", false, "/img/profile.png" },
-                    { 6, new DateTime(1993, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "speedygamer@example.com", "[]", "[]", "Sarah Wilson", "Female", true, null, "hello@1234", "SpeedyGamer", true, "/img/profile.png" },
-                    { 7, new DateTime(1987, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "retrogamer@example.com", "[]", "[]", "Chris Miller", "Male", true, null, "hello@1234", "RetroGamer", false, "/img/profile.png" },
-                    { 8, new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "arcadequeen@example.com", "[]", "[]", "Megan Taylor", "Female", true, null, "hello@1234", "ArcadeQueen", true, "/img/profile.png" },
-                    { 9, new DateTime(1991, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "fpsking@example.com", "[]", "[]", "Luke Anderson", "Male", true, null, "hello@1234", "FPSKing", false, "/img/profile.png" },
-                    { 10, new DateTime(1996, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "puzzlemaster@example.com", "[]", "[]", "Lisa Thomas", "Female", true, null, "hello@1234", "PuzzleMaster", true, "/img/profile.png" }
+                    { 1, new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamerone@example.com", "", "", "John Doe", "Male", true, null, "hello@1234", "", "GamerOne", true, "/img/profile.png" },
+                    { 2, new DateTime(1988, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamertwo@example.com", "", "", "Jane Smith", "Female", true, null, "hello@1234", "", "GamerTwo", false, "/img/profile.png" },
+                    { 3, new DateTime(1995, 3, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "progamer@example.com", "", "", "Alex Johnson", "Non-binary", true, null, "hello@1234", "", "ProGamer", true, "/img/profile.png" },
+                    { 4, new DateTime(1992, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "eliteplayer@example.com", "", "", "Emily Davis", "Female", true, null, "hello@1234", "", "ElitePlayer", true, "/img/profile.png" },
+                    { 5, new DateTime(1985, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "gamemaster@example.com", "", "", "Michael Brown", "Male", true, null, "hello@1234", "", "GameMaster", false, "/img/profile.png" },
+                    { 6, new DateTime(1993, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "speedygamer@example.com", "", "", "Sarah Wilson", "Female", true, null, "hello@1234", "", "SpeedyGamer", true, "/img/profile.png" },
+                    { 7, new DateTime(1987, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "retrogamer@example.com", "", "", "Chris Miller", "Male", true, null, "hello@1234", "", "RetroGamer", false, "/img/profile.png" },
+                    { 8, new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "arcadequeen@example.com", "", "", "Megan Taylor", "Female", true, null, "hello@1234", "", "ArcadeQueen", true, "/img/profile.png" },
+                    { 9, new DateTime(1991, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "fpsking@example.com", "", "", "Luke Anderson", "Male", true, null, "hello@1234", "", "FPSKing", false, "/img/profile.png" },
+                    { 10, new DateTime(1996, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "puzzlemaster@example.com", "", "", "Lisa Thomas", "Female", true, null, "hello@1234", "", "PuzzleMaster", true, "/img/profile.png" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Ratings",
+                columns: new[] { "RatingId", "GameId", "MemberId", "Rating" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, 4 },
+                    { 2, 1, 2, 5 },
+                    { 3, 2, 1, 3 },
+                    { 4, 3, 3, 2 },
+                    { 5, 2, 4, 4 },
+                    { 6, 3, 5, 5 },
+                    { 7, 1, 3, 3 },
+                    { 8, 4, 2, 4 },
+                    { 9, 4, 1, 5 },
+                    { 10, 5, 4, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -504,6 +537,9 @@ namespace PROG3050_Team_Project.Migrations
 
             migrationBuilder.DropTable(
                 name: "MemberEvents");
+
+            migrationBuilder.DropTable(
+                name: "Ratings");
 
             migrationBuilder.DropTable(
                 name: "Registration");

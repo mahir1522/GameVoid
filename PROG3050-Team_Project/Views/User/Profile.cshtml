@@ -61,7 +61,7 @@
     <h2>User Profile</h2> 
     <div class="profile-box"> 
         
-        <form asp-action="Profile" enctype="multipart/form-data" method="post">
+        <form asp-controller="User" asp-action="Profile" enctype="multipart/form-data" method="post">
 
         <input type="hidden" name="MemberID" value="@Model.MemberID" />
         <div class="mb-3">
@@ -165,7 +165,7 @@
 
         <div class="mb-3">
             <label for="languages" class="form-label">Language Preferences:</label>
-            <select id="languages" name="LanguagePreferences" class="form-select">
+                <select id="languages" name="PreferLanguage" class="form-select">
                     <option value="English" selected="@(Model.PreferLanguage.Contains("English"))">English</option>
                     <option value="French" selected="@(Model.PreferLanguage.Contains("French"))">French</option>
                     <option value="Spanish" selected="@(Model.PreferLanguage.Contains("Spanish"))">Spanish</option>

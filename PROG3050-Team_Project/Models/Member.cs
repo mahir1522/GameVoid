@@ -55,7 +55,7 @@ namespace PROG3050_Team_Project.Models
         public string? profileImage { get; set; } = "/img/profile.png";
 
         public ICollection<MemberEvent>? MemberEvents { get; set; } = new List<MemberEvent>();
-        public ICollection<Review> Reviews { get; set; }
+        public ICollection<Review>? Reviews { get; set; }
 
     }
 }

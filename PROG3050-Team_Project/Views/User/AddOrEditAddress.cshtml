@@ -6,6 +6,8 @@
         @TempData["SuccessMessage"]
     </div>
 }
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
@@ -26,7 +28,7 @@
 
 <h1>Address Information</h1>
   <div class="profile-box">
-<form asp-action="AddOrEditAddress" method="post" class="mt-4">
+<form asp-controller="User" asp-action="AddOrEditAddress" method="post" class="mt-4">
     <input type="hidden" asp-for="AddressID" />
     <input type="hidden" asp-for="MemberID" />
 
@@ -48,7 +50,7 @@
     </div>
     <div class="mb-3">
         <label asp-for="AptSuite" class="form-label"></label>
-        <input asp-for="AptSuite" class="form-control" />
+                <input asp-for="AptSuite" class="form-control" required />
     </div>
     <div class="mb-3">
         <label asp-for="City" class="form-label"></label>
@@ -64,7 +66,7 @@
     </div>
     <div class="mb-3">
         <label asp-for="DeliveryInstructions" class="form-label"></label>
-        <textarea asp-for="DeliveryInstructions" class="form-control"></textarea>
+                <textarea asp-for="DeliveryInstructions" class="form-control" required></textarea>
     </div>
     <div class="mb-3 form-check"> 
         <div style="display: flex; justify-content: center;">
@@ -74,7 +76,7 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Save Address</button>
-    <button  onclick="goBack()"  class="btn btn-secondary ms-2">Back to Profile</a>
+    <button  onclick="goBack()"  class="btn btn-secondary ms-2">Back to Profile</button>
 </form>
   </div>
 </div>

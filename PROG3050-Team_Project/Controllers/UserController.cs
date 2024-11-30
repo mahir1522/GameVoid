@@ -66,6 +66,19 @@ namespace PROG3050_Team_Project.Controllers
                 return NotFound();
             }
 
+
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
+                {
+                    Console.WriteLine(error.ErrorMessage); // Check the output or log
+                }
+            }
+
+
+
             if (ModelState.IsValid)
             {
                 // Update member properties
@@ -104,36 +117,27 @@ namespace PROG3050_Team_Project.Controllers
         public async Task<IActionResult> AddOrEditAddress(int memberId, int? addressId)
         {
             var member = await _context.Members.Include(m => m.Addresses).FirstOrDefaultAsync(m => m.MemberID == memberId);
-
             if (member == null)
             {
                 return NotFound();
             }
 
-            Address address;
-            if (addressId == null) // Adding a new address
+            Address address = addressId == null ? new Address { MemberID = memberId } : member.Addresses.FirstOrDefault(a => a.AddressID == addressId);
+
+            if (address == null)
             {
-                address = new Address(); // Create a new Address object
-            }
-            else // Editing an existing address
-            {
-                address = member.Addresses.FirstOrDefault(a => a.AddressID == addressId);
-                if (address == null)
-                {
-                    return NotFound(); // Address not found
-                }
+                return NotFound();
             }
 
-            return View(address); // Pass a single Address object to the view
+            return View(address);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddOrEditAddress(Address address)
         {
-            // Ensure the MemberID is set
-            if (address.MemberID == 0) // Assuming you get this from the profile page
+            if (address.MemberID == 0)
             {
-                // Optionally, handle this case, maybe redirect or set an error
                 ModelState.AddModelError("", "MemberID is required.");
             }
 
@@ -141,28 +145,36 @@ namespace PROG3050_Team_Project.Controllers
             {
                 try
                 {
-                    if (address.AddressID == 0) // Adding a new address
+                    if (address.AddressID == 0)
                     {
                         _context.Address.Add(address);
                     }
-                    else // Editing an existing address
+                    else
                     {
                         _context.Address.Update(address);
                     }
 
                     await _context.SaveChangesAsync();
                     TempData["SuccessMessage"] = "Address has been saved successfully.";
-                    return View(address);
+                    return RedirectToAction("Profile", new { memberId = address.MemberID });
+                }
+                catch (DbUpdateException dbEx)
+                {
+                    ModelState.AddModelError("", $"Database error: {dbEx.Message}");
                 }
                 catch (Exception ex)
                 {
-                    TempData["ErrorMessage"] = $"There was an error saving the address: {ex.Message}";
+                    ModelState.AddModelError("", $"Unexpected error: {ex.Message}");
                 }
             }
+            else
+            {
+                TempData["ErrorMessage"] = "Please correct the errors and try again.";
+            }
 
-            // Return the view with the invalid model state
             return View(address);
         }
+
 
 
         [HttpPost]

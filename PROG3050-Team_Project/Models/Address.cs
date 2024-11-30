@@ -20,6 +20,7 @@ namespace PROG3050_Team_Project.Models
         [Required(ErrorMessage = "Street Address is required")]
         public string StreetAddress { get; set; }
 
+        [Required(ErrorMessage = "AptSuite is required")]
         public string AptSuite { get; set; }
 
         [Required(ErrorMessage = "City is required")]
@@ -31,6 +32,7 @@ namespace PROG3050_Team_Project.Models
         [Required(ErrorMessage = "Postal Code is required")]
         public string PostalCode { get; set; }
 
+        [Required(ErrorMessage = "Delivery Instructions is required")]
         public string DeliveryInstructions { get; set; }
 
         public bool IsShippingSameAsMailing { get; set; }

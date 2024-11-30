@@ -448,6 +448,7 @@ namespace PROG3050_Team_Project.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("MemberID"));
 
                     b.Property<DateTime?>("BirthDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -699,6 +700,100 @@ namespace PROG3050_Team_Project.Migrations
                     b.HasIndex("MemberID");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("PROG3050_Team_Project.Models.Ratings", b =>
+                {
+                    b.Property<int>("RatingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingId"));
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("RatingId");
+
+                    b.ToTable("Ratings");
+
+                    b.HasData(
+                        new
+                        {
+                            RatingId = 1,
+                            GameId = 1,
+                            MemberId = 1,
+                            Rating = 4
+                        },
+                        new
+                        {
+                            RatingId = 2,
+                            GameId = 1,
+                            MemberId = 2,
+                            Rating = 5
+                        },
+                        new
+                        {
+                            RatingId = 3,
+                            GameId = 2,
+                            MemberId = 1,
+                            Rating = 3
+                        },
+                        new
+                        {
+                            RatingId = 4,
+                            GameId = 3,
+                            MemberId = 3,
+                            Rating = 2
+                        },
+                        new
+                        {
+                            RatingId = 5,
+                            GameId = 2,
+                            MemberId = 4,
+                            Rating = 4
+                        },
+                        new
+                        {
+                            RatingId = 6,
+                            GameId = 3,
+                            MemberId = 5,
+                            Rating = 5
+                        },
+                        new
+                        {
+                            RatingId = 7,
+                            GameId = 1,
+                            MemberId = 3,
+                            Rating = 3
+                        },
+                        new
+                        {
+                            RatingId = 8,
+                            GameId = 4,
+                            MemberId = 2,
+                            Rating = 4
+                        },
+                        new
+                        {
+                            RatingId = 9,
+                            GameId = 4,
+                            MemberId = 1,
+                            Rating = 5
+                        },
+                        new
+                        {
+                            RatingId = 10,
+                            GameId = 5,
+                            MemberId = 4,
+                            Rating = 2
+                        });
                 });
 
             modelBuilder.Entity("PROG3050_Team_Project.Models.Registration", b =>
