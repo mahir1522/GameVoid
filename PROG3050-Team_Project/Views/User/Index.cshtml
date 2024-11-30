@@ -24,10 +24,12 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="mb-5">
-                <div class="brand-logo">
-                    <div class="game">GAME</div>
-                    <div class="void">VOID</div>
-                </div>
+             <a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.member.MemberID"> 
+                    <div class="brand-logo">
+                        <div class="game">GAME</div>
+                        <div class="void">VOID</div>
+                    </div>
+                </a>
 
 
             </div>

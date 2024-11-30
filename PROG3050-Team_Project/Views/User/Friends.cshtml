@@ -1,15 +1,47 @@
 ﻿@model PROG3050_Team_Project.Models.FriendsViewModel // Adjust to your namespace
 
-<a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.CurrentMember.MemberID" class="btn btn-secondary mb-3">
-    Back to User Panel
-</a>
-
 <link rel="stylesheet" href="~/css/friendslist.css">
-<div class="brand-logo">
-    <div class="game">GAME</div>
-    <div class="void">VOID</div>
-</div>
+<link rel="stylesheet" href="~/css/navbar.css">
 
+        <div class="sidebar">
+            <div class="mb-5">
+                <a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.CurrentMember.MemberID"> 
+                    <div class="brand-logo">
+                        <div class="game">GAME</div>
+                        <div class="void">VOID</div>
+                    </div>
+                </a>
+
+            
+
+
+            </div>
+            <br /><br />
+            <ul class="nav flex-column">
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.CurrentMember.MemberID">Profile</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class ="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.CurrentMember.MemberID">Friends & Family</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.CurrentMember.MemberID">Events</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.CurrentMember.MemberID">WishList</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.CurrentMember.MemberID">Cart</a>
+                </li>
+                <li>
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="UserPurchases" asp-route-memberId="@Model.CurrentMember.MemberID">My Purchases</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+                </li>
+                    
+            </ul>
+        </div>
 <div class="search-bar mb-4">
     <form asp-action="SearchFriends" method="get">
         <input type="text" name="query" class="form-control" placeholder="Search for friends by username..." required />

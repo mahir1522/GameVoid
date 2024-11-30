@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<PROG3050_Team_Project.Models.Order>
 
-<link rel="stylesheet" href="~/css/admin.css">
+<link rel="stylesheet" href="~/css/friendslist.css">
+<link rel="stylesheet" href="~/css/navbar.css">
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -16,9 +17,46 @@
     </div>
 }
 
-<a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
-<a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.FirstOrDefault()?.MemberID" class="btn btn-secondary">Back to User Panel</a>
+<!-- Sidebar -->
+        <div class="sidebar">
+            <div class="mb-5">
+                <a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.FirstOrDefault()?.MemberID"> 
+                    <div class="brand-logo">
+                        <div class="game">GAME</div>
+                        <div class="void">VOID</div>
+                    </div>
+                </a>
 
+            
+
+
+            </div>
+            <br /><br />
+            <ul class="nav flex-column">
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="User" asp-action="Profile" asp-route-memberId="@Model.FirstOrDefault()?.MemberID">Profile</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class ="nav-link text-light" asp-controller="User" asp-action="GoToFriends" asp-route-memberId="@Model.FirstOrDefault()?.MemberID">Friends & Family</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Event" asp-route-memberId="@Model.FirstOrDefault()?.MemberID">Events</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="List" asp-route-memberId="@Model.FirstOrDefault()?.MemberID">WishList</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="Cart" asp-route-memberId="@Model.FirstOrDefault()?.MemberID">Cart</a>
+                </li>
+                <li>
+                    <a class="nav-link text-light" asp-controller="Wishlist" asp-action="UserPurchases" asp-route-memberId="@Model.FirstOrDefault()?.MemberID">My Purchases</a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link text-light" asp-controller="LogIn" asp-action="Index">LogOut</a>
+                </li>
+                    
+            </ul>
+        </div>
 <div class="text-center">
     <h1 class="display-4">My Purchased Games</h1>
 
@@ -34,7 +72,7 @@
         {
             <ul>
                 @foreach (var item in order.Games)
-                {
+                {<div class="member-item">
                     <li>
                         @item.Title - @item.Price.ToString("C") - @order.OrderStatus
                         @if (order.OrderStatus == "Processed")
@@ -43,6 +81,7 @@
                             <button class="btn btn-primary btn-sm downloadBtn" data-game-id="@item.GameID">Download</button>
                         }
                     </li>
+                    </div>
                 }
             </ul>
         }

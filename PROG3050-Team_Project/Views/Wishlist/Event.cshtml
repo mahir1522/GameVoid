@@ -23,10 +23,12 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="mb-5">
-                <div class="brand-logo">
-                    <div class="game">GAME</div>
-                    <div class="void">VOID</div>
-                </div>
+              <a asp-controller="User" asp-action="Index" asp-route-memberId="@Model.member.MemberID"> 
+                    <div class="brand-logo">
+                        <div class="game">GAME</div>
+                        <div class="void">VOID</div>
+                    </div>
+                </a>
 
 
             </div>
@@ -55,10 +57,10 @@
 
         <div class="main-content-container">
             <div class="text-center">
-                <h1 class="display-4">Events</h1>
+                <h1 class="display-4">Events</h1></br>
                 <div class="add-game-container">
-                    <a asp-controller="Wishlist" asp-action="RegisteredEvent" method="post" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Registered Event</a>
-                </div>
+                   <h4>View Your Events!</h4> <a asp-controller="Wishlist" asp-action="RegisteredEvent" method="post" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Your Registered Events</a>
+                </div></br>
                     <div class="custom-row">
                     @foreach (var eventItem in Model.events)
                             {
