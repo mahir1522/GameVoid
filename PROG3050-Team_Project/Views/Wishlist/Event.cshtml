@@ -59,8 +59,10 @@
             <div class="text-center">
                 <h1 class="display-4">Events</h1></br>
                 <div class="add-game-container">
-                   <h4>View Your Events!</h4> <a asp-controller="Wishlist" asp-action="RegisteredEvent" method="post" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Your Registered Events</a>
-                </div></br>
+                   <h4>View Your Events!</h4> 
+                   <a asp-controller="Wishlist" asp-action="RegisteredEvent" method="post" asp-route-memberId="@Model.member.MemberID" class="btn btn-primary">Your Registered Events</a>
+                </div>
+                </br>
                     <div class="custom-row">
                     @foreach (var eventItem in Model.events)
                             {
@@ -90,7 +92,6 @@
                                     </div>
                                 </div>
                             }
-
                     </div>
             </div>
         </div>

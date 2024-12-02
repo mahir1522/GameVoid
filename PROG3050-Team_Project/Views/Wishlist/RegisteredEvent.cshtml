@@ -73,11 +73,15 @@
                                     <p class="custom-card-text">@eventItem.Event.StartDate - @eventItem.Event.EndDate</p>
                                     <p class="custom-card-text">@eventItem.Event.Location</p>
                                     <p class="custom-card-text">@eventItem.Event.Description</p>
-                                    <p>
+                                </div>
+                             </div>
+                                    <div class="custom-card-footer">
                                         @if (isRegistered)
                                         {
                                             <form asp-controller="Wishlist" asp-action="Unregister" asp-route-eventId="@eventItem.Event.EventId" asp-route-memberId="@Model.member.MemberID" method="post">
                                                 <button type="submit" class="btn btn-primary">Unregister</button>
+                                                <br />
+                                                <br />
                                             </form>
                                         }
                                         else
@@ -88,11 +92,8 @@
                                                 <button type="submit" class="btn btn-primary">Register</button>
                                             </form>
                                         }
-                                    </p>
-                                    <p></p>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
                     }
 
                 </div>
