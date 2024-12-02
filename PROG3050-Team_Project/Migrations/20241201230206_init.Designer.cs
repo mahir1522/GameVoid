@@ -12,7 +12,7 @@ using PROG3050_Team_Project.Models;
 namespace PROG3050_Team_Project.Migrations
 {
     [DbContext(typeof(GameVoidContext))]
-    [Migration("20241130181617_init")]
+    [Migration("20241201230206_init")]
     partial class init
     {
         /// <inheritdoc />

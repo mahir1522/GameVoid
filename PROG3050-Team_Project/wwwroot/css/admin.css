@@ -266,3 +266,30 @@ input[type="text"], input[type="password"] {
     width: 250px; /* Width of the sidebar */
     padding: 20px; /* Padding inside the sidebar */
     overflow-y: auto; /* Allow vertical scrolling if content overflows */}
+
+    .review-box {
+        background-color: #2D2D2D; /* Dark gray background matching the sidebar */
+        color: white; /* White text for readability */
+        border-radius: 12px; /* Rounded corners */
+        padding: 16px; /* Internal padding for spacing */
+        margin-bottom: 20px; /* Space between reviews */
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4); /* Soft shadow for an elevated effect */
+        border: 1px solid #A100ED; /* Subtle purple border for a themed accent */
+    }
+    
+    .review-box p {
+        margin: 0; /* Remove default margin for better alignment */
+        font-size: 16px; /* Standard text size */
+        line-height: 1.5; /* Better line spacing for readability */
+    }
+    
+    .review-box small {
+        display: block; /* Display as a separate line */
+        margin-top: 8px; /* Space above the date */
+        color: #DA00FE; /* Purple color for the date for emphasis */
+        font-size: 14px; /* Slightly smaller text for metadata */
+    }
+    
+
+  
+    
