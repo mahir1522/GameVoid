@@ -213,3 +213,12 @@ body {
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better text visibility */
     border-radius: 8px; /* Rounded corners */
 }
+.buttonCard {
+    background-color: #DA00FE; /* Custom button color */
+    color: white; /* Button text color */
+    border: none; /* No border */
+    border-radius: 8px; /* Rounded corners for button */
+    padding: 5px 10px; /* Padding for button */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}

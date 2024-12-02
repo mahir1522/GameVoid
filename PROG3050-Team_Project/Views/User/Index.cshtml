@@ -118,14 +118,14 @@
                                         <h5 class="custom-card-title">@game.Title</h5>
                                         <p class="custom-card-text">@game.Price.ToString("C")</p>
                                         <form asp-controller="Wishlist" asp-action="AddToCart" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
-                                            <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToCart" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Cart</button>
+                                            <button class="custom-btns" asp-controller="Wishlist" asp-action="AddToCart" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Cart</button>
                                         </form>
                                         <br />
                                         <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">
-                                            <button class="custom-btn" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Wishlist</button>
+                                            <button class="custom-btns" asp-controller="Wishlist" asp-action="AddToWishlist" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Add to Wishlist</button><br>
                                         </form>
-                                        <a class="custom-btn" class="custom-btn" asp-controller="Review" asp-action="Index" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Reviews</a>
-                                        <a class="custom-btn" class="custom-btn" asp-controller="Review" asp-action="Ratings" asp-route-gameId="@game.GameID" asp-route-memberId="@Model.member.MemberID">Ratings</a>
+                                        <a class="custom-btn"class="buttonCard"  asp-controller="Review" asp-action="Index" asp-route-memberId="@Model.member.MemberID" asp-route-gameId="@game.GameID">Reviews</a><br>
+                                        <a class="custom-btn" class="buttonCard" asp-controller="Review" asp-action="Ratings" asp-route-gameId="@game.GameID" asp-route-memberId="@Model.member.MemberID">Ratings</a>
                                     </div>
                                 </div>
                             </div>
